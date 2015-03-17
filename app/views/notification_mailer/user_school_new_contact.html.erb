@@ -1,0 +1,4 @@
+<%= p_tag "Olá, #{@receiver_name}." %>
+<%= p_tag "A escola de cursos online <strong>#{@school.name}</strong> está te enviando um novo contato:" %>
+<%= message_tag "<strong>#{@sender.full_name}</strong> disse: <br /> #{simple_format(@message.text)}" %>
+<%= p_tag a_tag('Clique aqui para acessar a escola →', root_url(subdomain: @school.subdomain)) %>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%= render "layouts/layout_head" %>
+	<%= render "layouts/custom_layout" %>
+	<%= yield :stylesheets %>
+	<title><%= content_for?(:title) ? yield(:title) : 'Edools' %></title>
+	<meta name="description" content="<%= content_for?(:description) ? yield(:description) : '' %>">
+	<% if current_school %>
+		<link rel="shortcut icon" href="/favicon_subdomain.ico?v=2" />
+	<% end %>
+</head>
+<body class="<%= !current_school && !params[:controller].include?('admin') ? 'edools': '' %>">
+	<%= render "layouts/zendesk" %>
+
+	<% if current_school %>
+		<% wrap_id = "wrap_school" %>
+	<% else %>
+		<% wrap_id = "wrap" %>
+	<% end %>
+
+	<div id="<%= wrap_id %>">
+
+			<%#= render "layouts/feedback" %>
+			<%= render "layouts/header" %>
+
+			<%= yield :modal %>
+
+			<div class="app-flash">
+			  <% if notice && !notice.blank? %>
+			    <div class="alert alert-success">
+			      <button data-dismiss="alert" class="close" type="button">×</button>
+			      <% if notice.is_a? Array %>
+			        <% notice.each do |msg| %>
+			          <p><strong><%= msg %></strong></p>
+			        <% end %>
+			      <% else %>
+			        <strong><%= notice %></strong>
+			      <% end %>
+			    </div>
+			  <% end %>
+
+			  <% if alert && !alert.blank? %>
+			    <div class="alert alert-danger">
+			      <button data-dismiss="alert" class="close" type="button">×</button>
+			      <% if alert.is_a? Array %>
+			        <% alert.each do |msg| %>
+			          <p><strong><%= msg %></strong></p>
+			        <% end %>
+			      <% else %>
+			        <strong><%= alert %></strong>
+			      <% end %>
+			    </div>
+			  <% end %>
+			</div>
+			
+			<%= render "layouts/no_javascript" %>
+
+			<% if current_school %>
+				<%= yield :style %>
+			<% end %>
+			
+			<%= yield :course_edit_header %>
+			
+			<% if content_for?(:navigation) %>
+				<div class="container container_painel">
+					<div id="painel-menu" class="row-fluid">
+						<div class="span12">
+							<%= yield :navigation %>
+						</div>
+					</div>
+					<%= yield :dashboard_sub_menu %>
+					<div class="row-fluid" id="painel-content">
+						<div class="span12">
+							<%= box(id: "painel-box") do %>
+								<%= yield %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<% elsif content_for?(:course_edit_navigation) %>
+				<div class="container">
+					<div class="row-fluid">
+						<div class="span2 pagination-centered">
+							<%= yield :course_edit_navigation %>
+						</div>
+						<div class="span10">
+							<%= yield %>
+						</div>
+					</div>
+				</div>
+			<% else %>
+				<%= yield %>
+			<% end %>
+			
+			<% if current_school %>
+				<% push_id = "push_school" %>
+			<% else %>
+				<% push_id = "push" %>
+			<% end %>
+
+			<div id="<%= push_id %>"></div>
+		</div>
+		
+		<%= render "layouts/footer" %>
+		<%= render "layouts/analytics" %>
+	</body>
+</html>

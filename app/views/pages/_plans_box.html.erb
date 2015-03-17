@@ -1,0 +1,44 @@
+<div class="row-fluid">	
+	<div class="span4">
+  	<div class="price_wrapper lite regular">
+    	<div class="header">
+      	<span><%= t('plans.one.name') %></span>
+        <div class="price">
+					<%= raw t('plans.one.price') %>
+        </div>
+      </div>
+      <div class="section">
+        <h3><%= t('plans.one.description') %></h3>
+        <%= link_to t('plans.btn'), new_user_registration_path, :class => "btn btn-success" %>
+      </div>
+    </div>
+	</div>    
+	<div class="span4">
+     <div class="price_wrapper pro">
+         <div class="header">
+             <span><%= t('plans.two.name') %></span>
+             <div class="price">
+                 <%= raw t('plans.two.price') %>
+             </div>
+         </div>
+         <div class="section">
+             <h3><%= t('plans.two.description') %></h3>
+						<%= link_to t('plans.btn'), new_user_registration_path, :class => "btn btn-success" %>
+         </div>
+     </div>
+ 	</div>
+	<div class="span4">
+		<div class="price_wrapper standard regular">
+ 			<div class="header">
+      	<span><%= t('plans.three.name') %></span>
+      	<div class="price">
+          <%= raw t('plans.three.price') %>
+      	</div>
+    	</div>
+    	<div class="section">
+    		<h3><%= t('plans.three.description') %></h3>
+				<%= link_to t('plans.btn'), new_user_registration_path, :class => "btn btn-success" %>
+    	</div>
+  	</div>
+ 	</div>
+</div>

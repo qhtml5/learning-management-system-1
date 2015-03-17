@@ -1,0 +1,20 @@
+<%= render "notice" %>
+
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), remote: true, class: "" %>
+
+<div class="pagination-centered">
+	<h1><strong><%= @media.title %></strong></h1>
+	<h2>Adicionar mídia</h2>
+	<hr>
+
+	<%= link_to url_for_event(:add_content, course: @course, media: @media), class: "inline btn btn-huge btn-upload-media", remote: true do %>
+		<i class="icon-upload"></i><p>Subir mídia</p>
+	<% end %>
+	<div class="span1">
+		<div class="btn-huge-divider">
+		</div>
+	</div>
+	<%= link_to url_for_event(:add_from_library, course: @course, media: @media), class: "inline btn btn-huge", remote: true do %>
+		<i class="fa-icon-hdd"></i><p>Adicionar da biblioteca</p>
+	<% end %>
+</div>

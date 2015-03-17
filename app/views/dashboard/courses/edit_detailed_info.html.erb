@@ -1,0 +1,37 @@
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Informações Detalhadas</h4>
+		</div>
+		<div class="content">
+			<fieldset>
+				<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_detailed_info) do |f| %>
+					<div class="row-fluid">
+						<div class="span6">
+							<%= f.input :description, as: :text, label: "Descrição do curso (?)", label_html: { class: 'hint hint--large', :data => {:hint => "Esta é a sua chance de deixar o mundo saber sobre seu curso, como o aprendizado é estruturado e tudo o que mais for interessante. Você também deve incluir alguns detalhes, como o tipo de material encontrado no curso e quanto tempo vai demorar para concluir o curso." }}, input_html: { :class => "tinymce span9", :size => "100x25", style: "height: 200px;"} %>
+							<br />
+							<hr>
+							<%= f.input :content_and_goals, as: :text, label: "O que o aluno aprenderá com o curso (?)", label_html: { class: 'hint hint--large', :data => {:hint => "Ressalte o que o aluno ganhará de conhecimento ao fazer o curso. Ex: Nesse curso você aprenderá como tomar o controle da sua vida financeira, como planejar seu futuro e  - acima de tudo - como colocar o dinheiro para trabalhar para você." }}, input_html: { :class => "tinymce span9", :size => "100x5", style: "height: 200px;"}%>
+							<br />
+							<hr>	
+							<%= f.input :who_should_attend, as: :text, input_html: { :class => 'tinymce span9', :size => "100x2", style: "height: 200px;"}, :placeholder => "Ex.: Pessoas interessadas em adquirir sua independência financeira trabalhando de casa", label: "Público-alvo (quem deve comprar esse curso?)" %>
+						</div>
+						<div class="span6">
+							<%= f.input :testimonials, label: "Depoimentos dos alunos (?)", as: :text, label_html: { class: 'hint hint--large', :data => {:hint => "Destaque os depoimentos dos alunos apaixonados pelo curso e mostre para os potenciais alunos como seu curso é bom." }}, input_html: { :class => "tinymce span9", :size => "100x20", style: "height: 200px;"}, :placeholder => "Adicione aqui os depoimentos dos seus alunos mais apaixonados." %>
+							<br>
+							<hr>
+							<%= f.input :advantages, as: :text, input_html: { :class => 'tinymce span9', :size => "100x2", style: "height: 200px;"}, :placeholder => "Ex.: Ao comprar esse curso você ganhará acesso ao nosso forum especial.", label: "Vantagens ao comprar esse curso" %>
+						</div>
+					</div>
+					<br />
+					<hr>	
+		    	<div class="form-actions">
+			    	<%= f.submit "Salvar", :class => "btn btn-success" %>
+			  	</div>
+				<% end -%>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<%= tinymce_assets %>
+<%= tinymce %>

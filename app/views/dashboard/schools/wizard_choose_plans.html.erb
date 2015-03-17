@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="box_widget_course school_wizard">
+		<div class="box">
+			<div class="content">
+				<%= render "wizard_steps", active:  { choose_plans: "active" } %>
+				<div class="row-fluid">
+					<div class="span11">						
+						<%= form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+							<%= render :partial => "wizard_plans", :locals => { :f => f }  %>
+							<div class="pagination-centered">
+								<%= f.submit "Criar escola!", class: "btn btn-success btn-large pull-right" %>
+							</div>
+						<% end %>
+						<br>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

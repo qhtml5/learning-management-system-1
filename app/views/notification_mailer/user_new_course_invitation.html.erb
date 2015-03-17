@@ -1,0 +1,5 @@
+<div style="text-align: center;"><%= image_tag @course.logo.url(:medium) %></div>
+<br />
+<%= p_tag "Parabéns!" %>
+<%= p_tag "Você foi convidado para assistir ao curso <strong>#{@course.title}</strong> na escola #{@school.name}!" %>
+<%= p_tag a_tag('Clique aqui para assistir.', checkout_invitation_course_url(@course, user_email: @invitation.email, subdomain: @school.subdomain)) %>

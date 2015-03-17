@@ -1,0 +1,30 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+      <th></th>
+      <th>Curso</th>
+      <th>Escola</th>
+      <th>Alunos</th>
+      <th>Preço</th>
+      <th>Status</th>
+      <th>Privacidade</th>
+      <th>Criado em</th>
+      <th>Atualizado em</th>
+   	</tr>
+	</thead>
+	<tbody>
+	<% @courses.each do |course| %>
+   	<tr>
+      <td><%= image_tag course.logo.url(:small), width: "100%" %></td>
+      <td><%= course.title %></td>
+      <td><%= course.school.name %></td>
+      <td><%= course.students.length %></td>
+      <td><%= em_real course.price %></td>
+      <td><%= Course::STATUS.key course.status %></td>
+      <td><%= Course::PRIVACY.key course.privacy %></td>
+      <td><%= l course.created_at, format: :long %></td>
+      <td><%= l course.updated_at, format: :long %></td>
+   	</tr>
+	<% end %>
+ </tbody>
+</table>

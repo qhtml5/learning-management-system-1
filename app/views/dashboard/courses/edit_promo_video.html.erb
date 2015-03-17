@@ -1,0 +1,29 @@
+<%= box(:title => "Vídeo Promocional - Apresentação do Curso", :icon => "fa-icon-facetime-video")  do %>
+	<div class="pagination-centered">
+		<% if @course.video_url %>
+			<h3>Atual:</h3>
+			<iframe width="468" height="270" src="//www.youtube.com/embed/<%= @course.video_url %>?autoplay=0&autohide=1" frameborder="0" allowfullscreen></iframe>
+
+			<hr>
+		<% end -%>
+
+
+		<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_promo_video) do |f| %>
+			<div class="row-fluid">
+		    <div class="span8 offset2">
+			    <%= f.input :video_url, as: :string, :placeholder => "Ex.: xopXSq8oz8c", label: "Código do vídeo no YouTube:" %>
+			    <br>
+					<p><i class="icon-exclamation-sign"></i> <strong>Importante 01:</strong> Se a URL do seu vídeo é <em>http://www.youtube.com/watch?v=xopXSq8oz8c</em>, o código do vídeo será <strong>xopXSq8oz8c</strong>.</p>
+					<p><i class="icon-exclamation-sign"></i> <strong>Importante 02:</strong> Este vídeo substituirá a imagem em destaque do curso. Deixe em branco para remover o vídeo e retornar com a imagem.</p>
+					<p><i class="icon-exclamation-sign"></i> <strong>Importante 03:</strong> No momento apenas vídeos no YouTube irão funcionar.</p>
+				</div>
+			</div>
+			
+			<div class="form-actions">
+		    <%= f.submit "Salvar", :class => "btn btn-success" %>
+		  </div>
+	    
+		<% end %>	
+	</div>
+
+<% end %>

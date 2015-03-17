@@ -1,0 +1,61 @@
+<h3 class="muted">Avaliações que seus alunos fizeram em seus cursos</h3>
+<hr>
+
+<% if @courses.any? %>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box_widget_course">
+				<% @courses.each do |course| %>
+					<div class="box">
+						<div class="head">
+							<h4><%= course.title %></h4>
+						</div>
+						<div class="content">
+	    				<% if course.course_evaluations.any? %>
+								<table class="table table-hover">
+									<thead>
+		              	<tr>
+		                  <th>Aluno</th>
+										  <th>Pontuação</th>
+										  <th>Comentário</th>
+		                </tr>
+		            	</thead>
+      				
+		              <tbody>                
+										<% course.course_evaluations.each do |evaluation| %>
+											<tr>
+			                  <td><%= evaluation.user.full_name %></td>
+											  <td><div class="star" data-score="<%= evaluation.score %>"></div></td>
+											  <td><%= evaluation.comment %></td>
+			                </tr>
+										<% end %>
+		              </tbody>
+		            </table>
+	            <% else %>
+	            	<p class="alert"><%= t('messages.evaluations.empty') %></p>
+	            <% end %>
+						</div>
+					</div>
+	      <% end %>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<p class="alert"><%= t('messages.school.no_courses')%></p>
+<% end %>
+
+<script>
+	$('.star').raty({
+						score: function() {
+					    return $(this).attr('data-score');
+					  },
+						starHalf : '<%= asset_path('star-half.png') %>',
+						starOff  : '<%= asset_path('star-off.png') %>',
+						starOn   : '<%= asset_path('star-on.png') %>',
+						cancelOff: '<%= asset_path('cancel-off.png') %>',
+					    cancelOn : '<%= asset_path('cancel-on.png') %>',
+						cancel     : false,
+						readOnly : true
+					});
+</script>
+	

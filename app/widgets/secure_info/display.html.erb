@@ -1,0 +1,27 @@
+<%= widget_div do %>
+  <div class="well well_gray">
+  	<div class="row-fluid">
+  		<div class="span12">
+      	<div class="icon pagination-centered">
+					<%= image_tag('lock.png') %>
+				</div>
+        <h4><%= t('widgets.secure_info.lock.title') %></h4>
+        <p><%= t('widgets.secure_info.lock.description') %></p>
+      </div>
+  	</div>
+		<div class="row-fluid secure_icons">
+			<div class="offset1 span3 amazon">
+				<%= image_tag('amazon.png') %>
+			</div>
+			<div class="span3">
+				<%= image_tag('moip.png') %>
+			</div>
+			<div class="span4">
+				<span id="siteseal">
+					<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=cOgBuInvPIKcjurG96qea0LtVll3Y6UnK6RSR6PsxhZ6ejjPps"></script>
+				</span>
+			</div>
+		</div>
+  </div>
+
+<% end %>

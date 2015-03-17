@@ -1,0 +1,25 @@
+<%= simple_form_for @lead, :url => url_for_event(:create_lead, course: @course), remote: true do |f| %>
+	<div class="modal-body">
+	  <h1 id="myModalLabel" style="text-align: center;"><i class="icon-gift" style='font-size: 30px;'></i><br> <strong>Ganhe 5% de desconto agora!</strong></h1>
+	  <hr>
+		<div style="padding: 0 20px;">
+	  	<h3 style="line-height: 36px;">Entre com o seu email e o enviaremos um <strong>cupom com 5% de desconto</strong> agora mesmo:</h3>
+	  	<div class="row-fluid">
+	  		<div class="span12">
+		      <%= f.input :email, label: false, autofocus: true, input_html: { :class => "span12", style: "padding: 22px; margin-top: 10px; font-size: 18px;" }, :placeholder => "exemplo@email.com" %></p>
+	  		</div>
+	  	</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="float" style="margin-left: 70px;">
+	    <%= f.submit "Enviar cupom de desconto →", :class => "btn btn-success pull-right", :id => "submit-lead" %>
+		</div>
+		<div class="float" style="margin-top: 5px;">
+	    |
+		</div>
+		<div class="float" style="margin-top: 5px;">
+	    <%= link_to "continuar sem desconto", add_to_cart_course_path(@course), :id => "submit-course" %>
+		</div>
+	</div>
+<% end -%>

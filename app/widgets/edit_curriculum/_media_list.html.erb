@@ -1,0 +1,32 @@
+<ul class="td-sortable" data-update-url="<%= sort_dashboard_course_medias_path(@course) %>" style="list-style-type: none; margin-left: 0; padding-left: 0;">
+
+	<% lesson.lessons_medias.order(:sequence).each do |lesson_media| %>
+		<% media = lesson_media.media %>
+
+		<li data-item-id="<%= lesson_media.id %>">
+			<div class="box-course media">
+				<div class="box-header btn btn-info media-header">
+					<span class="reorder hint hint--right" data-hint="Arraste para ordenar as aulas"><i class="fa-icon-reorder"></i></span>
+					<span class="break"></span>
+
+					<!-- <span class="label label-info"><%= t('lesson') %>:</span>  -->
+					<span class="pagination-centered"><%= media_icon media.kind, style: "opacity: 0.5;" %></span>
+					<span class="hint hint--right" data-hint="Clique para renomear"><%= best_in_place media, :title, :path => rename_dashboard_course_media_path(@course, media.id) %></span>
+
+					<%= link_to "<i class=\"fa-icon-trash\"></i>".html_safe, url_for_event(:destroy_media, course: @course, media: media), method: :delete, remote: true, confirm: t('messages.lesson.destroy.confirm'), class: "pull-right btn-media-remove", id: "remove-media-#{media.id}" %>
+
+					<% if media.available? %>
+						<%= link_to "Editar".html_safe, url_for_event(:choose_library_or_upload, course: @course, media: media), remote: true, :class => "btn btn-small btn-success pull-right btn-add-content-media btn-view-content-media", id: "view-edit-media-#{media.id}" %>
+
+						<%= link_to "Visualizar".html_safe, url_for_event(:view_content, course: @course, media: media), remote: true, :class => "btn btn-small btn-info pull-right btn-add-content-media btn-view-content-media", id: "view-edit-media-#{media.id}" %>
+
+					<% else %>
+						<%= link_to "<i class=\"icon-plus\"></i> Adicionar mídia".html_safe, url_for_event(:choose_library_or_upload, course: @course, media: media), remote: true, :class => "btn btn-small btn-success pull-right btn-add-content-media" %>
+					<% end %>
+				</div>
+			</div>
+		</li>
+
+	<% end -%>
+
+</ul>

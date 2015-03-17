@@ -1,0 +1,29 @@
+<div id="crm-progress-tab">
+
+	<div class="tabbable">
+		<br>
+		
+		<% if @student.courses_confirmed.any? %>
+			<ul class="nav nav-pills">
+				<% @student.courses_confirmed.each_with_index do |course, i| %>
+					<li class="<%= i == 0 ? 'active' : '' %>"><%= link_to "#{course.title} (#{@student.completed_progress(course)})".html_safe, "##{course.slug}", "data-toggle" => "tab" %></li>
+				<% end %>
+			</ul>
+
+			<br>
+
+			<div class="tab-content form">
+				<% @student.courses_confirmed.each_with_index do |course, i| %>
+				  <div class="tab-pane <%= i == 0 ? 'active' : '' %>" id="<%= course.slug %>">
+				  	<%= render_widget :progress, :crm_page, course: course, user: @student %>
+				  	<%= render_widget :curriculum, :crm_page, course: course, user: @student %>
+				  </div>
+				<% end %>
+			</div>
+		<% else %>
+			<p class="alert">Não existem cursos disponíveis para exibir o progresso.</p>
+		<% end %>
+
+	</div>
+
+</div>

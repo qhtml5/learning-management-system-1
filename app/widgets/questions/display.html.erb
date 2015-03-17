@@ -1,0 +1,102 @@
+<% if @notice %>
+	<p class="flash-notice"><%= @notice %></p>
+<% elsif @alert %>
+	<p class="alert"><%= @alert %></p>
+<% end %>
+
+<%= simple_form_for Message.new, :url => url_for_event(:submit_message, course: @course), remote: true, html: { class: "form-search" } do |f| %>
+	<%= f.input :text, label: false, as: :text, placeholder: "Faça sua pergunta sobre esse curso", input_html: { class: "input-xlarge", size: "100x2", style: "width: 97%;" } %>
+	<%= f.submit "Enviar", class: "btn btn-success", id: "ask-btn" %>
+	<br>
+<% end -%>
+
+<% @messages.each_with_index do |message, i| %>
+	<div class="faq course-questions">
+		<div class="question message">
+			<% if message.user.image_url %>
+				<%= image_tag(message.user.image_url, size: "30x30") %> 
+			<% else %>
+				<%= image_tag(message.user.image(:thumb), size: "30x30") %> 
+			<% end %>
+			<strong><%= message.user.first_name %></strong>
+			<span class="muted"><%= l message.created_at, format: :long %></span>
+			<% if can? :destroy_message, Course %>
+				<small class="muted"><%= link_to "apagar", url_for_event(:destroy_message, course: @course, message: message), remote: true,method: :delete, confirm: "Tem certeza que deseja apagar a mensagem?", id: "destroy_message_#{message.id}" %></small>
+			<% end %>
+			<p><%= simple_format(message.text) %></p>
+
+			<% if message.answers.present? %>
+				<span class="message-answers-icon"><i class="icon-chevron-down" style="opacity: 0.4"></i> <%= pluralize(message.answers.length, "resposta") %></span>
+			<% end %>
+
+			<div class="answers">
+				<br>
+				<% message.answers.each do |answer| %>
+					<div class="answer-short">
+						<% if answer.user.image_url %>
+							<%= image_tag(answer.user.image_url, size: "15x15") %> 
+						<% else %>
+							<%= image_tag(answer.user.image(:mini_thumb), size: "15x15") %> 
+						<% end %>
+							<strong><%= answer.user.first_name %>  </strong>
+							<span class="muted"><%= l message.created_at, format: :long %></span>
+							<% if can? :destroy_message, Course %>
+								<small class="muted"><%= link_to "apagar", url_for_event(:destroy_message, course: @course, message: answer), method: :delete, confirm: "Tem certeza que deseja apagar a mensagem?", id: "destroy_answer_#{answer.id}", remote: true %></small>
+							<% end %>
+							<br>
+							<p><%= simple_format answer.text %></p>
+					</div>
+				<% end -%>
+
+				<% if current_user.can_answer_in_course?(@course) %>
+					<div class="answer">
+						<%= simple_form_for Message.new, url: url_for_event(:submit_answer, course: @course, question: message), remote: true, html: { class: "form-search" } do |f| %>
+							<%= f.input :text, label: false, as: :text, placeholder: "Responder ao #{message.user.first_name}", input_html: { class: "input-xlarge answer-text-area", size: "100x2", style: "width: 97%;", id: "answer_text" } %>
+							<br>
+							<%= f.submit "Enviar", class: "btn", id: "answer-btn" %>
+						<% end -%>
+					</div>
+				<% end -%>
+			</div>
+		</div>
+
+	</div>
+	<hr>
+<% end -%>
+
+<% if @course.messages.count > 6 %>
+	<div class="apple_pagination" style="font-size: 14px;">
+		<%= paginate @messages %>
+	</div>
+<% end -%>
+
+<script type="text/javascript">
+	$(document).ready(function (){
+		$(".answers").hide();
+
+		$(".question").on("mouseenter", function() {
+			$("#message-answers-icon").html("<span class='glyphicon glyphicon-chevron-up' style='opacity: 0.4'>");
+			$(this).find('.answers').slideDown({easing: "easeInOutBack"});
+		}).on("mouseleave", function () {
+			$("#message-answers-icon").html("<span class='glyphicon glyphicon-chevron-down' style='opacity: 0.4'>");
+			$(this).find('.answers').slideUp({easing: "easeInOutBack"});
+		});
+
+		$("#ask-btn, #answer-btn").click(function () {
+			$(this).after('<button class="btn disabled">Enviando...</button>');
+			$(this).hide();
+		})
+	});
+
+	$('.nav-icon').click(function (e){
+				if($(".sub-menu").is(":visible")) {
+					$(".nav-icon").find(".pull-right").html("<i class='icon-chevron-down'></i>");
+					$(".sub-menu").slideUp({easing: "easeInOutBack"});
+					// $("*[data-menu-subitem=" + $(this).data("menu-item") + "]").slideUp({easing: "easeInOutBack"});
+				} else {
+					$(this).find(".pull-right").html("<i class='icon-chevron-up'></i>");
+					$("*[data-menu-subitem=" + $(this).data("menu-item") + "]").slideDown({easing: "easeInOutBack"});
+				}
+				e.preventDefault();
+			});
+</script>

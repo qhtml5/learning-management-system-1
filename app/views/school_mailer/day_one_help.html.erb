@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body style="margin:0;">
+  <br>
+
+  <table align="left" cellspacing="0" cellpadding="0" border="0" width="540" style="background-color:#fff;padding:10px;font-size:12px;color:#3d4b4b;font-family:Helvetica,Arial,sans-serif;">
+    <tbody>
+      <tr style="vertical-align:top;">
+        <td style="margin-top:10px;padding:10px 20px;background-color:#fff;min-height:200px;">
+          <%= text_tag "Olá, #{@school_admin.first_name}. Tudo bem?" %>
+
+					<%= text_tag "Vi que você criou uma escola no Edools.com. Fico feliz por isso." %>
+
+					<%= text_tag "Meu contato é para saber se você precisa de alguma ajuda ou quer tirar alguma dúvida. Caso precise, pode contar comigo." %>
+
+					<%= text_tag "Se preferir, podemos marcar um skype (meu usuário é rafaelm.carvalho) ou você pode me ligar (meus telefones estão na assinatura)." %>
+
+					<%= text_tag "Espero que goste do Edools.com e quero muito ter você como cliente." %>
+
+					<%= text_tag "Abraços, <br> Rafael Carvalho".html_safe %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table align="left" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#fff;padding:0px 25px;font-size:12px;color:#3d4b4b;font-family:Helvetica,Arial,sans-serif;">
+    <tbody>
+      <tr>
+        <td style="margin-top:10px;padding:30px 0 30px 20px;background-color:#fff;min-height:200px;width:120px;">
+          <%= image_tag 'edools_logo_v1.png', width: 100 %>
+        </td>
+        <td>
+					<%= "Rafael Carvalho <br> Relacionamento com o cliente <br> tel.: 21 9395-1646 | 21 3741-8006 <br> skype: rafaelm.carvalho".html_safe %> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

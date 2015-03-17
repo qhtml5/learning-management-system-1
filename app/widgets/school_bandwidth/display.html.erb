@@ -1,0 +1,10 @@
+<%= render "notice" %>
+
+<% if @total_gb %>
+	<div class="progress progress-success">
+	  <div class="bar" style="width: <%= @percent_gb %>%;"></div>
+	</div>
+	<p>
+		Sua escola já consumiu <span class="badge badge-info"><%= @total_gb %> Gb</span> de tráfego de dados nesse mês.
+	</p>
+<% end %>

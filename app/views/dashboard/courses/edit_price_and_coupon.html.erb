@@ -1,0 +1,71 @@
+<%= render "dashboard/courses/coupon_modal" %>
+
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Preço e cupons</h4>
+		</div>
+		<div class="content">
+			<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_price_and_coupon) do |f| %>
+				<h2>Preço do Curso</h2>
+				<hr>
+		    <%= f.input :price, as: :string %>
+				<p class="muted">O curso deve ter preço mínimo de R$ 30,00.</p>
+
+				<br>
+	
+			  <h2>Cupons</h2>
+			  <hr>
+		    <%= link_to "Novo Cupom +", '#newCoupon', :class => "btn btn-success", :id => "new-coupon", "role" => "button", "data-toggle" => "modal" %>
+		    <br>
+		    <br>
+			  <table class="table table-striped table-hover" id="tabela_atendimentos">
+			    <thead>
+			      <tr>
+			        <th>Nome</th>
+			        <th>Desconto</th>
+			        <th>Validade</th>
+			        <th>Quantidade</th>
+			        <th>Restante</th>
+			        <th>Links para divulgação</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @course.coupons.not_automatic.each do |coupon| %>
+			      <tr>
+			        <td><%= coupon.name %></td>
+			        <td><%= "#{coupon.discount}%" %></td>
+			        <td><%= l coupon.expiration_date, format: :long %></td>
+			        <td><%= coupon.quantity %></td>
+			        <td><%= coupon.quantity_left %></td>
+			        <td>
+			        	<%= link_to "<i class='icon-facetime-video'></i>".html_safe, course_path(@course, coupon: coupon.name), class: "hint hint--left btn-small", "data-hint" => "Para a página do curso com o cupom aplicado", "target" => "_blank" %>
+			        	<%= link_to "<i class='fontello-icon-basket'></i>".html_safe, add_to_cart_course_path(@course, coupon: coupon.name), class: "hint hint--left btn-small", "data-hint" => "Direto para o carrinho com o cupom aplicado", "target" => "_blank" %>
+			        	<%= link_to "<i class='fontello-icon-chart-line'></i>".html_safe, affiliate_course_path(@course, coupon.name), class: "btn-small hint hint--left", "data-hint" => "Relatório de vendas do cupom", "target" => "_blank" %>
+			        </td>
+			        <% unless coupon.new_record? %>
+				        <td class="item_center">
+				          <%= link_to "<i class='fontello-icon-trash'></i>".html_safe, dashboard_course_coupon_path(@course, coupon), :method => :delete, :confirm => "Apagar cupom?", :class => "btn btn-danger btn-mini", id: "delete-coupon-#{coupon.id}" %>
+				        </td>
+			        <% end %>
+			      </tr>
+			      <% end %>
+			    </tbody>
+			  </table>
+
+				<div class="form-actions">
+				  <%= f.submit "Salvar", :class => "btn btn-success" %>
+				</div>
+
+			<% end -%>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		if(window.location.pathname.indexOf("/coupons") !== -1) {
+			$("#newCoupon").modal('show');
+		}
+	});
+</script>

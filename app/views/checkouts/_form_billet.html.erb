@@ -1,0 +1,23 @@
+<%= form_tag pay_billet_checkouts_path do %>	
+	<% if @purchase.present? %>
+		<%= hidden_field_tag :purchase_id, @purchase.id %>
+	<% end %>
+	
+	<p class="flag-panel">
+		<label class="checkbox inline flag boleto">
+			<%= radio_button_tag "payment[form]", "Billet", true, :name => "payment_billet" %>
+		</label>
+	</p>
+
+	<p class="app-alert">Desabilite o bloqueio de pop-ups do seu navegador</p>
+	<hr>
+	<div class="transaction-actions">
+		<%= link_to "← voltar", register_checkouts_path %>
+		<%= submit_tag "Efetuar pagamento", :class => "btn btn-success btn-large pull-right btn-process-transaction", :id => "comprar-curso-boleto-bancario" %>
+	</div>
+	<div class="process-transaction">
+	</div>
+	<div class="transaction-message">
+		<p><strong>Processando sua transação. Por favor, aguarde.</strong></p>
+	</div>
+<% end -%>

@@ -1,0 +1,32 @@
+<fieldset>
+  <legend>
+  	<div class="row-fluid">
+	    <div class="span2">Feedbacks</div>
+	    <div class="span2"><small><%= @feedbacks_like_count %> Positivas</small></div>
+	    <div class="span2"><small><%= @feedbacks_dislike_count %> Negativas</small></div>
+	  </div>
+  </legend>
+
+  <table class="table table-striped table-hover" id="tabela_atendimentos">
+    <thead>
+      <tr>
+        <th class="span1">Opinião</th>
+        <th class="span1">Email</th>
+        <th>Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @feedbacks.each do |feedback| %>
+	      <tr>
+            <td class="span1"><%= thumbs_up_or_down feedback.like %></td>
+            <td class="span1"><%= feedback.email %></td>
+          <% if feedback.like %>
+            <td><p class="text-info" style="word-wrap: break-word;"><%= feedback.text %></td>
+          <% else %>
+		        <td><p class="text-warning" style="word-wrap: break-word;"><%= feedback.text %></td>
+	       	<% end -%>
+	      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</fieldset>

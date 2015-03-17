@@ -1,0 +1,274 @@
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap_and_overrides
+ *= require signup
+ *= require signin
+ *= require theme
+ *= require animate
+ *= require external-pages
+ *= require blog
+ *= require hint
+ *= require halflings
+ *= require font-awesome
+ *= require fontello
+ *= require glyphicons
+ *= require jquery.allofthelights
+ *= require pagination
+ *= require jquery.minicolors
+ *= require jquery.tokenInput
+ *= require multi-line-button
+ *= require application_custom
+ *= require bootstrap-wysihtml5
+ *= require datetime_picker
+ *= require_self
+ */
+
+#course-overview {
+	margin-top: 20px;
+}
+
+#course-overview h4 {
+	line-height: 30px;
+}
+
+#course-form p {
+	margin-bottom: 30px;
+	font-weight: bold;
+}
+
+#course-form label {
+	font-weight: bold;
+}
+
+#course-form input[type="text"] {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 1.1em;
+}
+
+.course-in-cart {
+	margin-bottom: 10px;
+}
+
+.course-in-cart .course-price {
+	background: white;
+	border: 1px solid #e0e0e0;
+	height: 42px;
+	margin-left: 50px;
+	width: 142px;
+	float: left;
+}
+
+.course-in-cart .course-price p {
+	margin-top: 10px;
+	font-size: 28px;
+	color: #666666;
+	font-weight: 600;
+}
+
+.course-photo {
+	height: 300px;
+	background: #f0f0f0;
+}
+
+.course-in-cart-photo {
+	height: 150px;
+	background: #f0f0f0;
+}
+
+
+#order-summary {
+	background: #e0e0e0;
+}
+
+
+.payment-form .btn {
+	margin-top: 20px;
+}
+
+.mandatory_label{
+  color: #ff5555;
+  font-size: 12px;
+  margin-left: 3px;
+}
+
+#profile-menu {
+}
+
+#profile-menu ul li {
+	text-align: left;
+}
+
+
+#profile-menu ul .nav-header {
+	text-align: center;
+}
+
+/*li.center {
+	text-align: center;
+}*/
+
+#coupon-form select{
+	width: 100px;
+}
+
+#feedback {
+	margin-top: 230px;
+	margin-left: -62px;
+	position: fixed;
+	-webkit-transform:rotate(-90deg);
+	-moz-transform:rotate(-90deg);
+	-o-transform: rotate(-90deg);
+}
+
+#myModal {
+	margin-top: 100px;
+	width: 500px;
+}
+
+#myModal input[type="radio"], #myModal input[type="checkbox"] {
+	margin: -6px 4px 0;
+}
+
+#myModalLabel i {
+	margin-top: 5px;
+}
+
+.feedback-text-area {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.pretty-hover:hover {
+	-webkit-box-shadow: rgba(0, 0, 0, 0.11) 0 0 20px;
+  /*-webkit-box-shadow: 5px 5px 60px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow: 5px 5px 60px rgba(0, 0, 0, 0.07);
+  box-shadow: 5px 5px 60px rgba(0, 0, 0, 0.07);*/
+  cursor: pointer;
+}
+
+.pretty-hover:hover h3 a {
+  text-decoration: underline;
+}
+
+.item_center{ text-align: center; }
+
+#sortable tr td {
+  cursor: row-resize;
+}
+
+.fb-button img {
+	margin: 20px 0 10px 0;
+}
+
+select.select-register {
+	height: 45px;
+	width: 230px;
+}
+
+.multi-button {
+	width: 400px;
+}
+
+.badge-white {
+	padding: 0px 7px;
+	margin-top: 4px;
+	background: #f0f0f0;
+	opacity: 1;
+	color: black;
+	h4 {
+		line-height: 13px;
+	}
+}
+
+a {
+  color: #8fc25d;
+  font-style: 14px;
+  font-weight: bold;
+  &:hover {
+    color: #8fc25d;
+    font-style: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  font-size: 27px;
+  line-height: 27px;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 19px;
+  line-height: 26px;
+  font-weight: 300;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 300;
+}
+
+h5 {
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 300;
+}
+
+h6 {
+  font-size: 11px;
+  line-height: 11px;
+  font-weight: 300;
+}
+
+html {
+  font-weight: 300;
+}
+
+label {
+  /*font-weight: 300;*/
+}
+
+input {
+  font-weight: 300 !important;
+}
+
+
+#painel-menu {
+	.nav > li > a {
+		padding: 8px 15px;
+		text-align: center;
+	}
+}
+
+textarea {
+	height: 50px;
+}
+
+.textarea-large {
+	width: 100%;	
+}
+
+@media (max-width: 1000px) {
+	.container {
+		padding: 0 10px;
+	}
+}

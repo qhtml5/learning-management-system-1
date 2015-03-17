@@ -1,0 +1,72 @@
+<br>
+<div id="course_content" class="course_content_page">
+	<div class="container">
+
+
+		<div class="row-fluid">
+			<div class="span7">
+				<div class="pretty_box">
+					<div class="course-info">
+						<%= image_tag @course.logo.url(:medium) %>
+						<h2><%= @course.title %></h2>
+						<h4 class="muted"><strong><%= @course.school.name %></strong></h4>
+						<h5 class="muted"><%= pluralize @course.medias.length, "aula" %> </h5>
+					</div>
+				</div>
+				<%= render_widget :curriculum, :display, course: @course %>
+			</div>
+			<div class="span5">
+				<%= render_widget :progress, :display, course: @course, user: current_user %>
+				<%= render_widget :course_evaluation, :display, course: @course %>
+				<%= render_widget :questions, :display, course: @course, messages: @messages %>
+				<%= render_widget :downloads, :display, course: @course %>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<!-- <div id="course_description">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+					<h3><%#= @course.title %></h3>
+					<hr>
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="tabbable tabs-left">
+								<ul class="nav nav-tabs" style="width: 180px;">
+									<%# @medias.each do |media| %>
+										<%# if media == @medias.first %>
+											<li class="active"><%#= link_to media.title, "##{media.id}", "data-toggle" => "tab" %></li>
+										<%# else %>
+											<li><%#= link_to media.title, "##{media.id}", "data-toggle" => "tab" %></li>
+										<%# end -%>
+									<%# end -%>
+								</ul>
+
+								<div class="tab-content">
+									<%# @medias.each do |media| %>
+										<%# if media == @medias.first %>
+											<div id="<%#= media.id %>" class="tab-pane active">
+												<iframe class="wistia_embed" name="wistia_embed" src="<%#= media.url %>?controlsVisibleOnLoad=true&amp;version=v1&amp;videoHeight=422&amp;videoWidth=750&amp;volumeControl=true" frameborder="0" scrolling="no" width="968" height="542"></iframe>
+
+												<%#= render 'related_content', :media => media %>
+											</div>
+										<%# else %>
+											<div id="<%#= media.id %>" class="tab-pane">
+												<iframe class="wistia_embed" name="wistia_embed" src="<%#= media.url %>?controlsVisibleOnLoad=true&amp;version=v1&amp;videoHeight=422&amp;videoWidth=750&amp;volumeControl=true" frameborder="0" scrolling="no" width="968" height="542"></iframe>
+
+												<%#= render 'related_content', :media => media %>
+											</div>
+										<%# end -%>
+									<%# end -%>
+								</div>
+
+							</div>
+						</div>
+					</div>	
+			</div>
+		</div>
+	</div>
+</div> -->

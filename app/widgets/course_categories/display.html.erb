@@ -1,0 +1,30 @@
+<%= render "notice" %>
+
+<%= box(title: "Categorias", icon: "icon-list") do %>
+	<% if @course_categories.any? %>
+		<ul class="td-sortable" data-update-url="<%= sort_course_categories_dashboard_courses_path %>" style="list-style-type: none; margin-left: 0; padding-left: 0;">
+			<% @course_categories.each do |c| %>
+				<div class="row-fluid">
+					<li class="btn span12 course-category" data-item-id="<%= c.id %>"><i class="fa-icon-reorder"></i> <span class="hint hint--right" data-hint="Clique para renomear"><%= best_in_place c, :name, :path => rename_course_category_dashboard_courses_path(course_category_id: c.id) %></span> <small>(<%= pluralize(c.courses.length, "curso") %>)</small> <%= link_to "<i class=\"fontello-icon-trash\"></i>".html_safe, url_for_event(:destroy, course_category: c), method: :delete, remote: true, confirm: "Tem certeza que deseja apagar a categoria #{c.name}? Os cursos não serão apagados.", class: "pull-right btn btn-danger btn-mini btn-media-remove" %></li>
+				</div>
+			<% end %>
+		</ul>
+		<hr>
+	<% end %>
+
+
+	<%= simple_form_for :course_category, url: url_for_event(:create), remote: true do |f| %>
+		<div class="row-fluid">
+			<div class="span4">
+				<%= f.input :name, placeholder: "Nome da categoria", label: false, input_html: { class: "span12" } %>
+			</div>
+			<div class="span1">
+				<%= f.submit "Criar categoria", class: "btn btn-success" %>
+			</div>
+		</div>
+	<% end %>	
+<% end %>
+
+<i class="fontello-icon-attention"></i> Adicione um curso à uma categoria indo em Cursos > Gerenciar curso > Informações Básicas.
+
+<%= javascript_include_tag "top/jquery.sortable" %>

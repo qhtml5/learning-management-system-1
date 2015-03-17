@@ -1,0 +1,9 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<% if @purchase.courses.length > 1 %>
+  <%= p_tag "Sua compra dos cursos <strong>#{@courses_titles}</strong> está com o pagamento pendente. Status: <strong>#{@purchase.payment_status}</strong>." %>
+<% else %>
+  <%= p_tag "Sua compra do curso <strong>#{@courses_titles}</strong> está com o pagamento pendente. Status: <strong>#{@purchase.payment_status}</strong>." %>
+<% end %>
+<%= p_tag "Fique tranquilo pois a confirmação do seu pagamento é realizada de forma automática pelo MoIP. Assim que o pagamento for confirmado você receberá um novo email com a liberação do acesso ao curso." %>
+<%= p_tag "Observação: pagamento realizados por <strong>débito online e boleto bancário</strong> podem demorar até 3 dias para serem confirmados." %>
+<%= p_tag a_tag('Clique aqui para acompanhar o status das suas compras.', purchases_user_url(subdomain: @school.subdomain)) %>

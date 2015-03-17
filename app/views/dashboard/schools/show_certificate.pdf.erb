@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <%= wicked_pdf_stylesheet_link_tag 'application' -%>
+  <%= wicked_pdf_stylesheet_link_tag 'pdf' -%>
+  <title>Certificado do curso <%= @course.title %></title>
+</head>
+<body>
+	<div class="content pagination-centered">
+		<%= wicked_pdf_image_tag 'certificate_bg.png' %>
+	</div>
+	<div class="logo pagination-centered">
+		<%= wicked_pdf_image_tag 'edools_logo_v1.png' %>
+	</div>
+	<div class="cert_info pagination-centered">
+		<div class="title">
+			<h2>Certificamos que</h2>
+			<h1><%= @student.full_name %></h1>
+		</div>
+		<div class="text">
+			<p>Concluiu com total aproveitamento o curso</p>
+			<p class="course_title"><%= @course.title %></p>
+			<br>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="date pagination-centered">
+			<%= I18n.l(Date.today) %>
+		</div>
+		<div class="assinatura">
+			<%= @school.owner.full_name %>
+		</div>
+	</div>
+</body>
+</html>

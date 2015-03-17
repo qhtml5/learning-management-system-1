@@ -1,0 +1,216 @@
+<% if current_school %>
+	<% layout_configuration = current_school.try(:layout_configuration) %>
+
+	<% if params[:background] && !params[:background].empty? %>
+		<% background = params[:background] %>
+	<% else %>
+		<% background = layout_configuration.try(:background) %>
+	<% end %>
+
+	<% if params[:box_header] && !params[:box_header].empty? %>
+		<% box_header = params[:box_header] %>
+	<% else %>
+		<% box_header = layout_configuration.try(:box_header) %>
+	<% end %>
+
+	<% if params[:box_header_color] && !params[:box_header_color].empty? %>
+		<% box_header_color = params[:box_header_color] %>
+	<% else %>
+		<% box_header_color = layout_configuration.try(:box_header_color) %>
+	<% end %>
+
+	<% if params[:box_content] && !params[:box_content].empty? %>
+		<% box_content = params[:box_content] %>
+	<% else %>
+		<% box_content = layout_configuration.try(:box_content) %>
+	<% end %>
+
+	<% if params[:box_content_color] && !params[:box_content_color].empty? %>
+		<% box_content_color = params[:box_content_color] %>
+	<% else %>
+		<% box_content_color = layout_configuration.try(:box_content_color) %>
+	<% end %>
+
+	<% if params[:main_color] && !params[:main_color].empty? %>
+		<% main_color = params[:main_color] %>
+	<% else %>
+		<% main_color = layout_configuration.try(:main_color) %>
+	<% end %>
+
+	<% if params[:menu_link_color] && !params[:menu_link_color].empty? %>
+		<% menu_link_color = params[:menu_link_color] %>
+	<% else %>
+		<% menu_link_color = layout_configuration.try(:menu_link_color) %>
+	<% end %>
+
+	<% if params[:menu_link_hover_color] && !params[:menu_link_hover_color].empty? %>
+		<% menu_link_hover_color = params[:menu_link_hover_color] %>
+	<% else %>
+		<% menu_link_hover_color = layout_configuration.try(:menu_link_hover_color) %>
+	<% end %>
+
+	<% if params[:menu_bar] && !params[:menu_bar].empty? %>
+		<% menu_bar = params[:menu_bar] %>
+	<% else %>
+		<% menu_bar = layout_configuration.try(:menu_bar) %>
+	<% end %>
+
+	<% if params[:title] && !params[:title].empty? %>
+		<% title = params[:title] %>
+	<% else %>
+		<% title = layout_configuration.try(:title) %>
+	<% end %>
+
+	<% if params[:title_home_color] && !params[:title_home_color].empty? %>
+		<% title_home_color = params[:title_home_color] %>
+	<% else %>
+		<% title_home_color = layout_configuration.try(:title_home_color) %>
+	<% end %>
+
+	<% if params[:home_title_subtitle_shadow] && !params[:home_title_subtitle_shadow].empty? %>
+		<% home_title_subtitle_shadow = params[:home_title_subtitle_shadow] %>
+	<% else %>
+		<% home_title_subtitle_shadow = layout_configuration.try(:home_title_subtitle_shadow) %>
+	<% end %>
+
+<% end %>
+
+<% if title %>
+	<% content_for :title do %>
+		<%= title %>
+	<% end %>
+<% end %>
+
+
+
+<style>
+	<% unless background.blank? %>
+		body {
+			background: none <%= background %>;
+		}
+	<% end %>
+
+	<% unless box_header.blank? %>
+		.box_widget_course .box .head, .box .head {
+			background: <%= box_header %>;
+		  background: -webkit-linear-gradient(white, <%= box_header %>);
+		  background: -o-linear-gradient(white, <%= box_header %>);
+		  background: -ms-linear-gradient(white, <%= box_header %>);
+		  background: linear-gradient(white, <%= box_header %>);
+		}
+	<% end %>
+
+	<% unless box_header_color.blank? %>
+		.box_widget_course .head h4, .box .head h4 {
+			color: <%= box_header_color %>;
+		}
+	<% end %>
+
+	<% unless box_content.blank? %>
+		.box_widget_course .content, .box .content {
+			background: <%= box_content %>;
+		}
+	<% end %>
+
+	<% unless box_content_color.blank? %>
+		.box_widget_course .content, .box .content {
+			color: <%= box_content_color %>;
+		}
+	<% end %>
+
+	<% unless menu_bar.blank? %>
+		#header {
+			background: none <%= menu_bar %> !important;
+		}
+		#footer {
+			background: none #000000 !important;
+		}
+		#header-nav > li {
+      border-top: 5px solid <%= menu_bar %> !important;
+    }
+	<% end %>
+
+	<% unless main_color.blank? %>
+    #header-nav > li:hover {
+      border-top: 5px solid <%= main_color %> !important;
+    }
+    .navbar .nav > li > a:hover {
+    	color: <%= main_color %>;
+    }
+		#home_user_bar{
+			background-color: <%= main_color %>;
+			box-shadow: 0 3px 0px 0 #E7E7E7;
+		}
+		.course_top_bar{
+			background: none <%= main_color %>;
+		}
+		/*.course_top_bar h1, .course_top_bar h2{
+			color: #F4F4F4;
+			text-shadow: #000000 1px 2px 1px;
+		}
+		.course_top_bar h1{
+			font-size:45px;
+			line-height:45px;
+			font-weight:bold;
+		}*/
+		#course_content .post h3 {
+		    color: <%= main_color %>;
+		}
+		#course-course_faq #faq .faq .number {
+		    background-color: <%= main_color %>;
+		}
+		#faq .faq:hover .question{
+			color: <%= main_color %>;
+		}
+		a, .navbar .nav > li > a {
+		    color: <%= main_color %>;
+		}
+		textarea:focus,
+		input[type="text"]:focus,
+		input[type="password"]:focus,
+		input[type="datetime"]:focus,
+		input[type="datetime-local"]:focus,
+		input[type="date"]:focus,
+		input[type="month"]:focus,
+		input[type="time"]:focus,
+		input[type="week"]:focus,
+		input[type="number"]:focus,
+		input[type="email"]:focus,
+		input[type="url"]:focus,
+		input[type="search"]:focus,
+		input[type="tel"]:focus,
+		input[type="color"]:focus,
+		.uneditable-input:focus {
+			border-color:<%= main_color %>;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px <%= main_color %>;
+			-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px <%= main_color %>;
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px <%= main_color %>;
+		}
+	<% end %>
+
+	<% unless menu_link_color.blank? %>
+		.navbar .nav > li > a{
+			color: <%= menu_link_color %>;
+		}
+		.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle,
+		.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+		    color: <%= menu_link_color %>;
+		}
+	<% end %>
+
+	<% unless title_home_color.blank? %>
+		#home_user_bar h1, #home_user_bar h2, .course_top_bar h1, .course_top_bar h2 {
+			color: <%= title_home_color %>;
+		}
+		#course-price-at-sight {
+			color: <%= title_home_color %>;
+		}
+	<% end %>
+
+	<% unless home_title_subtitle_shadow.blank? %>
+		#home_user_bar h1, #home_user_bar h2, .course_top_bar h1, .course_top_bar h2 {
+			text-shadow: 1px 2px 1px <%= home_title_subtitle_shadow %>;
+		}
+	<% end %>
+
+</style>

@@ -1,0 +1,32 @@
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), class: "media-back", remote: true %>
+
+<br>
+<br>
+
+<div class="row-fluid">
+	<div class="span12">
+		<% if @counter %>
+			<h1 class=""><%= @counter %>. <%= @media.title %></h1>
+		<% else %>
+			<h1 class=""><%= @media.title %></h1>
+		<% end %>
+		<hr>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="">
+			<% if @content %>
+				<% if @media.kind == "Slide" %>
+				 <p class="text-white">O carregamento pode demorar alguns instantes.</p>
+				<% end -%>
+				<div id="content-embed"><%= raw @content.try(:embedCode) %></div>
+			<% else %>
+				<div id="content-embed">
+					<%= raw @media.text %>
+				</div>
+			<% end -%>
+		</div>
+	</div>
+</div>

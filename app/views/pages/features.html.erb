@@ -1,0 +1,180 @@
+<% content_for :title do %>
+	<%= t('home.title') %>
+<% end %>
+<% content_for :description do %>
+	<%= t('home.description') %>
+<% end %>
+
+<div id="feature_title" class="bar_edools pagination-centered">
+	<div class="container">
+		<div class="row-fluid animated fadeInDown">
+			<div class="span12">
+	        <h1>
+						O Edools é a solução completa para quem comercializa cursos online.<br>
+						Tudo integrado em uma única plataforma.
+	        </h1>
+	    </div>
+		</div>
+	</div>
+</div>
+
+<div id="features" class="features_page">
+	<div class="container">
+  	<div class="features1">
+
+    	<div class="row-fluid feature_area">
+      	<div class="span6">
+        	<%= image_tag 'feature_ead.png' %>
+        </div>
+				<div class="span6 feature">
+					<h2>Ensino à distância</h2>
+	 				<p class="description pull-right">
+						<ul>
+							<li><i class="fa-icon-ok"></i>Hospedagem de conteúdos em ambiente seguro</li>
+							<li><i class="fa-icon-ok"></i>Múltiplos tipos de mídia (vídeo, aúdio, slides, links e outros arquivos)</li>
+							<li><i class="fa-icon-ok"></i>Disponibilização de material para download</li>
+							<li><i class="fa-icon-ok"></i>Avaliação e feedback dos alunos</li>
+							<li><i class="fa-icon-ok"></i>Ambiente de perguntas e respostas</li>
+							<!-- <li><i class="fa-icon-ok"></i>Gestão de equipe de professores e administradores da escola</li> -->
+							<li><i class="fa-icon-ok"></i>Cursos gratuitos para captura de leads</li>
+							<li><i class="fa-icon-ok"></i>Aulas organizadas em módulos</li>
+							<li><i class="fa-icon-ok"></i>Personalização do tempo de acesso ao conteúdo</li>
+							<li><i class="fa-icon-ok"></i>Criação de cursos privados com acesso apenas através de endereço específico</li>
+							<li><i class="fa-icon-ok"></i>Publicação de depoimentos dos alunos</li>
+							<li><i class="fa-icon-ok"></i>Emissão de certificados</li>
+						</ul>
+         	</p>
+					<div class="pagination-centered">
+						<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+							<span class='title uppercase'><%= t('btn.features.action') %></span><br/>
+						  <span class='subtitle'><%= t('btn.features.subaction') %></span>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			
+			<hr>
+			
+			
+			
+			<div class="row-fluid feature_area">
+      	<div class="span6 feature feature-gray">
+					<h2>E-commerce de cursos</h2>
+	 				<p class="description pull-right">
+						<ul>
+							<li><i class="fa-icon-ok"></i>Páginas de vendas com personalização completa</li>
+							<li><i class="fa-icon-ok"></i>Endereço personalizado com o seu domínio</li>
+							<li><i class="fa-icon-ok"></i>Pagamentos com boleto, cartão de crédito ou transferência bancária</li>
+							<li><i class="fa-icon-ok"></i>Parcelamento para pagamentos com cartão de crédito</li>
+							<li><i class="fa-icon-ok"></i>Recebimento imediato em sua conta MOIP</li>
+							<li><i class="fa-icon-ok"></i>Carrinho de compras otimizado e seguro</li>
+							<li><i class="fa-icon-ok"></i>Cupons de desconto rastreáveis</li>
+							<li><i class="fa-icon-ok"></i>Envio de convites para novos alunos e cortesias</li>
+							<li><i class="fa-icon-ok"></i>Certificado de segurança para transações bancárias</li>
+						</ul>
+         	</p>
+					<div class="pagination-centered">
+						<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+							<span class='title uppercase'><%= t('btn.features.action') %></span><br/>
+						  <span class='subtitle'><%= t('btn.features.subaction') %></span>
+						<% end %>
+					</div>
+        </div>
+				<div class="span6">
+					<%= image_tag 'feature_ecommerce.png' %>
+				</div>
+			</div>
+			
+			<hr>
+			
+			
+			
+			<div class="row-fluid feature_area">
+      	<div class="span6">
+        	<%= image_tag 'feature_marketing.png' %>
+        </div>
+				<div class="span6 feature">
+					<h2>Marketing Digital</h2>
+	 				<p class="description pull-right">
+						<ul>
+							<li><i class="fa-icon-ok"></i>Integração com RDStation</li>
+							<li><i class="fa-icon-ok"></i>Integração com Google Analytics</li>
+							<li><i class="fa-icon-ok"></i>Páginas otimizadas para buscas (SEO)</li>
+							<!-- <li><i class="fa-icon-ok"></i>Publicação nas redes sociais</li> -->
+						</ul>
+         	</p>
+					<div class="pagination-centered">
+						<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+							<span class='title uppercase'><%= t('btn.features.action') %></span><br/>
+						  <span class='subtitle'><%= t('btn.features.subaction') %></span>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			
+			
+			<hr>
+			
+			
+				<div class="row-fluid feature_area">
+	      	<div class="span6 feature">
+						<h2>Gestão de clientes (CRM)</h2>
+		 				<p class="description pull-right">
+							<ul>
+								<li><i class="fa-icon-ok"></i>Controle das ações realizadas pelos alunos</li>
+								<li><i class="fa-icon-ok"></i>Troca de mensagens com os alunos</li>
+								<!-- <li><i class="fa-icon-ok"></i>Tags para organizar melhor os alunos</li> -->
+								<li><i class="fa-icon-ok"></i>Monitoramento do progresso de cada aluno</li>
+								<li><i class="fa-icon-ok"></i>Sistema de notificações</li>
+							</ul>
+	         	</p>
+						<div class="pagination-centered">
+							<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+								<span class='title uppercase'><%= t('btn.features.action') %></span><br/>
+							  <span class='subtitle'><%= t('btn.features.subaction') %></span>
+							<% end %>
+						</div>
+	        </div>
+					<div class="span6">
+						<%= image_tag 'feature_crm.png' %>
+					</div>
+				</div>
+		
+		
+				<hr>
+				
+		
+				<div class="row-fluid feature_area">
+	      	<div class="span6">
+	        	<%= image_tag 'feature_financas.png' %>
+	        </div>
+					<div class="span6 feature">
+						<h2>Gestão financeira</h2>
+		 				<p class="description pull-right">
+							<ul>
+								<li><i class="fa-icon-ok"></i>Recebimento imediato em sua conta MOIP</li>
+								<li><i class="fa-icon-ok"></i>Gráficos com a evolução mensal de faturamento</li>
+								<li><i class="fa-icon-ok"></i>Faturamento individual por curso</li>
+							</ul>
+	         	</p>
+							<div class="pagination-centered">
+								<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+									<span class='title uppercase'><%= t('btn.features.action') %></span><br/>
+								  <span class='subtitle'><%= t('btn.features.subaction') %></span>
+								<% end %>
+							</div>
+					</div>
+				</div>
+				
+				
+				<div class="row-fluid know_more">
+					<div class="offset1 span10 well well_gray">
+						<h1>Ainda está com dúvidas se o Edools atenderá as necessidades da sua empresa?</h1>
+						<p>Entre em contato conosco pelo <strong>telefone (21) 3741-8006</strong> ou pelo <strong>email contato@edools.com</strong>.</p>
+					</div>
+				</div>
+				
+				
+		</div>
+	</div>
+</div>				

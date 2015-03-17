@@ -1,0 +1,23 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= box(:title => 'Plano', :icon => 'fa-icon-map-marker')  do %>		
+				<p class="muted">
+					Atualmente você está no plano: <strong><%= School::PLANS.key(@school.plan) %></strong>
+				</p>
+				<div class="well">
+					Para saber mais sobre os planos disponíveis, envie-nos um contato para <%= mail_to "contato@edools.com" %> ou ligue-nos no telefone (21) 3741 8006. Teremos prazer em atendê-lo.
+				</div>
+				<hr>
+				<%= f.input :plan, required: false, collection: @school.available_plans, label: 'Mudar para o plano', as: :select %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+	</div>
+<% end %>

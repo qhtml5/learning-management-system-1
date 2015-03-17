@@ -1,0 +1,15 @@
+<%= render "notice" %>
+
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), remote: true, class: "" %>
+
+<div class="pagination-centered">
+	<h2><%= @lesson.title %></h2>
+	<h1><strong>Criar Aula</strong></h1>
+	<hr>
+
+	<%= simple_form_for Media.new, :url => url_for_event(:create_media, course: @course, lesson: @lesson), remote: true do |f| %>
+	  <%= f.input :title, :placeholder => t('widgets.edit_curriculum.create_lesson_placeholder'), autofocus: true, input_html: { :class => "span5 input-special" } %></p>				
+	  <%= link_to t('btn.cancel'), url_for_event(:cancel_action, course: @course), remote: true, class: "btn btn-warning" %>
+	  <%= f.submit t('btn.lesson.create'), :class => "btn btn-success" %>
+	<% end -%>
+</div

@@ -1,0 +1,14 @@
+<% @school.accepted_payment_forms.each do |payment_form| %>
+	<p>✓ <%= School::PAYMENT_FORMS_BR.key(payment_form) %></p>
+<% end %>
+<hr>
+
+<% if @school.accepts_payment_form? :credit_card %>
+	<div class="float float-no-margin"><%= image_tag "formas-pagamento-cartao-credito.png", width: "190" %></div>
+<% end %>
+<% if @school.accepts_payment_form? :online_debit %>
+	<div class="float float-no-margin"><%= image_tag "formas-pagamento-debito-online.png", width: "105" %></div>
+<% end %>
+<% if @school.accepts_payment_form? :billet %>
+	<div class="float float-no-margin"><%= image_tag "formas-pagamento-boleto.png", width: "33" %></div>
+<% end %>

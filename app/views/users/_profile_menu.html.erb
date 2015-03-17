@@ -1,0 +1,38 @@
+<div id="profile_menu" class="span3">	
+		<div class="title_box">
+			<div class="title_head">
+				<div class="pagination-centered">
+					<% if current_user.image_url %>
+						<%= image_tag(current_user.image_url, :size => "100x100", :class => "img-polaroid") %>
+					<% else %>
+						<%= image_tag(current_user.image.url(:medium), :class => "img-polaroid") %>
+					<% end -%>
+				</div>
+
+					<ul class="nav nav-list">
+						<br>
+				    <li class="nav-header pagination-centered"><%= current_user.full_name %></li>
+				    <li class="nav-header pagination-centered"><%= current_user.email %></li>
+				    <li class="nav-header pagination-centered"><%= User::ROLES.key(current_user.role) %></li>
+
+				    <% if current_user.student? %>
+							<li>
+								<%= link_to_unless_current "<i class=\"icon-edit\"></i> ".html_safe + "Meu Perfil", edit_profile_user_path do %>
+									<li class="active">
+										<%= link_to "<i class=\"icon-user\"></i> ".html_safe + "Meu Perfil", edit_profile_user_path %>
+									</li>
+								<% end -%>
+							</li>
+							<li>
+								<%= link_to_unless_current "<i class=\"icon-barcode\"></i> ".html_safe + "Minhas Compras", purchases_user_path do %>
+									<li class="active">
+										<%= link_to "<i class=\"icon-barcode\"></i> ".html_safe + "Minhas Compras", purchases_user_path %>
+									</li>
+								<% end -%>
+							</li>
+						<% end %>
+
+				  </ul>
+			</div>
+		</div>
+</div>

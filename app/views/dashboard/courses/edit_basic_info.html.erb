@@ -1,0 +1,30 @@
+<%= box(title: "Informações Básicas") do %>
+	<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_basic_info) do |f| %>
+    <%= f.input :title, input_html: { :class => 'span12' }, :placeholder => "Ex.: Como ganhar dinheiro sem sair de casa.", label: "Título do curso", hint: "<i class='icon-exclamation-sign'></i> Ao trocar o nome do curso o endereço dele também será alterado. Isso pode causar links quebrados.".html_safe %>
+
+    <%= f.input :pitch, input_html: { :class => 'span12', :size => "100x3"}, :placeholder => "Ex.: Guia passo-a-passo de como adquirir sua independência financeira trabalhando de casa", label: "Subtítulo do curso" %>
+
+    <%= f.input :course_category_id, as: :select, collection: CourseCategory.all, label: "Categoria" %>
+    
+    <div class="form-actions">
+	    <%= f.submit "Salvar", :class => "btn btn-success" %>
+	  </div>
+	<% end -%>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function(){	
+		$("#course_pitch").charCount({
+			allowed: 120,		
+			warning: 20,
+			counterText: 'Caracteres restantes: '	
+		});
+		$("#course_title").charCount({
+			allowed: 48,		
+			warning: 5,
+			counterText: 'Caracteres restantes: '	
+		});
+	});
+</script>
+
+<%= tinymce %>

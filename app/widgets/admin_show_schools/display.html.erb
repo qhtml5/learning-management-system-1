@@ -1,0 +1,122 @@
+<%= render 'notice' %>
+
+<h4>Escola atual: <strong><%= current_user.try(:school).try(:name) %></strong></h4>
+<hr>
+
+<div id="table-schools">
+  <%= simple_form_for :schools_to_email, url: url_for_event(:send_email_to_schools), remote: true do |f| %>
+    <div id="action-buttons" class="row-fluid">
+      <div class="span12">
+        <div class="float">
+          <%= link_to "<i class='icon-envelope'></i> Enviar mensagem".html_safe, '#', class: "btn btn-default disabled", id: "add-message-button" %>
+        </div>
+      </div>
+    </div>
+
+    <div id="action-forms" class="row-fluid">
+      <div id="message-form">
+        <%= f.input :subject, as: :string, label: false, input_html: { class: "span12" }, placeholder: "Título do email" %>
+
+        <%= f.input :message, as: :text, autofocus: true, label: false, input_html: { class: "span12", rows: "2" }, placeholder: "Corpo do email" %>
+        <br>
+        <div class="float-right">
+          <%= f.submit "Enviar", class: "btn btn-success _btn-loading", id: "submit-message" %>
+        </div>
+        <div class="float-right">
+          <%= link_to "Cancelar", '#', class: "btn btn-default cancel-btn", id: "cancel-btn-message" %>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <table class="table table-hover">
+    	<thead id="table-links">
+    		<tr>
+         <th><%= check_box_tag :check_all, nil %></th>
+         <th></th>
+         <th><%= link_to "Nome da escola", url_for_event(:order_schools, order: :name, reverse: @order == "name"), remote: true %></th>
+         <th><%= link_to "Plano", url_for_event(:order_schools, order: :plan, reverse: @order == "plan"), remote: true %></th>
+    		 <th><%= link_to "Alunos", url_for_event(:order_schools, order: :students, reverse: @order == "students"), remote: true %></th>
+         <th><%= link_to "Cursos", url_for_event(:order_schools, order: :courses, reverse: @order == "courses"), remote: true %></th>
+         <th><%= link_to "Dono da escola", url_for_event(:order_schools, order: :school_admin, reverse: @order == "school_admin"), remote: true %>
+         <th><%= link_to "Criada em", url_for_event(:order_schools, order: :created_at, reverse: @order == "created_at"), remote: true %></th>
+         <th><%= link_to "Atualizada em", url_for_event(:order_schools, order: :updated_at, reverse: @order == "updated_at"), remote: true %></th>
+       	</tr>
+    	</thead>
+    	<tbody>
+    	<% @schools.each do |school| %>
+       	<tr>
+          <td><%= f.check_box school.id, class: "check-box" %></td>
+          <td>
+            <% if school.try(:layout_configuration).try(:site_logo).try(:present?) %>
+              <%= image_tag school.layout_configuration.site_logo.url(:medium), width: "50" %>
+            <% end %>
+          </td>
+          <td><%= link_to school.name, switch_to_school_admin_pages_path(school_id: school), target: "_blank", class: "hint hint--top", "data-hint" => "clique para visualizar como dono da escola" %></td>
+          <td><%= School::PLANS.key(school.plan) %></td>
+    			<td><%= school.students.count %></td>
+          <td><%= school.courses.count %></td>
+          <td><%= mail_to school.try(:owner).try(:email), school.try(:owner).try(:full_name) %></td>
+          <td><%= l school.created_at, format: :long %></td>
+          <td><%= l school.updated_at, format: :long %></td>
+       	</tr>
+    	<% end %>
+     </tbody>
+    </table>
+
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#action-forms").hide();
+
+    $('#check_all').on('click', function() {
+      $('.check-box').prop('checked', $(this).is(":checked"));
+
+      if($(this).is(":checked")) {
+        $("#action-buttons a").removeClass("disabled");
+      } else {
+        $("#action-buttons a").addClass("disabled");
+        $("#action-buttons").show();
+        $("#action-forms").hide();
+      }
+    });
+
+    $(".check-box").change(function() {
+      if($(".check-box:checked").length > 0) {
+        $("#action-buttons a").removeClass("disabled");
+      } else {
+        $("#action-buttons a").addClass("disabled");
+        $("#action-buttons").show();
+        $("#action-forms").hide();
+      }
+    });
+
+    $("#table-links a").click(function() {
+      var opts = {
+        lines: 13, // The number of lines to draw
+        length: 10, // The length of each line
+        width: 3, // The line thickness
+        radius: 5, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb
+        speed: 0.5, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+      };
+      var spinner = new Spinner(opts).spin();
+      $("#table-schools").html(spinner.el);
+    }); 
+  });
+</script>
+
+<%= tinymce %>

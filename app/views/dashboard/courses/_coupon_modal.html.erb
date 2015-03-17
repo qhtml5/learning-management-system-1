@@ -1,0 +1,36 @@
+<%= content_for :modal do %>
+
+<div id="newCoupon" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 id="myModalLabel"><i class="fa-icon-edit"></i> Novo Cupom</h2>
+      </div>
+      <%= simple_form_for @coupon || Coupon.new, :url => dashboard_course_coupons_path(@course) do |f| %>
+        <div class="modal-body">
+          <div class="row-fluid">
+            <div class="span10">
+              <%= f.input :name, label: "Nome", :placeholder => "Digite o nome do cupom" %></p>
+
+              <%= f.input :discount, label: "Desconto (%)" %></p>
+
+              <div class="input-group">
+                <%= f.input :expiration_date, label: "Validade" %>
+              </div>
+              <br>
+
+              <%= f.input :quantity, label: "Quantidade", :size => "4" %></p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Fechar</button>
+          <%= f.submit "Criar Cupom", :class => "btn btn-success", :id => "submit-course" %>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% end -%>

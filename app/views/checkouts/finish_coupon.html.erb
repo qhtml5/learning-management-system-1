@@ -1,0 +1,30 @@
+<div class="checkout_page">
+	<div class="container">
+
+		<%= render 'checkouts/cart_header' %>
+
+		<div class="progress">
+			<div class="bar bar-success" style="width: 34%; background: rgb(130,186,57);"><i class="icon-user"></i> 1. Conecte-se</div>
+			<div class="bar bar-success" style="width: 33%; background: rgb(130,186,57);"><i class="icon-list"></i> 2. Complete seu cadastro</div>
+			<div class="bar bar-success" style="width: 33%; background: rgb(130,186,57);"><i class="icon-ok"></i> 3. Realize o pagamento</div>
+		</div>
+		<div class="row-fluid cart_container">
+			<div class="span8">
+				<%= box(title: "Obrigado!") do %>
+					<h4>Obrigado! Acesse a <%= link_to "área de cursos", dashboard_courses_path %> para assistí-los.</h4>
+				<% end %>
+
+				<h3>Você adquiriu:</h3>
+				<hr class="black">
+	      <% @purchase.cart_items.each do |cart_item| %>
+	        <%= render "cart_item_purchased", :cart_item => cart_item %>
+	      <% end -%>
+			</div>
+			<div class="span4">
+				<%= render "checkouts/order" %>
+				<%= render_widget :school_phone_email, :checkout, :school => current_school  %>
+				<%= render_widget :secure_info %>
+			</div>
+		</div>
+	</div>
+</div>

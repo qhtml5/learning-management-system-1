@@ -1,0 +1,14 @@
+<%= render "notice" %>
+
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), remote: true, class: "" %>
+
+<div class="pagination-centered">
+	<h1><strong><%= t('widgets.edit_curriculum.create_module') %></strong></h1>
+	<hr>
+
+	<%= simple_form_for Lesson.new, :url => url_for_event(:create_lesson, course: @course), remote: true do |f| %>
+	  <p><%= f.input :title, autofocus: true, :placeholder => t('widgets.edit_curriculum.create_module_placeholder'), input_html: { :class => "span5 input-special" } %></p>
+	  <%= link_to t('btn.cancel'), url_for_event(:cancel_action, course: @course), remote: true, class: "btn btn-warning" %>
+	  <%= f.submit t('btn.module.create'), :class => "btn btn-success", :id => "submit-lesson" %>
+	<% end -%>
+</div>

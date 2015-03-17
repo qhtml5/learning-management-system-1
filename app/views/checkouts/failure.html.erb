@@ -1,0 +1,30 @@
+<div class="checkout_page">
+	<div class="container">
+
+		<%= render 'checkouts/cart_header' %>
+
+		<div class="progress">
+			<div class="bar bar-success" style="width: 34%;">1. Conecte-se</div>
+		  <div class="bar bar-success" style="width: 33%;">2. Complete seu cadastro</div>
+		  <div class="bar bar-warning" style="width: 33%;">3. Realize o pagamento</div>
+		</div>
+		<div class="row-fluid cart_container">
+			<div class="span8">
+				<%= box(title: "Erro ao processar pagamento:") do %>
+					<% if flash[:purchase_message] %>
+						<h5 class="alert"><%= flash[:purchase_message] %></h5>
+					<% else %>
+						<h5 class="alert"><%= @message %></h5>
+					<% end -%>
+					<hr>
+					<p class="muted"><%= link_to "← voltar para o pagamento", :back, :class => "btn btn-warning" %></p>
+				<% end %>
+			</div>
+			<div class="span4">
+				<%= render "checkouts/order" %>
+				<%= render_widget :school_phone_email, :checkout, :school => current_school  %>
+				<%= render_widget :secure_info %>
+			</div>
+		</div>
+	</div>
+</div>

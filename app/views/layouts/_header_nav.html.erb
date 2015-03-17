@@ -1,0 +1,85 @@
+<ul id="header-nav" class="nav navbar-nav pull-right">
+	<% if current_cart && current_cart.courses.any? %>
+		<li>
+			<%= link_to_unless_current "<i class=\"fontello-icon-basket\"></i> Carrinho".html_safe, cart_checkouts_path, :id => "carrinho" do %>
+			<li class="active">
+				<%= link_to "<i class=\"fontello-icon-basket\"></i> Carrinho".html_safe, cart_checkouts_path, :id => "carrinho" %>
+			</li>
+			<% end -%>
+		</li>
+	<% end -%>
+
+
+	<% if user_signed_in? %>
+		<% if current_school %>
+			<li>
+				<%= link_to_unless_current "<i class=\"icon-bell\"></i> Notificações".html_safe, notifications_user_path do %>
+				<li class="active">
+					<%= link_to "<i class=\"icon-bell\"></i> Notificações".html_safe, notifications_user_path %>
+				</li>
+				<% end -%>
+			</li>
+
+			<li>
+				<%= link_to dashboard_courses_path do %>
+					<% if current_user.admin? || current_user.school_admin? %>
+						<i class="icon-home"></i> Minha escola 
+					<% else %>
+						<i class="icon-facetime-video"></i> Meus Cursos
+					<% end %>
+				<% end %>
+			</li>
+		<% elsif current_user.school_admin? %>
+			<% if current_user.school.present? %>
+				<li><%= link_to "<i class='icon-share'></i> Acessar escola".html_safe, dashboard_courses_path(subdomain: current_user.school.subdomain, code: current_user.encrypted_password) %></li>
+			<% else %>
+				<li><%= link_to "<i class='icon-ok'></i> Complete sua escola".html_safe, wizard_basic_info_dashboard_schools_path %></li>
+			<% end %>
+		<% else %>
+			<% if current_user.try(:admin?) %>
+				<li>
+					<%= link_to_unless_current "<i class=\"fa-icon-cogs\"></i> Área administrativa".html_safe, admin_root_path do %>
+					<li class="active">
+						<%= link_to "<i class=\"fa-icon-cogs\"></i> Área administrativa".html_safe, admin_root_path %>
+					</li>
+					<% end -%>
+				</li>
+			<% end %>
+		<% end %>
+
+		<li class="dropdown">
+			<% if current_user.image.present? %>
+				<% image = image_tag(current_user.image.url(:small), size: "40x40", class: "img-circle") %>
+			<% else %>
+				<% image = image_tag(current_user.image.url(:small), size: "40x40", class: "img-circle") %>
+			<% end %>
+			<%= link_to '#', :class=>"dropdown-toggle user-picture", :data=>{:toggle=>"dropdown"} do %>
+				<%= image %>
+				<%= current_user.first_name %> <i class="fontello-icon-down-open-big"></i>
+			<% end %>
+			<ul class="user_menu dropdown-menu" role="menu" aria-labelledby="dLabel">
+				<li style="margin-bottom: 5px;" class="pagination-centered"><%= current_user.first_name %></li>
+				<li class="divider"></li>
+				<li>
+					<%= link_to edit_profile_user_path do %>
+						<i class="icon-user"></i> Meu Perfil
+					<% end -%>
+				</li>
+				<% if current_user.student? %>
+					<li>
+						<%= link_to purchases_user_path do %>
+							<i class="icon-barcode"></i> Minhas Compras
+						<% end -%>
+					</li>
+				<% end %>
+				<li>
+					<%= link_to destroy_user_session_path, :method => :delete do %>
+						<i class="icon-off"></i> Sair
+					<% end -%>
+				</li>
+	    </ul>
+		</li>
+	<% else %>
+		<li><%= link_to "Entrar", new_user_session_path %></li>
+	<% end %>
+</ul>

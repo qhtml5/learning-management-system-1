@@ -1,0 +1,65 @@
+<%= render "notice" %>
+
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), remote: true, class: "" %>
+
+<div class="pagination-centered">
+	<h1><strong><%= @media.title %></strong></h1>
+	<h2>Adicionar mídia</h2>
+	<hr>
+</div>
+
+<% if @medias.present? %>
+	<%= simple_form_for :library_media, url: url_for_event(:update_media_from_library, course: @course, media: @media), remote: true do |f| %>
+		<table class="table table-hover">
+			<thead>
+		  	<tr>
+		  		<th></th>
+		  		<th></th>
+		    	<th>Nome</th>
+		      <th>Tipo</th>
+		    </tr>
+		  </thead>
+		  <tbody>	
+				<% @medias.each do |media| %>
+		    	<tr style="cursor: pointer;">
+			    	<td><%= f.radio_button media.hashed_id, media.hashed_id, class: "check-box", name: "library_media_hashed_id" %></td>
+			    	<td><%= image_tag media.thumbnail.url %></td>
+		        <td><%= media.name %></td>
+		        <td><%= media.type %></td>
+		      </tr>
+				<% end %>
+		  </tbody>
+		</table>
+		<div class="pagination-centered">
+			<%= f.input :kind, as: :select, collection: Media::LIBRARY_TYPES, label: "Visualizar como:" %>
+			<%= f.submit "Salvar", :class => "btn btn-success disabled", id: "btn-add-from-library" %>
+		</div>
+	<% end %>
+<% else %>
+	<p>Não há mídias disponíveis na sua biblioteca</p>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('tr').click(function () {
+			radio_button = $(this).find('input[name=library_media_hashed_id]')
+			radio_button.attr('checked','checked');
+			checked = radio_button.val();
+			media_kind = $("#library_media_kind").val();	
+			if(checked && media_kind) {
+				$('#btn-add-from-library').removeClass('disabled');
+			} else {
+				$('#btn-add-from-library').addClass('disabled');
+			}
+		});
+		$('input[name=library_media_hashed_id], #library_media_kind').bind("change propertychange keyup input paste", function () {
+			checked = $(this).val();
+			media_kind = $("#library_media_kind").val();
+			if(checked && media_kind) {
+				$('#btn-add-from-library').removeClass('disabled');
+			} else {
+				$('#btn-add-from-library').addClass('disabled');
+			}
+		});
+	});
+</script>

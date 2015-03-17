@@ -1,0 +1,36 @@
+<div class="container checkout_page">
+	<%= render 'checkouts/cart_header' %>
+
+	<div class="progress">
+		<div class="bar" style="width: 34%; background: rgb(130,186,57);"><i class="icon-user"></i>1. Conecte-se</div>
+	  <div class="bar" style="width: 33%; background: rgb(130,186,57);"><i class="icon-list"></i>2. Complete seu cadastro</div>
+	  <div class="bar bar-warning" style="width: 33%; font-size: 18px;"><i class="icon-ok"></i>3. Realize o pagamento</div>
+	</div>
+	
+	<div class="row-fluid cart_container">
+		<div class="span8">
+			
+			<div id="checkout-exception-page" class="box_widget_course _form-validations">
+				<div class="box">
+					<div class="content">
+						<h2 class="pagination-centered"> 
+							<%= image_tag "lock.png", size: "200x200" %>
+						</h2>
+						<br>
+						<h1 class="pagination-centered"><strong>Sistema sobrecarregado</strong></h1>
+						<hr>
+						<h2 class="pagination-centered">No momento nosso sistema está sobrecarregado, fique tranquilo pois todos os seus dados estão seguros. Volte novamente mais tarde para concluir sua transação.</h2>
+						<hr>
+						<p class="pagination-centered"><%= link_to "← voltar", register_checkouts_path, class: "btn" %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="span4">
+			<%= render "checkouts/order" %>
+			<%= render_widget :school_phone_email, :checkout, :school => current_school  %>
+			<%= render_widget :secure_info %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Privacidade</h4>
+		</div>
+		<div class="content">
+			<fieldset>
+				<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_privacy) do |f| %>
+					<div class="row-fluid">
+						<label class="radiobutton inline span2">
+							<%= f.radio_button :privacy, :public, :class => "btn", name: "course_privacy" %> Público
+						</label>
+						<label class="radiobutton inline span2">
+							<%= f.radio_button :privacy, :private, :class => "btn", name: "course_privacy" %> Privado
+						</label>
+						<label class="radiobutton inline span2">
+							<%= f.radio_button :privacy, :restrict, :class => "btn", name: "course_privacy" %> Restrito
+						</label>
+					</div>
+					<br>
+
+					<div id="email_field">
+						<%= f.label :allowed_emails, "Emails permitidos (separados por vírgulas):" %>
+						<%= f.input :allowed_emails, as: :text, label: false, input_html: { rows: "2" } %>
+					</div>
+
+					<br>
+
+					<div class="row-fluid">
+						<div class="span1 pagination-centered">
+							<i class="fa-icon-question-sign"></i>
+						</div>
+						<div class="span8">
+							<p class="muted">
+								 Um curso "público" estará disponíveis para todos os usuários do Edools. <br />Um curso "privado" não aparece na busca e é acessado apenas através da URL. <br /> Um curso "restrito" fica disponível apenas para os emails informados.
+							</p>
+						</div>
+					</div>
+					<div class="form-actions"> 
+						<%= f.submit "Salvar", :class => "btn btn-success" %>
+					</div>
+				<% end -%>
+			</fieldset>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		if($("input[name=course_privacy]:checked").val() === "restrict") {
+			$("#email_field").show();
+		}else{
+			$("#email_field").hide();
+		};
+		$("input[name=course_privacy]").change(function() {
+			if($(this).val() === "restrict") {
+				$("#email_field").show();
+			}else{
+				$("#email_field").hide();
+			};
+		}); 
+		$('#course_allowed_emails').keydown(function(e) {
+	    if (e.keyCode == 32) {
+        return false;
+	    }
+		});
+	});
+</script>

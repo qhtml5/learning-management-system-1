@@ -1,0 +1,74 @@
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+<div class="row-fluid">
+	<div class="span6">
+		<%= box(:title => "Informações básicas", :icon => "fa-icon-info-sign")  do %>
+			<%= f.input :name, label: "Nome da escola:", input_html: { class: "span12 big-input" } %>
+			<%= f.input :about_us, as: :text, label: "Sobre a escola", hint: "Será mostrado na página inicial da escola, abaixo dos cursos.", input_html: { class: "tinymce", size: "100x3" } %>
+			<br>
+			<%= f.input :footer_info, as: :text, label: "Texto do rodapé", hint: "Será mostrado no rodapé da escola, em todas as páginas.", input_html: { class: "tinymce", size: "100x3" } %>
+			<br>
+			<%= f.input :introduction_info, as: :text, label: "Apresentação da escola (opcional)", hint: "Será mostrado na página inicial da escola, acima dos cursos.", input_html: { class: "tinymce", size: "100x3" } %>
+		<% end %>
+	</div>
+	<div class="span6">
+		<%= box(:title => "Contato", :icon => "fa-icon-phone")  do %>
+			<div class="row-fluid">
+				<div class="span4">
+					<h4>
+						Telefone:
+					</h4>
+				</div>
+				<div class="span8">
+					<%= f.input :phone, label: false, input_html: { class: "span12 big-input" } %>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span4">
+					<h4>
+						Email:
+					</h4>
+				</div>
+				<div class="span8">
+					<%= f.input :email, label: false, input_html: { class: "span12 big-input" } %>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span4">
+					<h4>
+						http://
+					</h4>
+				</div>
+				<div class="span8">
+					<%= f.input :site, label: false, placeholder: "www.minhaempresa.com", input_html: { class: "span12 big-input" } %>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span4">
+					<h4>
+						facebook.com/
+					</h4>
+				</div>
+				<div class="span8">
+					<%= f.input :facebook, label: false, placeholder: "facebook", input_html: { class: "span12 big-input" } %>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span4">
+					<h4>twitter.com/</h4>
+				</div>
+				<div class="span8">
+					<%= f.input :twitter, label: false, placeholder: "twitter", input_html: { class: "span12 big-input" } %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+
+	
+</div>
+<hr>
+<%= f.submit "Salvar", class: "btn btn-success btn-large" %>
+<% end %>
+<%= tinymce_assets %>
+<%= tinymce %>

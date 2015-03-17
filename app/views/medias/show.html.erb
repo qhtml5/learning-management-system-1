@@ -1,0 +1,10 @@
+<div class="container">
+	<br>
+	<%= link_to "← Área do curso", content_course_path(@course) %>
+	<br>
+	<br>
+	<div class="row-fluid">
+		<%= render_widget :media, :display, media: @media, course: @course %>
+	</div>
+	<br>
+</div>

@@ -1,0 +1,480 @@
+<% content_for :title do %>
+	<%= t('home.title') %>
+<% end %>
+<% content_for :description do %>
+	<%= t('home.description') %>
+<% end %>
+
+<div id="plan_title" class="bar_edools pagination-centered">
+	<div class="container">
+		<div class="row-fluid animated fadeInDown">
+			<div class="span12">
+	        <h1><%= t('plans.title') %></h1>
+					<h2><%= t('plans.subtitle') %></h2>
+	    </div>
+		</div>
+	</div>
+</div>
+
+<div class="pricing_page" id="pricing">
+	<div class="container">
+  	
+		<div class="span2 well well_gray plan_professional">
+			<h1>Precisa de um plano personalizado?</h1>
+			<p>Entre em contato conosco pelo telefone<br/> <strong>(21) 3741-8006</strong> ou pelo email <%= mail_to 'contato@edools.com', 'contato@edools.com' %>.</p>
+		</div>
+		
+		<table class="table features_table">
+			<thead>
+        <tr>
+	        <th class="span4 feature_name" ></th>
+	        <th>
+		
+						<div class="price_plan span2" data-spy="affix" data-offset-top="370">
+							<div class="header">
+						  	<span>Iniciante</span>
+						    <div class="price">
+									<!-- <span>R$ 99</span>/ mês -->
+									<span>Contate-nos!</span>
+						  	</div>
+						  </div>
+						  <div class="section">
+						    <div class="price-basic-info">
+							  	<h3>Ideal para quem está começando.</h3>
+									<h3><strong><%= t('plans.trial_msg') %></strong></h3>
+								</div>
+								<%= link_to "Começar agora!", new_user_registration_path, :class => "btn btn-success"%>
+						  </div>
+						</div>
+		
+					</th>
+	        <th>
+	        	
+						<div class="price_plan span2" data-spy="affix" data-offset-top="370">
+							<div class="header">
+						  	<span>Básico</span>
+						    <div class="price">
+									<!-- <span>R$ 249</span>/ mês -->
+									<span>Contate-nos!</span>
+						    </div>
+						  </div>
+						  <div class="section">
+						    <div class="price-basic-info">
+							  	<h3>Para quem já tem um pouco mais de alunos.</h3>
+							    <h3><strong><%= t('plans.trial_msg') %></strong></h3>
+							   </div>
+								<%= link_to "Começar agora!", new_user_registration_path, :class => "btn btn-success"%>
+						  </div>
+						</div>
+	
+	        </th>
+	        <th>
+		
+						<div class="price_plan pro span2" data-spy="affix" data-offset-top="370">
+							<div class="header">
+						  	<span>Intermediário</span>
+						    <div class="price">
+									<!-- <span>R$ 599</span>/ mês -->
+									<span>Contate-nos!</span>
+						    </div>
+						  </div>
+						  <div class="section">
+						    <div class="price-basic-info">
+							  	<h3>Nosso plano mais popular. Todas as funcionalidades!</h3>
+						    	<h3><strong><%= t('plans.trial_msg') %></strong></h3>
+						    </div>
+								<%= link_to "Começar agora!", new_user_registration_path, :class => "btn btn-success"%>
+						  </div>
+						</div>
+						
+					</th>
+					<th>
+						
+						<div class="price_plan span2" data-spy="affix" data-offset-top="370">
+							<div class="header">
+						  	<span>Personalizado</span>
+						    <div class="price">
+									<span>Contate-nos!</span>
+						    </div>
+						  </div>
+						  <div class="section">
+						    <div class="price-basic-info">
+							  	<h3>Para quem já possui uma boa base de alunos.</h3>
+						    	<h3>-</h3>
+						    </div>
+								<%= mail_to "contato@edools.com", "Contatar", :class => "btn btn-success"%>
+						  </div>
+						</div>
+						
+						</th>
+
+	      </tr>
+      </thead>
+      
+			<tbody>
+        <tr>
+          <td class="feature_name">
+						Alunos ativos
+						<span class="hint hint--right" data-hint="Alunos matriculados em um ou mais cursos."> (?)</td>
+          <td class="plan1">10</td>
+          <td class="plan2">30</td>
+          <td class="plan3">100</td>
+					<td class="plan4">Personalizado</td>
+        </tr>
+        <tr>
+          <td class="feature_name">Preço por aluno extra</td>
+          <td class="plan1">R$ 7</td>
+					<td class="plan2">R$ 7</td>
+					<td class="plan3">R$ 7</td>
+					<td class="plan4">R$ 7</td>
+        </tr>
+				<tr>
+          <td class="feature_name">Quantidade de cursos</td>
+          <td class="plan1">Ilimitado</td>
+					<td class="plan2">Ilimitado</td>
+					<td class="plan3">Ilimitado</td>
+					<td class="plan4">Ilimitado</td> 
+        </tr>
+				<tr>
+          <td class="feature_name">Quantidade de vídeos</td>
+          <td class="plan1">Ilimitado</td>
+					<td class="plan2">Ilimitado</td>
+					<td class="plan3">Ilimitado</td>
+					<td class="plan4">Ilimitado</td> 
+        </tr>
+				<tr>
+          <td class="feature_name">Armazenamento</td>
+          <td class="plan1">Ilimitado</td>
+					<td class="plan2">Ilimitado</td>
+					<td class="plan3">Ilimitado</td>
+					<td class="plan4">Ilimitado</td> 
+        </tr>
+				<tr>
+          <td class="feature_name">Tráfego de dados</td>
+          <td class="plan1">Ilimitado</td>
+					<td class="plan2">Ilimitado</td>
+					<td class="plan3">Ilimitado</td>
+					<td class="plan4">Ilimitado</td> 
+        </tr>
+				<tr>
+          <td class="feature_name">Hospedagem de conteúdos em ambiente seguro</td>
+          <td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+        </tr>
+				<tr>
+          <td class="feature_name">Múltiplos tipos de mídia (vídeo, aúdio, slides, links e outros arquivos)</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Disponibilização de material para download</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Avaliação e feedback dos alunos</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Ambiente de perguntas e respostas</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Gestão de equipe de professores e administradores da escola</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Aulas organizadas em módulos</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Personalização do tempo de acesso ao conteúdo</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Publicação de depoimentos dos alunos</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Pagamentos com boleto, cartão de crédito ou transferência bancária</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Parcelamento para pagamentos com cartão de crédito</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Recebimento imediato em sua conta MOIP</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Carrinho de compras otimizado e seguro</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Certificado de segurança para transações financeiras</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Páginas otimizadas para buscas (SEO)</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Publicação nas redes sociais</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Controle das ações realizadas pelos alunos</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Tags para organizar melhor os alunos</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Monitoramento do progresso de cada aluno</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Gráficos com a evolução mensal de faturamento</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Informações de faturamento individual por curso</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Sistema de notificações</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Domínio personalizado
+					suaescola.edools.com</td>
+					<td class="plan1"><i class="icon-ok"></i></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Emissão de certificados</td>
+					<td class="plan1"></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Cupons de desconto rastreáveis</td>
+					<td class="plan1"></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Envio de convites para novos alunos e cortesias</td>
+					<td class="plan1"></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Troca de mensagens com os alunos</td>
+					<td class="plan1"></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Integração com Google Analytics</td>
+					<td class="plan1"></td>
+					<td class="plan2"><i class="icon-ok"></i></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>				
+				<tr>
+          <td class="feature_name">Uso de domínio próprio
+					www.suaescola.com.br</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Cursos gratuitos para captura de leads</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Criação de cursos privados com acesso apenas através de endereço específico</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Integração com RDStation</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<tr>
+          <td class="feature_name">Integração com AdRoll</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"><i class="icon-ok"></i></td>
+					<td class="plan4"><i class="icon-ok"></i></td> 
+				</tr>
+				<!-- <tr>
+          <td class="feature_name">Remoção do logo do Edools do rodapé do site e emails</td>
+					<td class="plan1"></td>
+					<td class="plan2"></td>
+					<td class="plan3"></td>
+					<td class="plan4"><i class="icon-ok"></i></td>
+				</tr>  -->
+      </tbody>
+    </table>
+		
+		
+	
+	<br /><br />	
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q1.q') %></h1>
+				<p><%= raw t('faq.q1.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q3.q') %></h1>
+				<p><%= raw t('faq.q3.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q7.q') %></h1>
+				<p><%= raw t('faq.q7.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q4.q') %></h1>
+				<p><%= raw t('faq.q4.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q5.q') %></h1>
+				<p><%= raw t('faq.q5.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q8.q') %></h1>
+				<p><%= raw t('faq.q8.a') %></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q6.q') %></h1>
+				<p><%= raw t('faq.q6.a') %></p>
+			</div>
+		</div>
+
+		<div class="row-fluid know_more">
+			<div class="offset1 span10 well well_gray">
+				<h1><%= t('faq.q9.q') %></h1>
+				<p>Visite nossa <%= link_to "base de conhecimento", "http://suporte.edools.com" %> para ter acesso a mais perguntas e repostas.</p>
+			</div>
+		</div>
+		
+		            
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(window).scroll(function(){ 
+	    var windowTop = $(window).scrollTop();
+	 
+	    if (windowTop > 2100) {
+	      $('.affix').hide();
+	    } else {
+	      $('.affix').show();
+	    }
+	  });
+
+	});
+ 
+</script>

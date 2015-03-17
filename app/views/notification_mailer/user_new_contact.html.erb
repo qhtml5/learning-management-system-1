@@ -1,0 +1,5 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<%= p_tag "Há um novo contato em sua escola:" %>
+<%= message_tag "<strong>#{@sender.full_name}</strong> disse: <br /> #{simple_format(@message.text)}" %>
+<%= p_tag "Não deixe de responder o contato, manter um bom relacionamento com os alunos é fundamental para o sucesso da sua escola." %>
+<%= p_tag a_tag('Clique aqui para responder o contato.', dashboard_student_url(@sender, subdomain: @school.subdomain)) %>

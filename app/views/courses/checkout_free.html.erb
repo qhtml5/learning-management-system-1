@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span8 offset2">
+      <div class="title_box">
+        <div class="title_head">
+          <div class="row-fluid">
+            <div class="span3">
+              <%= image_tag @course.logo.url(:medium), class: "thumbnail" %>
+            </div>
+            <div class="span9">
+              <h4>Curso online grátis</h4>
+              <h2><%= @course.title %></h2>
+              <h4><%= @course.school.name %></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="row-fluid">
+    <div class="span8 offset2">
+      <h2>Para consumir o conteúdo do curso, entre com seus dados:</h2>
+    </div>
+  </div>
+  <br>
+  <div class="row-fluid">
+    <div class="span4 offset2">     
+      <%= box(title: "Crie sua conta") do %>
+        <div class="form">
+          <%= simple_form_for(@user, :url => user_registration_path(course: @course, free: true)) do |f| %>
+            <%= f.input :first_name, label: false, autofocus: true, placeholder: "Seu nome", input_html: { id: "registration_first_name" } %>
+            <%= f.input :email, label: false, required: true, input_html: { id: "registration_email" }, placeholder: "Seu Email" %>
+            <%= f.input :password, label: false, required: true, input_html: { id: "registration_password" }, placeholder: "Crie uma Senha" %>
+            <%= f.input :company, label: false, required: true, input_html: { id: "registration_company" }, placeholder: "Empresa" %>
+            <%= f.input :function, label: false, required: true, input_html: { id: "registration_function" }, placeholder: "Cargo" %>
+            <%= f.submit "Criar conta", class: "btn uppercase btn-success" %>
+          <% end -%>
+          <%= link_to "Esqueceu a senha?", new_user_password_path %>            
+         </div>
+      <% end %>
+    </div>
+    <div class="span4">                     
+      <%= box(title: "Já possui conta?") do %>  
+        <div class="form">
+          <%= simple_form_for :user, url: user_session_path(course: @course) do |f| %>
+            <%= f.input :email, label: false, input_html: { id: "user_email_login" }, placeholder: "Seu Email", required: true %>
+            <%= f.input :password, label: false, input_html: { id: "user_password_login" }, required: true, placeholder: "Sua Senha" %>
+            <%= f.submit "Entrar", class: "btn uppercase btn-info", id: "login-button" %></p>
+          <% end -%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<%= render "notice" %>
+
+<%= simple_form_for :users, :url => url_for_event(:invite, course: @course), remote: true do |f| %>
+  <%= f.input :emails, as: :text, placeholder: "exemplo_1@mail.com,exemplo_2@mail.com", label: "Digite os emails separados por vírgulas:", required: false, input_html: { size: "100x2", id: "emails", class: "textarea-large" } %>
+  <br>
+  <%= f.submit "Enviar", :class => "btn btn-success send-invitations" %>
+  <br>
+  <br>
+<% end -%>
+
+<div id="invitations-form">
+</div>
+
+<i class="icon-exclamation-sign"></i> <strong>Importante:</strong> As pessoas convidadas poderão acessar o conteúdo do seu curso <strong>sem pagar</strong>.</p>
+
+<% if @course.invitations.any? %>
+
+  <hr>
+  <br>
+
+  <h3>Convites pendentes:</h3>
+
+  <table class="table table-striped">
+  	<thead>
+      <th>Email:</th>
+      <th>Enviado em:</th>
+      <th></th>
+  	</thead>
+    <tbody>
+      <% @course.invitations.each do |invitation| %>
+    		<tr>
+    			<td><%= invitation.email %></td>
+          <td><%= l invitation.created_at, format: :long %></td>
+          <td class="item_center">
+            <%= link_to "<i class='fontello-icon-trash'></i>".html_safe, url_for_event(:destroy_invitation, course: @course, invitation: invitation), remote: true, :confirm => "Apagar convite?", :class => "btn btn-danger btn-mini", id: "delete-invitation-#{invitation.id}" %>
+          </td>
+    		</tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <i class="icon-exclamation-sign"></i> Ao confirmar o recebimento do convite o aluno aparecerá na <%= link_to "lista de alunos da escola", dashboard_students_path %>.</p>
+
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#emails').keydown(function(e) {
+	    if (e.keyCode == 32) {
+	        return false;
+	    }
+		});
+
+    $(".send-invitations").click(function() {
+      var opts = {
+        lines: 13, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 10, // The line thickness
+        radius: 30, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb
+        speed: 0.5, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner-small', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+      };
+      var spinner = new Spinner(opts).spin();
+      $("#invitations-form").html(spinner.el);
+    }); 
+	});
+</script>

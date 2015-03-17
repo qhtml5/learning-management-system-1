@@ -1,0 +1,22 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= box(:title => 'Conta MoIP', :icon => 'fa-icon-credit-card')  do %>		
+				<p class="muted">
+					Adicione seu <strong>Login MoIP</strong> e receba pagamentos através da sua carteira virtual MoIP.
+					<%= link_to "Faça sua carteira aqui", "https://www.moip.com.br/criarcarteira.do", target: "_blank" %>.
+				</p>
+				<hr>
+				<%= f.input :moip_login, required: false, label: 'Login MoIP', placeholder: "exemplo@email.com", hint: 'A carteira MoIP deve ser da modalidade <strong>Vendedor</strong> e estar <strong>Validada</strong>.' %>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+	</div>
+<% end %>

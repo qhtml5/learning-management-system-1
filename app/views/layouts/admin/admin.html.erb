@@ -1,0 +1,9 @@
+<%= content_for :stylesheets do %>
+  <%= stylesheet_link_tag "flip" %>
+<% end %>
+
+<%= content_for :navigation do %>
+  <%= render partial: 'layouts/admin/main_menu', locals: { active_item: 'edit' } %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

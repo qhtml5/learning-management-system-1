@@ -1,0 +1,94 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= box(:title => 'Endereço', :icon => 'fa-icon-globe')  do %>		
+				<p class="muted">Configure seu subdomínio no Edools e adicione o domínio do seu site.</p>
+				<hr>
+
+				<div id="config-domain-custom" class="row-fluid">
+					<div class="span1">
+						<%= f.radio_button :use_custom_domain, false %>
+					</div>
+					<div class="span5">
+						<p>Subdomínio Edools</p> 
+						<p class="muted"><%= current_school.subdomain %>.edools.com</p>
+					</div>
+
+					<div class="span1">
+						<%= f.radio_button :use_custom_domain, true %>
+					</div>
+					<div class="span5">
+						<p>CNAME</p>
+						<p class="muted">escola.seudominio.com</p>
+					</div>
+				</div>
+
+				<div id="config-domain-subdomain" class="row-fluid">
+					<hr>
+					<div class="span2 pagination-centered">
+						<h4>http://</h4>
+					</div>
+					<div class="span6">
+							<%= f.input :subdomain, required: true, label: false %>
+					</div>
+					<div class="span3">
+						<h4>edools.com</h4>
+					</div>
+				</div>
+
+
+				<div id="config-domain-domain">
+					<hr>
+					<div class="row-fluid">
+						<div class="span2 pagination-centered">
+							<h4>http://</h4>
+						</div>
+						<div class="span10">
+							<%= f.input :domain, required: false, label: false, placeholder: "seudominio.com.br", input_html: { class: "span10" } %>
+						</div>
+					</div>
+
+					<hr>
+
+					<p class="muted">
+						A partir do momento em que você configurar o Edools para utilizar um domínio customizado, <%= current_school.subdomain %>.edools.com irá redirecionar para o novo domínio.
+					</p>
+
+					<hr>
+
+					<%= link_to "<i class='fa-icon-question-sign'></i> Saiba como configurar seu domínio personalizado".html_safe, '#howToConfigure', id: "hot-to-configure", "role" => "button", "data-toggle" => "modal" %>
+				</div>
+
+
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+		domain_form();
+
+		$('#config-domain-custom input:radio').bind("change propertychange keyup input paste", function () {
+			domain_form();
+		});
+
+		function domain_form() {
+			if($("#config-domain-custom input:radio:checked").val() === "true") {
+				$("#config-domain-subdomain").hide();
+				$("#config-domain-domain").show();
+			} else {
+				$("#config-domain-subdomain").show();
+				$("#config-domain-domain").hide();
+			}
+		};
+	});
+</script>

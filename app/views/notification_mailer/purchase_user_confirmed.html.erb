@@ -1,0 +1,7 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<% if @purchase.courses.length > 1 %>
+  <%= p_tag "Parabéns! O seu pagamento na compra dos cursos <strong>#{@courses_titles}</strong> foi confirmado." %>
+<% else %>
+  <%= p_tag "Parabéns! O seu pagamento na compra do curso <strong>#{@courses_titles}</strong> foi confirmado." %>
+<% end %>
+<%= p_tag a_tag('Clique aqui para conferir.', dashboard_courses_url(subdomain: @school.subdomain)) %>

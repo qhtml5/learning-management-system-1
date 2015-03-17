@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Desculpe, mas algo aconteceu de errado (500)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <style type="text/css">
+    html {
+      height: 100%;
+      background: url("/content_bg.jpg") repeat scroll left top #DDDCE2;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      color: #666;
+      text-align: center;
+      font-family: arial, sans-serif;
+      height: 100%;
+    }
+
+    #wrapper {
+      padding-top: 50px;
+    }
+
+    div.dialog {
+      margin: 0 auto;
+      width: 650px;
+      border: 1px solid #fff;
+      background: #fff;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	padding: 10px;
+    }
+    h1 {
+      padding-top: 260px;
+	  margin-top: 0px;
+      color: #7EA05E;
+      font-size: 60px;
+      font-weight: bold;
+      background: url("/images/error.png") no-repeat center 20px;
+    }
+    p.back a {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: black;
+      font-family: "Pontano Sans", sans-serif;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 3px;
+      border: 1px solid #AAA;
+      background: #EEE;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    p.back a:hover {
+      border: 1px solid #444;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+<div id="wrapper">
+
+  <div class="dialog">
+    <h1>Desculpe.</h1>
+	<h2>Mas algo aconteceu de errado.</h2>
+    <p>Nós já recebemos um aviso sobre esse erro e faremos o possível para corrigir bem rápido.</p>
+
+    <p class="back">
+      <a href="javascript:history.go(-1);">Voltar</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

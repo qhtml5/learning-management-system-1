@@ -1,0 +1,49 @@
+<%= form_tag pay_online_debit_checkouts_path do %>
+	<% if @purchase.present? %>
+		<%= hidden_field_tag :purchase_id, @purchase.id %>
+	<% end %>
+
+	<p class="flag-panel" id="online-debit-institutions">
+		<label class="checkbox inline flag bank-banco-do-brasil">
+			<%= radio_button_tag "payment[institution]", "BancoDoBrasil", false %>
+		</label>
+
+		<label class="checkbox inline flag bank-bradesco">
+			<%= radio_button_tag "payment[institution]", "Bradesco", false %>
+		</label>
+
+		<label class="checkbox inline flag bank-itau">
+			<%= radio_button_tag "payment[institution]", "Itau", false %>
+		</label>
+	</p>
+
+	<p class="app-alert">Desabilite o bloqueio de pop-ups do seu navegador</p>
+	<hr>
+	<div class="transaction-actions">
+		<%= link_to "← voltar", register_checkouts_path %>
+		<%= submit_tag "Efetuar pagamento", :class => "btn btn-success btn-large pull-right btn-process-transaction", :id => "comprar-curso-debito-online" %>
+	</div>
+	<div class="process-transaction">
+	</div>
+	<div class="transaction-message">
+		<p><strong>Processando sua transação. Por favor, aguarde.</strong></p>
+	</div>
+
+<% end -%>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#comprar-curso-debito-online').attr('disabled', 'disabled');
+
+		$('#online-debit-institutions input:radio').bind("change propertychange keyup input paste", function () {
+			checked = $("#online-debit-institutions input:radio:checked").val();
+			if(checked) {
+				$('#comprar-curso-debito-online').removeAttr('disabled');
+			} else {
+				$('#comprar-curso-debito-online').attr('disabled', 'disabled');
+			}
+		});
+	});
+</script>

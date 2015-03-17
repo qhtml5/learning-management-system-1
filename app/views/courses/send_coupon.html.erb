@@ -1,0 +1,3 @@
+<%= p_tag "Olá, #{@lead.email}." %>
+<%= p_tag "Aqui está o seu cupom de 5% de desconto no curso <strong>#{@course.title}</strong>, clique no link logo abaixo para prosseguir com a compra." %>
+<%= p_tag link_to("Prosseguir com a compra →", add_to_cart_course_path(@course, coupon: @coupon.name) %>

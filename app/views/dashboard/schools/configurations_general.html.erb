@@ -1,0 +1,72 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= box(:title => 'Formas de Pagamento', :icon => 'fa-icon-money')  do %>		
+				<p class="muted">
+					Formas de pagamento aceitas pela sua escola.
+				</p>
+				<hr>
+				<div class="row-fluid">
+					<label class="radiobutton span4">
+						<%= f.input :accept_credit_card, label: false %> Cartão de Crédito
+					</label>
+					<label class="radiobutton span4">
+						<%= f.input :accept_online_debit, label: false %> Débito Online
+					</label>
+					<label class="radiobutton span4">
+						<%= f.input :accept_billet, label: false %> Boleto Bancário
+					</label>
+				</div>
+			<% end %>
+
+			<%= box(:title => 'Formato de preços', :icon => 'fa-icon-money')  do %>		
+				<p class="muted">
+					Formato que o preço aparecerá nas páginas dos cursos e na escola.
+				</p>
+				<hr>
+				<div class="row-fluid">
+					<label class="radiobutton inline span8">
+						<%= f.input :pricing_style, as: :radio_buttons, :collection => { "Parcelado (12x de R$ 9,90)" => 1, "Preço cheio (R$ 99,90)" => 2 }, label: false %>
+					</label>
+				</div>
+			<% end %>
+		</div>	
+
+		<div class="span6">
+			<%= box(:title => 'Confirmação automática', :icon => 'fa-icon-money')  do %>		
+				<p class="muted">
+					Caso ativada, nas compras com cartão de crédito o aluno terá acesso imediato ao curso. Caso posteriormente o pagamento não for confirmado, o aluno perderá o acesso.
+				</p>
+				<hr>
+				<div class="row-fluid">
+					<label class="radiobutton inline span4">
+						<%= f.input :automatic_confirmation, as: :radio_buttons, :collection => { "Ativada" => true, "Desativada" => false }, label: false %>
+					</label>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="span6">
+			<%= box(:title => 'Recuperação de carrinho', :icon => 'icon-shopping-cart')  do %>		
+				<p class="muted">
+					Caso ativada, ao clicar em comprar o usuário será ofertado com um cupom de 5% de desconto automático em troca da inserção do seu email. Isso é útil para recuperar o email de leads que desistem de comprar no meio do processo de compra.
+				</p>
+				<hr>
+				<div class="row-fluid">
+					<label class="radiobutton inline span4">
+						<%= f.input :cart_recovery, as: :radio_buttons, :collection => { "Ativada" => true, "Desativada" => false }, label: false %>
+					</label>
+				</div>
+			<% end %>			
+
+		</div>
+
+	</div>
+
+	<div class="form-actions">
+		<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+	</div>
+<% end %>

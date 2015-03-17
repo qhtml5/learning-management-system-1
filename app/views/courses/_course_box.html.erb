@@ -1,0 +1,37 @@
+<div class="span3" id="course-box-<%= course.id %>">
+	<div class="course-item-home thumbnail" onclick=" window.location = '<%= course_path(course) %>'">
+		<div class="img-container">
+			<%= image_tag(course.logo.url(:medium)) %>
+		</div>
+		<div class="title_pitch">
+			<h3 class="title">
+				<span><%= course.title %></span>
+			</h3>
+			<h4 class="pitch">
+				<span><%= course.pitch %></span>
+			</h4>
+		</div>
+		<hr>
+		<div class="clearfix"></div>
+			<div class="course_price well">
+				<% if @school.pricing_style_full? || course.free? %>
+					<%= em_real course.price %>
+				<% else %>
+					<%= installments_amount course.price %>x
+					<span><%= max_installments_value(course.price) %></span>
+				<% end %>
+			</div>
+			<div class="order">
+				<% if course.restrict? %>
+					<% path = checkout_restrict_course_path(course) %>
+				<% elsif course.free? %>
+					<% path = checkout_free_course_path(course) %>
+				<% else %>
+					<% path = add_to_cart_course_path(course) %>
+				<% end %>
+				
+				<%= link_to t("course.buy"), path, :class => "btn btn-success", :id => "course-buy-#{course.slug}" %>
+			</div>
+		<div class='clearfix'></div>
+	</div>
+</div>

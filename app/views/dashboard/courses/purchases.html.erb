@@ -1,0 +1,49 @@
+<fieldset>
+  <legend>
+    Compras do curso <%= @course.title %>
+  </legend>
+
+  <h4>Concluídas</h4>
+  <table class="table table-striped table-hover" id="tabela_atendimentos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Data</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.confirmed_purchases.each do |purchase| %>
+      <tr>
+        <td><%= purchase.user.full_name %></td>
+        <td><%= purchase.user.email %></td>
+        <td><%= purchase.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= purchase.payment_status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4>Pendentes</h4>
+  <table class="table table-striped table-hover" id="tabela_atendimentos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Data</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.pending_purchases.each do |purchase| %>
+      <tr>
+        <td><%= purchase.user.full_name %></td>
+        <td><%= purchase.user.email %></td>
+        <td><%= purchase.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= purchase.payment_status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</fieldset>

@@ -1,0 +1,48 @@
+<%= render "course_modal" %>
+
+<div id="courses" class="row-fluid">
+  <% if current_user.student? %>
+    <div class="courses-list">
+      <% @course_items.each do |course_item| %>
+        <%= render "course_box_student", :course_item => course_item %>  
+      <% end %>
+    </div>
+
+  <% else %> 
+    <div class="courses-list">
+      <% @courses.each do |course| %>
+        <%= render "course_box", :course => course %>  
+      <% end %>
+    </div>
+
+    <% if can?(:dashboard_create, Course) %>
+      <div class="span4 pagination-centered btn-create-course">
+        <div class="row-fluid">
+          <div class="span6 offset3">
+            <%= link_to '#newCourse', :id => "new-course", "role" => "button", "data-toggle" => "modal", class: "multi-line-button green" do %>
+              <span class="title"><i class="fa-icon-edit"></i></span>
+              <span class="subtitle"><p>Criar Curso</p></span>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".course-item").hover(function() {
+      $(this).find(".info-edit").show();
+    }, function() {
+      $(this).find(".info-edit").hide();
+    });
+    $('html').bind('keypress', function(e) {
+      if((e.keyCode == 13) && ($("#submit-course").is(":visible"))) {
+        $("#submit-course").click();
+      }
+    }); 
+  });
+</script>

@@ -1,0 +1,81 @@
+<%= form_tag pay_credit_card_checkouts_path(purchase_id: @purchase.try(:id)) do %>
+	<% if @purchase.present? %>
+		<%= hidden_field_tag :purchase_id, @purchase.id %>
+	<% end %>
+
+	<div class="row-fluid">
+		<div class="span7">
+			<div id="credit-card-form" class="register-form large-label">
+				<p class="flag-panel" id="credit-card-logos">
+					<label class="checkbox inline flag mastercard">
+						<%= radio_button_tag "payment[credit_card]", "Mastercard", false %>
+					</label>
+
+					<label class="checkbox inline flag visa">
+						<%= radio_button_tag "payment[credit_card]", "Visa", false %>
+					</label>
+
+					<label class="checkbox inline flag amex">
+						<%= radio_button_tag "payment[credit_card]", "American_Express", false %>
+					</label>
+
+					<label class="checkbox inline flag diners">
+						<%= radio_button_tag "payment[credit_card]", "Diners", false %>
+					</label>
+
+					<label class="checkbox inline flag hipercard">
+						<%= radio_button_tag "payment[credit_card]", "Hipercard", false %>
+					</label>
+				</p>
+				<hr>
+
+				<p><%= label_tag "payment[credit_card_number]", "Nº do Cartão de Crédito" %>
+					<%= text_field_tag "payment[credit_card_number]", nil %></p>
+
+				<p><%= label_tag "payment[credit_card_security_code]", "Cód. de Segurança" %>
+					<%= text_field_tag "payment[credit_card_security_code]", nil, :maxlength => 4 %></p>
+
+				<p>
+					<%= label_tag "payment[expiration_month]", "Validade (mês/ano)" %>
+					<%= select_tag "payment[expiration_month]", options_for_select(("01".."12")), :include_blank => true %> /
+					<%= select_tag "payment[expiration_year]", options_for_select((13..25)), :include_blank => true %>
+				</p>
+
+				<p>
+					<%= label_tag "payment[installments]", "Parcelas" %>
+					<%= select_tag "payment[installments]", options_for_select(calculate_installments(@purchase.try(:total) || @cart.try(:total), @installments)) %>
+				</p>
+			</div>
+
+		</div>
+	</div>
+
+	<hr>
+	
+	<div class="transaction-actions">
+		<%= link_to "← voltar", register_checkouts_path %>
+		<%= submit_tag "Efetuar pagamento", :class => "btn btn-success btn-large pull-right btn-process-transaction", :id => "comprar-curso-cartao-credito" %>
+	</div>
+	<div class="process-transaction">
+	</div>							
+	<div class="transaction-message">
+		<p><strong>Processando sua transação. Por favor, aguarde.</strong></p>
+	</div>					
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#comprar-curso-cartao-credito').attr('disabled', 'disabled');
+
+		$('#credit-card-logos input:radio, #payment_credit_card_number, #payment_credit_card_security_code, #payment_expiration_month, #payment_expiration_year').bind("change propertychange keyup input paste", function () {
+			if($("#credit-card-logos input:radio:checked").val() && $("#payment_credit_card_number").val() && 
+					$("#payment_credit_card_security_code").val() && $("#payment_expiration_month").val() && 
+					$("#payment_expiration_year").val()) {
+				$('#comprar-curso-cartao-credito').removeAttr('disabled');
+			} else {
+				$('#comprar-curso-cartao-credito').attr('disabled', 'disabled');
+			}
+		});
+	});
+
+</script>

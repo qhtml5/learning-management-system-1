@@ -1,0 +1,148 @@
+<% counter = 1 %>
+
+<div class="row-fluid">
+	<div class="span3">
+    <button id="lessons-btn" class="btn expanded-btn" type="button">
+      <i class="fa-icon-reorder"></i> <span>Aulas</span>
+    </button>
+
+		<div id="lessons-list">
+			<%= box(class: "box-gray") do %>
+				<table class="table">
+					<tbody>
+						<% @course.lessons.available.order(:sequence).each_with_index do |lesson, i| %>
+							<tr class="lesson">
+								<td colspan="2">
+									<!-- <h6 class="muted">Capítulo <%#= i+1 %></h6> -->
+									<h4><%= lesson.title %></h4>
+								</td>
+							</tr>
+							<% lesson.medias.available.order(:sequence).each_with_index do |media, i| %>
+								<tr class="lesson-media">
+									<% if @media == media %>
+										<td class="title" width="90%" style="background: #ffffff;">
+											<!-- <h6 class="muted">Aula <%#= counter %></h6> -->
+											<h5>
+												<%= link_to media.title, url_for_event(:display, course: @course, media: media), remote: true %>
+												<span class="hint hint--left pull-right" data-hint="Assistindo"> <i class="icon-play-circle" style="margin-right: 10px; color: #888888;" id="media-watching"></i> </span>
+											</h5>
+										</td>
+									<% else %>
+										<td class="title" width="90%">
+											<!-- <h6 class="muted">Aula <%#= counter %></h6> -->
+											<h5>
+												<%= link_to media.title, url_for_event(:display, course: @course, media: media), remote: true %>
+												<% if current_user.ended_media? media %>
+													<span class="hint hint--left pull-right" data-hint="Assistido"> <i class="icon-ok" style="margin-right: 10px; color: #888888;"></i> </span>
+												<% elsif current_user.started_media? media %>
+													<span class="hint hint--left pull-right" data-hint="Começou a assistir"> <i class="icon-pause" style="margin-right: 10px; color: #888888;"></i> </span>
+												<% end %>
+											</h5>
+										</td>
+									<% end %>
+								</tr>
+								<% counter += 1 %>
+							<% end -%>
+						<% end -%>
+					</tbody>
+				</table>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="span9">
+		<%= box(title: @media.title) do %>
+			<div id="media-content">
+				<div class="content-frame">
+					<% if @media.kind == "Video" %>
+						<%= hidden_field_tag :wistia_hashed_id, @media.wistia_hashed_id, :id => :wistia_hashed_id %>
+						<%= hidden_field_tag :course_id, @course.slug, :id => :course_id %>
+						<%= hidden_field_tag :media_id, @media.id, :id => :media_id %>
+						<div id="wistia_<%= @media.wistia_hashed_id %>" style="height:526px;width:815px" data-video-width="815"></div>
+					<% elsif @media.embed? %>
+						<!-- <iframe width="100%" height="526px" src='<%#= @content.try(:assets).try(:first).try(:url) %>'></iframe> -->
+						<p>Por favor, aguarde enquanto o documento está sendo carregado.</p>
+						<div id="content-embed"><%= raw @content.try(:embedCode) %></div>
+						<% if @course.accept_download %>
+							<hr>
+							<div class="pagination-centered">
+								<%= link_to "<i class='fa-icon-download'></i> Baixar documento".html_safe, "#{@content.try(:assets).try(:first).try(:url)}?disposition=attachment&filename=#{@content.name}", class: "btn btn-success multi-line-button green" %>
+							</div>
+						<% end %>
+					<% else %>
+						<div id="content-embed">
+							<div class="well">
+								<%= raw @media.text %>
+							</div>
+						</div>
+					<% end -%>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<script src="http://fast.wistia.net/static/E-v1.js"></script>
+<script src="http://fast.wistia.net/static/concat/E-v1-gridify,socialbar-v1.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $("#content-embed").allofthelights();
+
+    $("#switch").on("click", function() {
+    	$(this).removeClass("hint--always");
+    });
+
+    $(".title a").click(function() {
+    	var opts = {
+			  lines: 14, // The number of lines to draw
+			  length: 13, // The length of each line
+			  width: 2, // The line thickness
+			  radius: 10, // The radius of the inner circle
+			  corners: 1, // Corner roundness (0..1)
+			  rotate: 0, // The rotation offset
+			  direction: 1, // 1: clockwise, -1: counterclockwise
+			  color: '#000', // #rgb or #rrggbb
+			  speed: 1.0, // Rounds per second
+			  trail: 60, // Afterglow percentage
+			  shadow: false, // Whether to render a shadow
+			  hwaccel: false, // Whether to use hardware acceleration
+			  className: 'spinner', // The CSS class to assign to the spinner
+			  zIndex: 2e9, // The z-index (defaults to 2000000000)
+			  top: 'auto', // Top position relative to parent in px
+			  left: 'auto' // Left position relative to parent in px
+			};
+    	var spinner = new Spinner(opts).spin();
+    	$("#media-content").html(spinner.el);
+    }); 
+
+
+    media_hashed_id = $("#wistia_hashed_id").val();
+
+    if(media_hashed_id) {
+			wistiaEmbed = Wistia.embed(media_hashed_id, {
+			  playerColor: "333333",
+			  fullscreenButton: true,
+			  container: "wistia_" + media_hashed_id,
+			  videoFoam: true
+			});
+		}
+
+		course_id = $("#course_id").val();
+		media_id = $("#media_id").val();
+
+		if(course_id && media_id) {
+			wistiaEmbed.bind("end", function() {
+			  $.post("/curso/" + course_id + "/medias/" + media_id + "/ended");
+			});
+		}
+
+		$("#lessons-btn").click(function (e){
+			if($("#lessons-list").is(":visible")) {
+				$("#lessons-list").slideUp({easing: "easeInOutBack"});
+			} else {
+				$("#lessons-list").slideDown({easing: "easeInOutBack"});
+			}
+		});
+	});
+</script>

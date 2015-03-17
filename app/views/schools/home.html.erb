@@ -1,0 +1,118 @@
+<%= content_for :opengraph do %>
+	<script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">stLight.options({publisher: "b15c5521-c9f6-4fe6-aa2b-c616db09a138", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+	<meta property="og:title" content="<%= current_school.name %>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= root_url(subdomain: current_school.subdomain) %>" />
+	<meta property="og:image" content="<%= @school_layout.home_logo.url(:medium) %>" />
+	<meta property="og:description" content="<%= @school_layout.try(:home_title) || current_school.name %>" />
+	<meta property="og:site_name" content="<%= current_school.name %>" />
+	<meta property="og:locale" content="pt_br" />
+<% end %>
+
+<div id="home_user_bar" class="school-home-top">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span5 pagination-centered picture">
+				<% if @school_layout.video_url? %>
+					<iframe width="468" height="270" src="//www.youtube.com/embed/<%= @school_layout.video_url %>?autoplay=0&autohide=1" frameborder="0" allowfullscreen></iframe>
+				<% else %>
+					<div class="shadow img-polaroid span12 img-container">
+						<%= image_tag(@school_layout.home_logo.url(:medium)) %>
+					</div>					
+				<% end %>		
+			</div>
+			<div class="span7 pagination-centered">
+				<h1>
+					<% if @school_layout.home_title %>
+						<%= current_school.layout_configuration.home_title %>
+					<% else %>
+						<%= current_school.name %>
+					<% end %>
+				</h1>
+				<h2>
+					<% if @school_layout.home_subtitle %>
+						<%= current_school.layout_configuration.home_subtitle %>
+					<% else %>
+						Escola em Construção
+					<% end %>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="home_user">
+	<div class="container">
+		<% if @school.introduction_info.present? %>
+			<div class="row-fluid">
+				<div class="span9">
+					<div class="well well_home" id="who-we-are">
+						<%= raw @school.introduction_info %>
+					</div>
+				</div>
+				<div class="span3">
+					<% if @school.facebook.present? %>
+						<%= link_to image_tag("follow-facebook.png", class: "pagination-centered follow-us-facebook"), "http://www.facebook.com/#{@school.facebook}" %>
+					<% end %>
+					<% if @school.twitter.present? %>
+						<%= link_to image_tag("follow-twitter.png", class: "pagination-centered follow-us-twitter"), "http://www.twitter.com/#{@school.twitter}" %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+
+		<% @course_categories.each do |course_category| %>
+			<div class="row-fluid">
+				<h2><%= course_category.name %></h2>
+				<div class="courses_box">
+					<% course_category.courses.published.not_private.order("created_at DESC").each do |course| %>
+						<%= render "courses/course_box", course: course %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+
+		<% if @courses.present? %>
+			<div class="row-fluid">
+				<h2>Cursos</h2>
+				<div class="courses_box">
+					<% @courses.each do |course| %>
+						<%= render "courses/course_box", course: course %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	
+		<div class="row-fluid" id="school-info">
+			<div class="span9">
+				<h2>Quem somos</h2>
+				<div class="well well_home" id="who-we-are">
+					<% if @school.about_us %>
+						<%= raw @school.about_us %>
+					<% else %>
+						<%= link_to "Edite as informações sobre a sua escola", dashboard_layout_configurations_path %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<br>
+<br>
+
+<script type="text/javascript">
+	// $(window).load(function() {
+	// 	heightLeft = $("#who-we-are").height();
+	// 	heightRight = $("#school-contact").height();
+	// 	if(heightLeft > heightRight) {
+	// 		$("#who-we-are").height(heightLeft);
+	// 		$("#school-contact").height(heightLeft);
+	// 	} else {
+	// 		$("#who-we-are").height(heightRight);
+	// 		$("#school-contact").height(heightRight);
+	// 	}
+	// });
+</script>

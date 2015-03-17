@@ -1,0 +1,9 @@
+<%= content_for :navigation do %>
+  <%= render partial: 'layouts/dashboard/main_menu', locals: { active_item: 'edit' } %>
+<% end %>
+
+<%= content_for :dashboard_sub_menu do %>
+  <%= render "layouts/dashboard/sub_menu" %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>

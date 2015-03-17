@@ -1,0 +1,29 @@
+<div class="nav-collapse top-nav">
+	<ul class="nav nav-tabs nav-stacked main-menu pagination-centered">
+		
+		<%= nav_link admin_root_path do %>
+			<%= link_to admin_root_path do %>
+				<i class="fa-icon-dashboard"></i><br /><span class="hidden-tablet">Dashboard</span>
+			<% end -%>
+		<% end -%>
+
+		<%= nav_link courses_admin_pages_path do %>
+			<%= link_to courses_admin_pages_path do %>
+				<i class="icon-facetime-video"></i><br /><span class="hidden-tablet">Cursos</span>
+			<% end -%>
+		<% end -%>
+		
+		<%= nav_link admin_features_path do %>
+			<%= link_to admin_features_path do %>
+				<i class="fa-icon-cogs"></i><br /><span class="hidden-tablet">Funcionalidades</span>
+			<% end -%>
+		<% end -%>
+		
+		<%= nav_link admin_feedbacks_path do %>
+			<%= link_to admin_feedbacks_path do %>
+				<i class="fa-icon-bullhorn"></i><br /><span class="hidden-tablet">Feedbacks</span>
+			<% end -%>
+		<% end -%>
+																			
+	</ul>
+</div>

@@ -1,0 +1,38 @@
+body { 
+	background-color: #ffffff;
+	font-family:Helvetica,Arial,sans-serif;
+}
+.logo{
+	margin-top:-570px;
+}
+.cert_info{
+	margin-top:80px;
+}
+.title h2{
+	font-style:italic;
+}
+.title h1{
+	font-weight:bold;
+	font-size:34px;
+}
+.text{
+	margin-top:80px;
+	font-size:18px;
+}
+.course_title{
+	font-size:28px;
+	font-weight:bold;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.footer{
+	margin-top:55px;
+	margin-left:180px;
+}
+.date{
+	width:210px;
+}
+.assinatura{
+	margin-left:510px;
+	margin-top:5px;
+}

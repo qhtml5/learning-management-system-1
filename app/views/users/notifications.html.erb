@@ -1,0 +1,38 @@
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Notificações</h4>
+		</div>
+    <div class="content">
+			<div class="row-fluid">
+				<div class="span12">
+					<% if @notifications.any? %>
+						<ul class="notifications notifications-page">
+							<%= button_to "Marcar tudo como lido", mark_all_notifications_as_read_user_path, class: "btn btn-mini btn-success" %>
+							
+							<% @notifications.each do |notification| %>
+								<%= link_to notification_path(notification) do %>
+									<li class="notification-item <%= notification.read %>">
+										<div class="notification-picture"><%= notification_picture notification %></div>
+										<div class="notification-title"><%= notification_text notification %></div>
+										<div class="notification-date pull-right"><%= l notification.created_at, format: :short %></div>
+										<div class="clearfix"></div>
+									</li>
+									<hr>
+								<% end %>
+							<% end %>
+							<br>
+							<% if @user.notifications_received.count > 10 %>
+								<div class="apple_pagination" style="font-size: 14px;">
+									<%= paginate @notifications, :container => false %>
+								</div>
+							<% end %>
+						</ul>
+					<% else %>
+						<p class="alert"><%= t('messages.notifications.empty')%></p>
+					<% end %>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

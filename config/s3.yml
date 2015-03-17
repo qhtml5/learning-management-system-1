@@ -1,0 +1,14 @@
+staging:
+  bucket: edools_staging
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
+
+production:
+  bucket: edools_production
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
+
+development:
+  bucket: edools_development
+  access_key_id: AKIAIZERWAS3TV6QIEBA
+  secret_access_key: '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'  

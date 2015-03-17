@@ -1,0 +1,12 @@
+<fieldset>
+	<legend>Professores</legend>
+
+	<%= form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_teachers) do |f| %>
+		<%= select_tag :teachers, options_for_select(["Augusto Zangrandi", "Maurílio Alberone", "Rafael Carvalho", "Bernardo Kircove", "Bruno Vilachã"]), :class => "span12", "data-rel" => "chosen", "multiple" => "", :placeholder => "Adicione professores" %>
+		
+    <div class="form-actions"> 
+	    <%= f.submit "Salvar", :class => "btn btn-success" %>
+	  </div>
+	<% end -%>
+
+</fieldset>

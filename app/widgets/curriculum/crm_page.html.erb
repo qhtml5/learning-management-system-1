@@ -1,0 +1,27 @@
+<table class="table">
+	<tbody>
+		<% @lessons.each_with_index do |lesson, i| %>
+			<tr class="lesson">
+				<td colspan="2">
+					<!-- <h6 class="muted">Capítulo <%#= i+1 %></h6> -->
+					<h4><%= lesson.title %></h4>
+				</td>
+			</tr>
+			<% lesson.medias.available.order(:sequence).each_with_index do |media, i| %>
+				<tr class="lesson-media">
+					<td class="title" width="90%" style="background: #ffffff;">
+						<!-- <h6 class="muted">Aula <%#= counter %></h6> -->
+						<h5>
+							<%= media.title %>
+							<% if @student.ended_media? media %>
+								<span class="hint hint--left pull-right" data-hint="Assistido"> <i class="icon-ok" style="margin-right: 10px; color: #5eb95e;"></i> </span>
+							<% elsif @student.started_media? media %>
+								<span class="hint hint--left pull-right" data-hint="Começou a assistir"> <i class="icon-pause" style="margin-right: 10px; color: #faa732;"></i> </span>
+							<% end %>
+						</h5>
+					</td>
+				</tr>
+			<% end -%>
+		<% end -%>
+	</tbody>
+</table>

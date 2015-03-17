@@ -1,0 +1,45 @@
+<% counter = 1 %>
+
+<div id="curriculum_sales">
+<table class="table">
+	<tbody>
+		<% @lessons.each_with_index do |lesson, i| %>
+			<tr class="lesson">
+				<td style="width: 100px;">
+					<span class="label label-success">
+						<% if @course.slug == "workshop-online-sua-ideia-ainda-nao-vale-nada" %>
+							Capítulo
+						<% else %>
+						 <%= t('module') %>
+						<% end %>
+						<%= i+1 %>
+					</span>
+				</td>
+				<td colspan="2"><h3><%= lesson.title %></h3></td>
+			</tr>
+			<% lesson.medias.order(:sequence).each_with_index do |media, i| %>
+				<tr class="media">
+					<td class"module" width="5%">
+						<span class="label label-default">
+							<% if @course.slug == "workshop-online-sua-ideia-ainda-nao-vale-nada" %>
+								Módulo
+							<% else %>
+							 <%= t('lesson') %>
+							<% end %>
+ 							<%= counter %>
+						</span>
+					</td>
+					<% if media.kind %>
+						<td class="icon" width="5%"><%= media_icon media.kind %></td>
+					<% else %>
+						<td class="icon" width="5%"><i class="glyphicons-icon facetime_video"></i></td>
+					<% end %>
+					<td class="title" width="90%"><h4><%= media.title %></h4></td>
+				</tr>
+				<% counter += 1 %>
+			<% end -%>
+		<% end -%>
+	</tbody>
+</table>
+
+</div>

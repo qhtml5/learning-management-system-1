@@ -1,0 +1,28 @@
+<%= simple_form_for :annotation_to_create, url: url_for_event(:create, student: @student), remote: true do |f| %>
+	<br>
+	<div class="row-fluid">
+	  <div class="span10">
+			<%= f.input :text, label: false, as: :text, placeholder: "Faça uma anotação sobre o usuário #{@student.full_name}", input_html: { size: "2000x3", class: "span12" } %>
+		</div>
+		<div class="span2">
+	    <div class="pagination-centered">
+	      <%= f.submit "Salvar", class: "btn btn-success" %>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+
+<%= render "notice" %>
+
+<hr>
+
+<% @annotations.each do |annotation| %>
+	<div class="row-fluid">
+		<div class="span12">
+			<p><%= l annotation.created_at, format: :long %> | <%= link_to "apagar", url_for_event(:destroy, annotation: annotation, student: @student), remote: true, confirm: "Tem certeza que deseja apagar esta mensagem?" %></p>
+			<div class="well">
+				<%= simple_format annotation.text %>
+			</div>
+		</div>
+	</div>
+<% end %>

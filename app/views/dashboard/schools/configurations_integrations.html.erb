@@ -1,0 +1,32 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= box(:title => 'RD Station', :icon => 'fa-icon-globe')  do %>		
+				<p class="muted">Integre sua conta <%= link_to "RD Station", "http://www.rdstation.com.br" %> ao Edools como ferramenta de CRM</p>
+				<hr>
+				<%= f.input :token_rdstation, required: false, label: 'Token' %>
+			<% end %>
+		
+			<%= box(:title => 'Google Analytics', :icon => 'fa-icon-bar-chart')  do %>		
+				<p class="muted">Integre seu <%= link_to "Google Analytics", "http://www.googleanalytics.com.br" %> ao Edools</p>
+				<hr>
+				<%= f.input :ga_tracking_id, required: false, label: 'Tracking ID', placeholder: 'UA-XXXXXXXX-X' %>
+			<% end %>
+		</div>
+		<div class="span6">
+			<%= box(:title => 'AdRoll', :icon => 'fa-icon-bar-chart')  do %>		
+				<p class="muted">Integre seu <%= link_to "AdRoll", "http://www.adroll.com" %> como ferramenta de Retargeting.</p>
+				<hr>
+				<%= f.input :adroll_adv_id, required: false, label: 'Adv Id' %>
+				<%= f.input :adroll_pix_id, required: false, label: 'Pix Id' %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+	</div>
+<% end %>

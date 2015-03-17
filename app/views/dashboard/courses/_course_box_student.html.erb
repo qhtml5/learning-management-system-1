@@ -1,0 +1,22 @@
+<% course = course_item.course %>
+
+<div class="span4">
+	<div class="course-item" id="course-<%= course.slug %>">
+		<div class="pagination-centered">
+			<div class="img-container">
+				<div class="info-edit">
+					<%= link_to payment_status_path(course_item), class: "btn btn-inverse" do %>
+						 <%= payment_status_message course_item %>
+					<% end %>
+				</div>
+				<%= link_to image_tag(course.logo.url(:medium)), payment_status_path(course_item), :class => "course-logo" %>
+			</div>
+		</div>
+		<div class="info-show">
+			<h4><%= course.title_short %></h4>
+			<h5 class="muted">
+				<%= payment_status_availabity_message course_item %>
+			</h5>
+		</div>
+	</div>
+</div>

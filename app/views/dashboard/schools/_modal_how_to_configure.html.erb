@@ -1,0 +1,38 @@
+<div id="howToConfigure" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		    <h2 id="myModalLabel"><i class="fa-icon-globe"></i> Como configurar o domínio</h2>
+		  </div>
+		  <div class="modal-body">
+		  	<p><strong>Siga esses 3 passos para configurar seu domínio personalizado:</strong></p>
+
+		  	<ol>
+					<li>Entre no painel de configurações do seu servidor de domínio e procure pela configuração de DNS ou algo similar.</li>
+					<li>Adicione uma entrada do tipo CNAME para o subdomínio que preferir apontando para sua url no Edools.</li>
+					<li>Salve e espere um pouco. A alteração pode demorar até 4 horas para propagar, dependendo do seu servidor.</li>
+				</ol>
+				
+				<p><strong>Exemplo</strong></p>
+
+				<p>Suponha que sua url no Edools é <%= link_to "bizstart.edools.com" %> e agora você quer ter o domínio personalizado <%= link_to "escola.bizstart.com.br" %>.</p>
+
+				<p>Depois de acessar a configuração de DNS do painel de configuração de domínio do servidor, no passo 2 você faria assim:</p>
+
+				<ul>
+					<li>adicionaria uma entrada escola no domínio bizstart.com.br</li>
+					<li>escolheria o tipo da entrada para CNAME</li>
+					<li>no campo valor (ou value) entraria com bizstart.edools.com, como na figura.</li>
+				</ul>
+				
+				<p><strong>Aviso importante:</strong> Para mantermos a segurança e oferecermos um <strong>ambiente sempre seguro</strong> para seus clientes, as áreas críticas do site (como login, troca de senha e pagamento) não aparecerão com seu domínio personalizado e sim com o seu domínio do Edools.</p>
+
+				<p>Isso é necessário para mantermos o certificado de segurança (SSL) que garante tráfego seguro de dados. Essa alteração será totalmente transparente para seus clientes e não causará danos.</p>
+		  </div>
+		  <div class="modal-footer">
+		    <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+		  </div>
+		 </div>
+  </div>
+</div>

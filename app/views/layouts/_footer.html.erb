@@ -1,0 +1,71 @@
+<!-- starts footer -->
+<% if current_school %>
+	<div id="footer-info">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span6">
+					<%= simple_format current_school.footer_info %>
+				</div>
+				<div class="span3">
+					<% if current_school.phone.present? %>
+						<h2>Telefone</h2>
+						<p><%= current_school.phone %></p>
+						<br>
+					<% end %>
+					<% if current_school.email.present? %>
+						<h2>Email</h2>
+						<p><%= mail_to current_school.email %></p>
+					<% end %>
+				</div>
+				<div class="span3">
+					<% if current_school.site.present? %>
+						<h2>Site</h2>
+						<p><%= link_to current_school.site, 'http://'+current_school.site %></span></p>
+						<br>
+					<% end %>
+					<% if current_school.facebook.present? || current_school.twitter.present? %>
+						<h2>Redes Sociais</h2>
+						<% if current_school.facebook.present? %>
+							<%= link_to "<i class='fa-icon-facebook-sign'></i>".html_safe, "http://www.facebook.com/#{current_school.facebook}" %>
+						<% end %>
+						<% if current_school.twitter.present? %>
+							<%= link_to "<i class='fa-icon-twitter-sign'></i>".html_safe, "http://www.twitter.com/#{current_school.twitter}" %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% if module_configuration.inactive?(:remove_edools_logo) %>
+		<div id="footer_school" style="height: 53px;">
+		  <div class="container">
+		      <div class="row-fluid copyright">
+		          <div class="pull-right copy" style="margin-top: 9px;">
+		             <p><%= link_to image_tag("edools_logo_v1_white.png", :alt=>"Edools", width: 90), "http://www.#{AppSettings.host}", :title => "Edools", :class=>"brand scroller", :target=>'blank' %></p>
+		          </div>
+		          <div class="pull-right copy" style="margin-top: 14px; margin-right: 5px;">
+		              <p>Plataforma de ensino por</p> 
+		          </div>
+		      </div>
+		  </div>
+		</div>
+	<% end %>
+<% else %>
+	<div id="footer">
+	  <div class="container">
+	      <div class="row-fluid copyright">
+	          <div class="span2 pull-right copy">
+	              <p>&copy; 2013 - Edools.com</p>
+	          </div>
+	      </div>
+	  </div>
+	</div>
+<% end %>
+
+<div id="zendesk-tab">
+	<% if current_school && current_user.try(:school_admin?) %>
+		<a href="http://myaccount.zendesk.com/account/dropboxes/20228386" onClick="script: Zenbox.show(); return false;" class="hint hint--right" data-hint="Abra um chamado para o suporte do Edools.com."><i class="fontello-icon-lifebuoy"></i> Suporte</a>
+		</ul>
+	<% end %>
+</div>

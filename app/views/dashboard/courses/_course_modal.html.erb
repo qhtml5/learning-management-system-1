@@ -1,0 +1,21 @@
+<%#= content_for :modal do %>
+
+<div id="newCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		  <%= simple_form_for Course.new, :url => dashboard_courses_path do |f| %>
+		    <div class="modal-body">
+		    	<div class="row-fluid">
+			      <p><%= f.input :title, label: "Título do curso", autofocus: true, :placeholder => "Digite o título do curso", input_html: { class: "span12" } %></p>
+		     	</div>
+		    </div>
+		    <div class="modal-footer">
+		      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+		      <%= f.submit "Criar Curso", :class => "btn btn-success", :id => "submit-course" %>
+		    </div>
+		  <% end -%>
+		</div>
+	</div>
+</div>
+
+<%# end -%>

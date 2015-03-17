@@ -1,0 +1,97 @@
+<div class="top-nav">
+	<ul class="nav nav-tabs main-menu pagination-centered">
+
+		<% if can? :edit_basic_info, School %>
+			<%= nav_link edit_basic_info_dashboard_schools_path do %>
+				<%= link_to edit_basic_info_dashboard_schools_path do %>
+					<i class="fa-icon-info-sign"></i><br /><span class="hidden-tablet">Informações</span>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+		
+		<% if current_user.student? %>
+			<%= nav_link dashboard_courses_path do %>
+				<%= link_to dashboard_courses_path do %>
+					<i class="fa-icon-facetime-video"></i><br /><span class="hidden-tablet">Cursos</span>
+				<% end -%>
+			<% end -%>
+		<% else %>
+			<%= nav_link dashboard_courses_path do %>
+				<%= link_to dashboard_courses_path do %>
+					<div class="nav-icon" data-menu-item="course">
+						<i class="fa-icon-facetime-video"></i><span class="pull-right"><i class="fontello-icon-down-open-big"></i></span><br /><span class="hidden-tablet">Ensino</span>
+					</div>
+				<% end -%>
+			<% end -%>
+		<% end %>
+
+		<% if can? :index, :dashboard_user %>		
+			<%= nav_link dashboard_students_path do %>
+				<%= link_to dashboard_students_path do %>
+					<i class="fa-icon-group"></i><br /><span class="hidden-tablet">Pessoas</span>
+				<% end -%>
+			<% end -%>
+		<% end %>
+		
+		<% if can? :finances, School %>
+			<%= nav_link finances_dashboard_schools_path do %>
+				<%= link_to finances_dashboard_schools_path do %>
+					<i class="fa-icon-bar-chart"></i><br /><span class="hidden-tablet">Financeiro</span>
+				<% end -%>
+			<% end -%>
+		<% end %>
+
+		<% if can? :conversions, School %>
+			<%= nav_link conversions_dashboard_schools_path do %>
+				<%= link_to conversions_dashboard_schools_path do %>
+					<div class="nav-icon" data-menu-item="conversions">
+						<i class="fa-icon-filter"></i><span class="pull-right"><i class="fontello-icon-down-open-big"></i></span><br /><span class="hidden-tablet">Conversões</span>
+					</div>
+				<% end -%>
+			<% end -%>
+		<% end %>
+	
+		<% if can? :index, LayoutConfiguration %>
+			<%= nav_link dashboard_layout_configurations_path do %>
+				<%= link_to dashboard_layout_configurations_path do %>
+					<i class="fa-icon-desktop"></i><br /><span class="hidden-tablet">Aparência</span>
+				<% end -%>
+			<% end -%>
+		<% end %>
+
+		<% if can? :configurations, School %>
+			<%= nav_link configurations_general_dashboard_schools_path do %>
+				<%= link_to configurations_general_dashboard_schools_path do %>
+					<div class="nav-icon" data-menu-item="configurations">
+						<i class="fa-icon-cogs"></i><span class="pull-right"><i class="fontello-icon-down-open-big"></i></span><br /><span class="hidden-tablet">Configurações</span>
+					</div>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+
+		<% if current_user.student? %>
+			<%= nav_link messages_user_path do %>
+				<%= link_to messages_user_path do %>
+					<i class='icon-comment'></i><br /><span class="hidden-tablet">Contato</span>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+														
+	</ul>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.nav-icon').click(function (e){
+			if($(".sub-menu").is(":visible")) {
+				$(".nav-icon").find(".pull-right").html("<i class='fontello-icon-down-open-big'></i>");
+				$(".sub-menu").slideUp({easing: "easeInOutBack"});
+				// $("*[data-menu-subitem=" + $(this).data("menu-item") + "]").slideUp({easing: "easeInOutBack"});
+			} else {
+				$(this).find(".pull-right").html("<i class='fontello-icon-up-open-big'></i>");
+				$("*[data-menu-subitem=" + $(this).data("menu-item") + "]").slideDown({easing: "easeInOutBack"});
+			}
+			e.preventDefault();
+		});
+	});
+</script>

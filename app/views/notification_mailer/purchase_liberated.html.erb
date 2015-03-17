@@ -1,0 +1,37 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<%= p_tag "Parabéns! Você tem um novo aluno!" %>
+<% if @purchase.courses.length > 1 %>
+  <%= p_tag "<strong>#{@sender.full_name}</strong> teve o acesso liberado nos cursos <strong>#{@courses_titles}</strong>:" %>
+<% else %>
+  <%= p_tag "<strong>#{@sender.full_name}</strong> teve o acesso liberado no curso <strong>#{@courses_titles}</strong>:" %>
+<% end %>
+
+<hr>
+
+<table style="font-size: 12px;">
+	<thead>
+  	<tr>
+    	<th>Cursos</th>
+      <th>Aluno</th>
+      <th>Data</th>
+      <th>Valor</th>
+      <th>Status</th>
+      <th>Forma de Pagamento</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<tr>
+      <td><%= @purchase.courses_titles %></td>
+      <td><%= @purchase.user.full_name %></td>
+      <td><%= l @purchase.created_at, format: :medium %></td>
+      <td><%= @purchase.total.em_real %></td>
+      <td><%= @purchase.payment_status %></td>
+      <td><%= @purchase.payment_type %></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<%= p_tag "Observação: O aluno está com acesso ao curso, porém, o pagamento ainda não foi confirmado. Caso o servidor de pagamento cancele o pagamento, o aluno perderá o acesso. Caso confirme, você será notificado e o usuário seguirá com o acesso normalmente." %>
+<%= p_tag a_tag('Clique aqui para ir até sua escola.', dashboard_courses_url(subdomain: @school.subdomain)) %>

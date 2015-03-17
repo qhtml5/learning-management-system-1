@@ -1,0 +1,63 @@
+<div class="pricing_page" id="pricing">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span4">
+            	<div class="price_wrapper lite regular">
+                    <div class="header">
+											<span><%= t('plans.one.name') %></span>
+                        <div class="price">
+                            <%= raw t('plans.one.price') %>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h3><%= t('plans.one.description') %></h3>
+                        <div class="pagination-centered">
+                        	<%= f.radio_button :plan, 'basic', { :checked => true } %>
+                        </div>
+												
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="price_wrapper pro">
+                    <div class="header">
+												<span><%= t('plans.two.name') %></span>
+                        <div class="price">
+                            <%= raw t('plans.two.price') %>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h3><%= t('plans.two.description') %></h3>
+                        <div class="pagination-centered">
+													<%= f.radio_button :plan, 'middle' %>
+												</div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="price_wrapper standard regular">
+                    <div class="header">
+												<span><%= t('plans.three.name') %></span>
+                        <div class="price">
+                            <%= raw t('plans.three.price') %>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h3><%= t('plans.three.description') %></h3>
+                        <div class="pagination-centered">
+													<%= f.radio_button :plan, 'high' %>
+												</div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".price_wrapper").click(function() {
+      $(this).find("input:radio").prop('checked', true);
+    });
+  });
+</script>

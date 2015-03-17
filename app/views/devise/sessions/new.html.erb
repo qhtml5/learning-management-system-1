@@ -1,0 +1,27 @@
+<div id="box_login">
+  <div class="container">
+    <div class="span12 box_wrapper">
+      <%= box(title: "Entrar com sua conta") do %>
+        <div class="form">
+					<%= form_for resource, as: resource_name, url: user_session_path do |f| %>
+						<%= f.text_field :email, autofocus: true, placeholder: "Seu Email" %>
+						<%= f.password_field :password, placeholder: "Sua Senha" %>
+						<%= f.submit "Entrar", class: "btn uppercase", id: "login-btn" %>
+					<% end -%>
+					<div class="remember">
+            <div class="left">
+                <!-- <input id="remember_me" type="checkbox">
+                                                <label for="remember_me">Remember me</label> -->
+            </div>
+            <div class="right">
+                <%= link_to "Esqueceu a senha?", new_password_path(resource_name) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <p class="already">Não possui conta? <%= link_to "Criar conta", new_user_registration_path, class: "uppercase" %></p>
+    </div>
+  </div>
+</div>
+
+<br>

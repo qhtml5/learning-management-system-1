@@ -1,0 +1,62 @@
+<div id="edit-available-time">
+
+	<%= box(title: "Tempo disponível") do %>
+		<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_available_time) do |f| %>
+			<div class="row-fluid">
+				<label class="radiobutton inline span2">
+					<%= radio_button_tag :availability, "ilimited", @course.ilimited?, :class => "btn" %> <span>Indeterminado</span>
+				</label>
+				<label class="radiobutton inline span2">
+					<%= radio_button_tag :availability, "limited", @course.limited?, :class => "btn" %> <span>Limitado</span>
+				</label>
+			</div>
+
+			<br>
+
+			<div id="time_field">
+				<div class="row-fluid">
+					<div class="span1" style="margin-top: 5px;">
+				    <%= f.input :available_time, as: :integer, input_html: { :class => 'span12 input-big' }, label: false %>
+					</div>
+					<div class="span4">
+						<h1>dias a partir da compra</h1>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span1">
+						<i class="fa-icon-question-sign"></i>
+					</div>
+					<div class="span8">
+						<p class="muted">
+							É o tempo (em dias) que o curso ficará disponível a partir do momento que for comprado por um aluno.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions"> 
+				<%= f.submit "Salvar", :class => "btn btn-success" %>
+			</div>
+		<% end %>
+	<% end %>
+
+</div>
+
+<script type="text/javascript">
+	if($("input[name=availability]:checked").val() === "limited") {
+		$("#time_field").show();
+	}else{
+		$("#time_field").hide();
+	};
+
+	$(document).ready(function() {
+		$("input[name=availability]").change(function() {
+			if($(this).val() === "limited") {
+				$("#time_field").show();
+			}else{
+				$("#time_field").hide();
+			};
+		}); 
+	});
+</script>

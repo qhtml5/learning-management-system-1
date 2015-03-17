@@ -1,0 +1,22 @@
+<div class="row-fluid">
+	<div class="span6">
+		<%= box(:title => 'Google Analytics', :icon => 'fa-icon-bar-chart')  do %>		
+			<p class="muted">Integre seu <%= link_to "Google Analytics", "http://www.googleanalytics.com.br" %> ao Edools</p>
+			<hr>
+			<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+				<%= f.input :ga_tracking_id, required: false, label: 'Tracking ID', placeholder: 'UA-XXXXXXXX-X' %>
+				<%= f.submit "Salvar", class: "btn btn-success", id: "save-analytics" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="span6">
+		<%= box(:title => 'RD Station', :icon => 'fa-icon-globe')  do %>		
+			<p class="muted">Integre sua conta <%= link_to "RD Station", "http://www.rdstation.com.br" %> ao Edools como ferramenta de CRM</p>
+			<hr>
+			<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |f| %>
+				<%= f.input :token_rdstation, required: false, label: 'Token' %>
+				<%= f.submit "Salvar", class: "btn btn-success", id: "save-rdstation" %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

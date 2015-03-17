@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="school_wizard">
+		<%= box do %>
+			<div class="row-fluid">
+				<div class="offset2 span10">
+					<%= render "wizard_steps", active:  { basic_info: "active" } %>
+
+					<%= simple_form_for(@school, :url => dashboard_schools_path) do |f| %>
+						<div class="row-fluid">
+							<div class="span5 offset1">
+								<%= f.input :name, required: true, autofocus: true, label: "Nome da escola:", input_html: { class: "span12 big-input" } %>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="span1">
+								<h3>http://</h3>
+							</div>
+							<div class="span5">
+								<%= f.input :subdomain, required: true, label: "Subdomínio:", placeholder: "minhaempresa", input_html: { class: "span12 big-input" }, hint: "O nome que ficará antes de edools.com. No exemplo http://minhaempresa.edools.com o subdomínio é minhaempresa." %>
+							</div>
+							<div class="span6">
+								<h3>.edools.com</h3>
+							</div>
+						</div>
+						
+						<br>
+						
+						<div class="row-fluid">
+							<div class="span4 offset3">
+								<%= f.submit "Criar escola →", class: "btn btn-success btn-large" %>
+							</div>
+						</div>
+					<% end %>									
+
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+				  

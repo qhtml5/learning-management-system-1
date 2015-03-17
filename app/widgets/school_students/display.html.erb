@@ -1,0 +1,190 @@
+<%= render "notice" %>
+
+<%= render "search_modal" %>
+
+<div class="row-fluid">
+  <div class="span9">
+    <%= simple_form_for :user, url: url_for_event(:search), remote: true, input_html: { class: "form-search"} do |f| %>
+      <div class="row-fluid">
+        <div class="span5">
+          <%= f.input :search, placeholder: "Buscar alunos", label: false, input_html: { class: "span12 search-query", value: @search } %>
+        </div>
+        <div class="span1">
+          <%= f.submit "Buscar", class: "btn btn-default", id: "search-student" %>
+        </div>
+        <div class="span4 pull-right small-font align-right">
+          <p><%= link_to "<i class='icon-download-alt'></i> Exportar".html_safe, dashboard_students_path(format: "xls") %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= box(title: "#{@users_title || 'Pessoas'} (#{@users_length})", id: "students") do %>
+      <div id="students-table">
+    		<% if @users.any? %>
+    			<table class="table">
+    				<thead>
+              <th><%= check_box_tag :check_all, nil %></th>
+    					<th>Nome</th>
+              <th>Email</th>
+              <th>Entrou em</th>
+              <th>Cursos</th>
+              <th></th>
+              <!-- <th>Papel</th> -->
+    				</thead>
+
+            <tbody>
+              <%= simple_form_for :students_leads, url: url_for_event(:send_message_to_students, course: @course, status: @status_filter), remote: true do |f| %>
+                <div id="action-buttons" class="row-fluid">
+                  <div class="span12">
+                    <div class="float">
+                      <%= link_to "<i class='icon-envelope'></i> Enviar mensagem".html_safe, '#', class: "btn btn-default disabled", id: "add-message-button" %>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="action-forms" class="row-fluid">
+                  <div id="message-form">
+                    <%= f.input :message, as: :text, autofocus: true, label: false, input_html: { class: "span12", rows: "2" }, placeholder: "Insira a mensagem a ser enviada aos alunos selecionados" %>
+                    <br>
+                    <div class="float-right">
+                      <%= f.submit "Enviar", class: "btn btn-success", id: "submit-message" %>
+                    </div>
+                    <div class="float-right">
+                      <%= link_to "Cancelar", '#', class: "btn btn-default cancel-btn", id: "cancel-btn-message" %>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+              	<% @users.each do |user| %>
+              		<tr>
+                    <% if user.kind_of?(User) %>
+                      <% if user.school_admin? %>
+                        <td></td>
+                        <td><strong><%= user.full_name_capitalized %></strong></td>
+                      <% else %>
+                        <td><%= f.check_box "student_#{user.id}", class: "check-box" %></td>
+                        <td><strong><%= link_to user.full_name_capitalized, dashboard_student_path(user) %></strong></td>
+                      <% end %>
+                      <td><%= user.email %></td>
+                      <td><%= l user.created_at, format: :medium %></td>
+                      <td><%= user.courses_titles if user.student? %></td>
+                      <% label_class = User::ROLES.key(user.role) == User::SCHOOL_ADMIN_ROLE ? "label-success" : "" %>
+                      <td><span class="label <%= label_class %>"><%= User::ROLES.key(user.role) %></span></td>
+                    <% elsif user.kind_of?(Lead) %>
+                      <td><%= f.check_box "lead_#{user.id}", class: "check-box" %></td>
+                      <td></td>
+                      <td><%= user.email %></td>
+                      <td><%= l user.created_at, format: :medium %></td>
+                      <td><%= user.course.title %></td>
+                      <td><span class="label label-inverse">Lead</span></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <div class="apple_pagination" style="font-size: 14px;">
+            <%= paginate @users, remote: params[:action] == "render_event_response" %>
+          </div>
+        <% else %>
+          <p class="alert"><%= t('messages.school.no_students')%></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="span3">
+    <%= box(id: "school-filters", style: "overflow: visible;", content_style: "overflow: visible;") do %>
+      <h4>Filtrar por curso <span class="pull-right hint hint--left" data-hint="combine os filtros por curso e por tipo!"><i class="fa-icon-question-sign"></i></span></h4>
+      <hr>
+      <ul>
+        <% @school.courses.order(:title).each do |course| %>
+          <li>
+            <% if @course == course %>
+              <span class="active"><%= link_to "<i class='icon-map-marker'></i> #{course.title}".html_safe, url_for_event(:filter), remote: true, id: "filter-#{course.title}" %></span>
+            <% else %>
+              <%= link_to "#{course.title}", url_for_event(:filter, course: course), remote: true, id: "filter-#{course.title}" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <br>
+      <h4>Filtrar por tipo</h4>
+      <hr>
+      <ul>
+        <% if @status_filter == "confirmed" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Alunos ativos".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-confirmed" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Alunos ativos", url_for_event(:filter, course: @course, status: "confirmed"), remote: true, id: "filter-confirmed" %>
+          </li>
+        <% end %>
+
+        <% if @status_filter == "pending" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Alunos pendentes".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-pending" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Alunos pendentes", url_for_event(:filter, course: @course, status: "pending"), remote: true, id: "filter-pending" %>
+          </li>
+        <% end %>
+
+        <% if @status_filter == "expired" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Alunos expirados".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-expired" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Alunos expirados", url_for_event(:filter, course: @course, status: "expired"), remote: true, id: "filter-expired" %>
+          </li>
+        <% end %>   
+
+        <% if @status_filter == "canceled" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Alunos cancelados".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-canceled" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Alunos cancelados", url_for_event(:filter, course: @course, status: "canceled"), remote: true, id: "filter-canceled" %>
+          </li>
+        <% end %> 
+
+        <% if @status_filter == "school_admins" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Equipe".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-school_admins" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Equipe", url_for_event(:filter, course: @course, status: "school_admins"), remote: true, id: "filter-school_admins" %>
+          </li>
+        <% end %>
+
+        <% if @status_filter == "leads" %>
+          <li class="active">
+            <%= link_to "<i class='icon-map-marker'></i> Leads".html_safe, url_for_event(:filter, course: @course), remote: true, id: "filter-leads" %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to "Leads", url_for_event(:filter, course: @course, status: "leads"), remote: true, id: "filter-leads" %>
+          </li>
+        <% end %>
+        <!-- <li>
+          <%# if @status_filter == "out_of_date" %>
+            <span class="active"><%#= link_to "Expirados", url_for_event(:filter, course: @course), remote: true %></span>
+          <%# else %>
+            <%#= link_to "Expirados", url_for_event(:filter, course: @course, status: "out_of_date"), remote: true %>
+          <%# end %>
+        </li> -->
+      </ul>
+    <% end %>
+  </div>  
+</div>
+
+<%= javascript_include_tag "top/school_students" %>
+<%= tinymce %>

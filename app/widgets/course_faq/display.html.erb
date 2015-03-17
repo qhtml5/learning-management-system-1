@@ -1,0 +1,38 @@
+<div id="faq" class="faq_page">		
+	<div class="faq" style="padding-left: 0;">
+    <div class="question">
+    	Por quanto tempo terei acesso aos materiais do curso?
+    </div>
+    <div class="answer">
+      <% if @course.ilimited? %>
+      	Você pode rever os materiais do curso quantas vezes quiser.
+      <% else %>
+        Você terá acesso ao curso durante <%= @course.available_time %> dias.
+      <% end %>
+    </div>
+	</div>
+
+	<div class="faq" style="padding-left: 0;">
+    <div class="question">
+    	Existe um horário pré-determinado para assistir as aulas?
+    </div>
+    <div class="answer">
+    	Não. As aulas ficam disponíveis 24 horas por dia, 7 dias por semana.
+    </div>
+	</div>
+
+  <div class="faq" style="padding-left: 0;">
+    <div class="question">
+      O curso oferece certificado?
+    </div>
+    <div class="answer">
+      <% if @course.certificate_available? %>
+        Sim, você poderá solicitar o certificado do curso após concluir as aulas.
+      <% else %>
+        Não, este curso não oferece certificado.
+      <% end %>
+    </div>
+  </div>
+				
+</div>
+

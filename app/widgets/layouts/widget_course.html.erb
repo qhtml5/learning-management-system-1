@@ -1,0 +1,5 @@
+<%= widget_div :id => "#{widget_id}" do %>
+	<%= box(:title => @title, :icon => @icon, :soon => @soon)  do %>
+				<%= yield %>
+	<% end %>
+<% end %>

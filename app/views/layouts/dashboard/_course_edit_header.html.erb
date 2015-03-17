@@ -1,0 +1,36 @@
+<% school = @course.school %>
+
+<div class="container">
+	<br>
+	<%= link_to "← voltar".html_safe, dashboard_courses_path %>
+	<br>
+	<br>
+	<div id="course-main-info" class="title_box">
+		<div class="title_head">
+			<div class="float" style="margin-top: 3px; margin-left: 15px;">
+				<%= image_tag @course.logo.url(:small), class: "thumbnail" %>
+			</div>
+			<div class="float">
+				<h5 class="muted"><strong><%= school.name %></strong></h5> 
+				<h3><%= @course.title %></h3>
+				<h5>
+					<%= link_to "Página de vendas", course_path(@course), :target => 'blank' %> |
+					<%= link_to "Página de conteúdo", content_course_path(@course), :target => 'blank' %>
+				</h5>
+			</div>
+			<div class="">
+				<% if @course.published? %>
+					<%= link_to unpublish_dashboard_course_path(@course), method: :post, :class => "btn btn-default btn-action-course pull-right", id: "course-unpublish" do %>
+					 <i class="fa-icon-check" style="font-size: 26px; opacity: 0.8;"></i>
+					 <p style="opacity: 0.8;">Despublicar</p>
+					<% end -%>
+				<% else %>
+					<%= link_to publish_dashboard_course_path(@course), method: :post, :class => "btn btn-default btn-action-course pull-right", id: "course-publish" do %>
+					 <i class="fa-icon-check" style="font-size: 26px; opacity: 0.8;"></i>
+					 <p style="opacity: 0.8;">Publicar curso</p>
+					<% end -%>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

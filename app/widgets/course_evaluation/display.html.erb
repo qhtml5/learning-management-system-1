@@ -1,0 +1,36 @@
+<%= render "notice" %>
+
+<%= simple_form_for @course_evaluation, :url => url_for_event(:submit), :remote => true do |f| %>
+	<div class="row-fluid">
+		<div class="span4 offset4">
+			<div id="star" data-score="<%= @course_evaluation.score %>"></div>
+		</div>
+	</div>
+	<br>
+	<div class="row-fluid">
+		<div class="span12">
+			<%= f.input :course_id, value: @course.id, as: :hidden %>
+			<%= f.input :comment, value: @course_evaluation.comment, :label=> 'Comentário (opcional):', :required => false, input_html: { :size => "4", class: "span12" }  %>
+		</div>
+	</div>
+  <% if @course_evaluation.new_record? %>
+    <%= f.submit 'Avaliar', class: "btn btn-success" %>
+  <% else %>
+    <%= f.submit 'Alterar avaliação', class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+<script>
+	$('#star').raty({
+						score: function() {
+					    return $(this).attr('data-score');
+					  },
+						size: 24,
+						starHalf : '<%= asset_path('star-half.png') %>',
+						starOff  : '<%= asset_path('star-off.png') %>',
+						starOn   : '<%= asset_path('star-on.png') %>',
+						cancelOff: '<%= asset_path('cancel-off.png') %>',
+					    cancelOn : '<%= asset_path('cancel-on.png') %>',
+						cancel     : false
+					});
+</script>

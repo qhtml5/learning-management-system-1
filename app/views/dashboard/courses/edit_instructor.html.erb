@@ -1,0 +1,14 @@
+<%= box(title: "Instrutor") do %>
+	<fieldset>
+		<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_instructor) do |f| %>	
+      <%= f.input :instructor_bio, label: "Biografia do instructor", as: :text, :size => "1000x3", input_html: { :class => "tinymce span9" }, :placeholder => "Adicione aqui informações do instrutor do curso." %></p>
+
+    	<div class="form-actions">
+	    	<%= f.submit "Salvar", :class => "btn btn-success" %>
+	  	</div>
+		<% end -%>
+	</fieldset>
+<% end %>
+
+<%= tinymce_assets %>
+<%= tinymce %>

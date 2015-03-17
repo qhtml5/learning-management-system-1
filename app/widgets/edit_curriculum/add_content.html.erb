@@ -1,0 +1,86 @@
+<%= tinymce %>
+
+<%= render "notice" %>
+
+<%= link_to "← voltar", url_for_event(:cancel_action, course: @course), remote: true, class: "" %>
+
+<div class="pagination-centered">
+
+	<h1><strong><%= @media.title %></strong></h1>
+	<h2>Adicionar mídia</h2>
+	<hr>
+
+	<p class="flag-panel">
+		<% Media::AVAILABLE_KINDS.each do |kind| %>
+			<label class="checkbox inline flag-media hint hint--top" data-hint="<%= Media::TYPES.key(kind) %>">
+				<%= link_to url_for_event(:load_content, course: @course, media: @media, kind: kind), class: "btn btn-media #{@media.kind == kind ? 'active' : ''}", remote: true, id: "add-content-#{kind}" do %>
+					<%= media_icon kind %>
+				<% end %>
+			</label>
+		<% end %>
+	</p>
+
+	<hr>
+
+	<% if @show_form %>
+		<%= simple_form_for @media, :url => url_for_event(:create_content, course: @course, media_id: @media, ), remote: true do |f| %>
+			<%= f.input :kind, value: @media.kind, as: :hidden %>
+		  <%= f.hidden_field :wistia_hashed_id, :id => "wistia_hashed_id" %>
+
+		  <% if @media.embed? %>
+				<div id="form-media-document" class="form-media">
+				  <p><%= label_tag :title, "Adicionar #{Media::TYPES.key(@media.kind)}" %>
+					<div id="wista" class="pagination-centered" style="width: 200px; height: 25px; margin-left: 40%;"></div></p>
+
+					<% if @media.kind == "Video" %>
+						<br>
+						<p>Formatos aceitos: MOV, MPG, AVI, FLV, F4V, MP4, M4V, ASF, WMV, VOB, MOD, 3GP, MKV, DIVX, XVID</p>
+					<% elsif @media.kind == "Audio" %>
+						<br>
+						<p>Formatos aceitos: MP3, WAV, AIF, AU, M4A</p>
+					<% elsif @media.kind == "Slide" %>
+						<br>
+						<p>Formatos aceitos: PDF, PPT, PPTX</p>
+					<% elsif @media.kind == "Document" %>
+						<br>
+						<p>Formatos aceitos: PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, JPG, PNG, GIF, TIFF, BMP, DCM</p>
+					<% end %>
+				</div>
+				<br> 
+			<% else %>
+				<div id="form-media-text" class="form-media">
+				  <p style="width: 100%;"><%= f.text_area :text, :class => "tinymce", :id => "media-text", style: "height: 400px;" %></p>
+				</div>
+			<% end %>
+				
+			<hr>
+		  <%= link_to "Cancelar", url_for_event(:cancel_action, course: @course), remote: true, class: "btn btn-warning" %>
+		  <%= f.submit "Salvar", :class => "btn btn-success", :id => "submit-media-content" %>
+
+		<% end -%>
+	<% end %>
+</div>
+
+<%= hidden_field_tag :wistia_id, current_user.school.wistia_public_project_id, :id => :wistia_id %>
+<%= hidden_field_tag :course_id, @course.slug, :id => :course_id %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token, :id => :authenticity_token %>
+
+<script src="http://static.wistia.com/javascripts/upload_widget.js"></script>
+<script type="text/javascript">
+ 	var cb = {
+ 	  'uploadSuccess': function(jsonFile) {
+ 	  	$("#wistia_hashed_id").val(jsonFile.hashed_id);
+ 	  	$("#submit-media-content").removeAttr('disabled');
+    },
+    'fileQueued': function(file) {
+    	$("#submit-media-content").attr('disabled','disabled');
+    }
+  };
+
+  var widget1 = new wistia.UploadWidget({ 
+    divId: 'wista', 
+    publicProjectId: $("#wistia_id").val(),
+    buttonText: 'Buscar arquivo',
+    callbacks: cb
+  });
+</script>

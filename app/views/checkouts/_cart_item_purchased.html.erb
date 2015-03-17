@@ -1,0 +1,39 @@
+<% course = cart_item.course %>
+
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<div class="pull-left">
+				<h4><%= link_to course.title, course_path(course), :id => "course-in-cart-#{course.slug}" %></h4>
+			</div>
+		</div>
+		<div class="content">
+			<% if flash["invalid_coupon_#{cart_item.id}"] %>
+				<div class="row-fluid">
+					<div class="span7">
+					  <p class="app-alert"><%= flash["invalid_coupon_#{cart_item.id}"] %></p>
+					</div>
+				</div>
+		  <% end %>
+		  <div class="row-fluid">
+				<div class="span5">
+					<%= image_tag course.logo.url(:medium), class: "thumbnail" %>
+				</div>
+				<div class="span7">
+					<p class=""><%= course.pitch %></p>
+					<p>
+						<div class="row-fluid">
+							<div class="span4 well">
+								<h3><%= em_real cart_item.price_with_discount %></h3>	
+							</div>
+							
+							<% if cart_item.coupon %>
+								<div class="span2"><p class="uneditable-input"><%= cart_item.coupon.name %></p></div>
+							<% end %>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

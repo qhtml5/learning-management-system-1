@@ -1,0 +1,5 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<%= p_tag "Parabéns! Este email é uma confirmação da sua escolha por usar o Edools num plano de pagamento mensal."%>
+<%= p_tag "Em breve entraremos em contato para acertarmos os detalhes do pagamento." %>
+<%= p_tag "Enquanto isso, #{a_tag('clique aqui para ir até sua escola', dashboard_courses_url(subdomain: @school.subdomain))} e conferir as novidades que preparamos para você." %>
+<%= p_tag "Muito obrigado." %>

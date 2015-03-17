@@ -1,0 +1,4 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<%= p_tag "O aluno <strong>#{@sender.full_name}</strong> avaliou seu curso <strong>#{@course.title}</strong> com <strong>#{@course_evaluation.score} estrelas</strong>." %>
+<%= p_tag a_tag('Clique aqui para ver a avaliação.', course_evaluations_dashboard_schools_url(subdomain: @school.subdomain)) %>
+

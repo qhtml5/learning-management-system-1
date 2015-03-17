@@ -1,0 +1,72 @@
+<% course = cart_item.course %>
+
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<div class="row-fluid">
+				<div class="span11">
+					<h4><%= link_to course.title, course_path(course), :id => "course-in-cart-#{course.slug}" %></h4>
+				</div>
+				<div class="span1">
+					<div class="pull-right delete_cart_item">
+						<%= link_to "<i class=\"fa-icon-trash\"></i>".html_safe, remove_from_cart_course_path(course.id), :id => "remove-course-#{course.slug}" %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<% if flash["invalid_coupon_#{cart_item.id}"] %>
+				<div class="row-fluid">
+					<div class="span12">
+					  <p class="app-alert"><%= flash["invalid_coupon_#{cart_item.id}"] %></p>
+					</div>
+				</div>
+		  <% end %>
+		  <div class="row-fluid">
+				<div class="span5">
+					<%= image_tag course.logo.url(:medium), class: "thumbnail" %>
+				</div>
+				<div class="span7">
+					<p class=""><%= course.pitch %></p>
+					<% if course.limited? %>
+						<small>* disponível durante <%= course.available_time %> dias após confirmação da compra</small>
+					<% end %>
+					<hr>
+					<p>
+						<div class="row-fluid">
+							<div class="span4">
+								<h3><strong><%= em_real cart_item.price_with_discount %></strong></h3>	
+							</div>
+							
+							<% unless cart_item.coupon %>
+								<div class="span8" style="margin-top: 5px;">
+									<%= form_tag add_coupon_course_path(course, cart_item) do %>
+										<div class="row-fluid">
+											<div class="span8">
+												<%= text_field_tag :coupon, nil, :placeholder => "Cupom de desconto", :maxlength => 20, :class => 'span12 form-control', "data-validate" => "validate(required(cupom)) on(submit)", :id => "cart-coupon-course-#{course.id}" %>
+											</div>
+											<div class="span1">
+												<%= submit_tag "OK", :class => "btn-success btn", :id => "refresh-coupon-#{course.id}" %>	
+											</div>
+										</div>
+									<% end -%>
+								</div>
+							<% else %>
+								<div class="span8" style="margin-top: 5px;">
+									<div class="row-fluid">
+										<div class="span8">
+											<p class="uneditable-input"><%= cart_item.coupon.name %></p>
+										</div>
+										<div class="span1">
+											<p><%= link_to "x", remove_coupon_course_path(course, cart_item), :method => :post, :id => "remove-coupon-#{course.id}", :class => "btn-warning btn" %></p>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

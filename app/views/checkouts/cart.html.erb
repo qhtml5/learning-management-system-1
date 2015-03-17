@@ -1,0 +1,40 @@
+<div id="cart">
+	<div class="container">
+		<%= render 'checkouts/cart_header' %>
+		
+		<div class="row-fluid">
+			<% if current_cart && current_cart.courses.any? %>
+				<div class="span8">
+					<% current_cart.cart_items.each do |cart_item| %>
+						<%= render 'cart_item', :cart_item => cart_item %>
+					<% end -%>
+				</div>
+
+				<div class="span4">
+					<%= box(:title => 'Total')  do %>
+						<h3>
+							Total
+							<strong class="pull-right"><%= em_real current_cart.total %></strong>
+						</h3>
+						<h4>
+							ou em até <%= installments_amount current_cart.total %>x no cartão
+							<strong class="pull-right"><%= max_installments_value(current_cart.total) %></strong>
+						</h4>
+						<hr>
+						<%= link_to "Finalizar Compra →", social_checkouts_path, :class => "btn btn-success btn-large pull-right", :id => "checkout" %>
+					<% end %>
+
+					<%= render_widget :school_payment_forms, :display %>
+					<%= render_widget :school_phone_email, :checkout, :school => current_school  %>
+					<%= render_widget :secure_info %>
+				</div>
+			<% else %>
+				<div class="span12">
+					<%= box(title: "Oops!") do %>
+						<h4><%= I18n.t("messages.cart.no_courses") %></h4>
+					<% end %>
+				</div>
+			<% end -%>
+		</div>
+	</div>
+</div>

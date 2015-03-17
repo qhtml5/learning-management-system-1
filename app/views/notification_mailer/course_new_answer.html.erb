@@ -1,0 +1,4 @@
+<%= p_tag "Olá, #{@receiver.first_name}." %>
+<%= p_tag "Sua pergunta no curso <strong>#{@course.title}</strong> foi respondida:" %>
+<%= message_tag "<strong>#{@sender.full_name}</strong> disse: <br /> #{simple_format(@message.text)}" %>
+<%= p_tag a_tag('Clique aqui para ir para a página do curso.', content_course_url(@course, subdomain: @school.subdomain)) %>

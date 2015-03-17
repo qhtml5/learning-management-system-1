@@ -1,0 +1,7 @@
+<%= p_tag "Olá, #{@lead.email}." %>
+<%= p_tag "Aqui está o seu cupom de 5% de desconto no curso <strong>#{@course.title}</strong>, clique no link para para prosseguir com a compra." %>
+<% if @school.use_custom_domain? %>
+	<%= button_tag "Prosseguir com a compra →", add_to_cart_course_url(@course, host: @school.domain, coupon: @coupon.name) %>
+<% else %>
+	<%= button_tag "Prosseguir com a compra →", add_to_cart_course_url(@course, coupon: @coupon.name, subdomain: @school.subdomain) %>
+<% end %>

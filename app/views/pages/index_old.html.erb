@@ -1,0 +1,289 @@
+<div id="hero">
+	<div class="container">
+		<div class="row-fluid animated fadeInDown">
+			<div class="span10 offset1">
+				<div class="row-fluid">
+					<div class="span6 pagination-centered">
+						<%= image_tag "computador2.png" %>
+					</div>
+
+					<div class="span6 pagination-centered">
+						<% if user_signed_in? %>
+							<h1 style="line-height: 1.1em;">
+								Tudo que você precisa para ter sua <strong>escola online</strong>
+								<%#= t('home.value_proposition') %>
+							</h1>
+							<%= link_to dashboard_courses_path, :class => "multi-line-button green multi-button" do %>
+								<span class='title uppercase'><%= t('btn.home.go_school') %></span>
+							<% end %>
+						<% else %>
+							<h1 style="line-height: 1.1em;">
+								Tudo que você precisa para ter sua <strong>escola online</strong>
+								<%#= t('home.value_proposition') %>
+							</h1>
+							<div class="row-fluid">
+								<div class="span8 offset2 well login_box">
+		<!-- 					<div class="pagination-centered">
+										<p><%#= link_login_facebook(:id => "facebook-login-box") %></p>
+										<p><span class="or uppercase">ou</span></p>
+									</div> -->
+									<p>Crie sua conta com seu e-mail:</p>
+
+									<div class="row-fluid">
+										<%= simple_form_for User.new, url: user_registration_path, html: { class: "form-horizontal"} do |f| %>
+											<%= f.input :first_name, label: false, placeholder: "Seu nome", autofocus: true, input_html: { class: "span12" } %>
+											<%= f.input :email, label: false, required: true, placeholder: "Seu Email", input_html: { class: "span12" }  %>
+											<%= f.input :password, label: false, as: :password, required: true, placeholder: "Crie uma senha", input_html: { class: "span12" }  %>
+											<%= f.submit "Criar escola", class: "btn btn-success uppercase", id: "create-school-register" %>
+										<% end -%>
+										<span>Já possui conta? <%= link_to "Entrar", new_user_session_path, class: "uppercase" %></span>
+									</div>
+								</div>
+							</div>
+						<% end -%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="intro">
+    <div class="container">
+        <h1>
+        	<%= t('home.pitch') %>
+        </h1>
+    </div>
+</div>
+
+<% if Flip.home_values? %>
+<div id="product_values">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="offset1 span10 well well_gray">
+				<div class="row-fluid">
+					<div class="span6 value">
+	             <div class="icon pagination-centered"><i class="fa-icon-lock"></i></div>
+	             <h4><%= t('home.values.v1.title') %></h4>
+	             <p><%= t('home.values.v1.description') %></p>
+	        </div>
+					<div class="span6 value">
+	             <div class="icon pagination-centered"><i class="fa-icon-bolt"></i></div>
+	             <h4><%= t('home.values.v2.title') %></h4>
+	             <p><%= t('home.values.v2.description') %></p>
+	        </div>	
+				</div>				
+				<div class="row-fluid">
+					<div class="span6 value">
+	             <div class="icon pagination-centered"><i class="fa-icon-time"></i></div>
+	             <h4><%= t('home.values.v3.title') %></h4>
+	             <p><%= t('home.values.v3.description') %></p>
+	        </div>
+					<div class="span6 value">
+	             <div class="icon pagination-centered"><i class="fa-icon-phone"></i></div>
+	             <h4><%= t('home.values.v4.title') %></h4>
+	             <p><%= t('home.values.v4.description') %></p>
+	        </div>	
+				</div>				
+			</div>
+	</div>
+</div>
+<% end %>
+
+<% if Flip.home_features_list? %>
+<div id="features" class="features_page">
+	<div class="container">  	
+		
+		<% if Flip.home_image_features? %>
+		<div class="features1">
+	    <h2 class="section_header">
+	    	<hr class="left visible-desktop">
+		  	<span><%= t('home.features.title') %></span>
+			  <hr class="right visible-desktop">
+	 		</h2>
+      <div class="row-fluid">
+	     	<div class="span4 feature">
+					<%= image_tag ('feature_01.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f1.title') %></h3>
+	        <p class="description"><%= t('home.features.f1.description') %></p>
+	      </div>
+				<div class="span4 feature">
+					<%= image_tag ('feature_02.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f2.title') %></h3>
+	        <p class="description"><%= t('home.features.f2.description') %> <%= link_to t('home.more_about_plans'), pricing_page_path %></p>
+	      </div>
+				<div class="span4 feature">
+					<%= image_tag ('feature_03.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f3.title') %></h3>
+	        <p class="description"><%= t('home.features.f3.description') %> <%= link_to t('home.more_about_plans'), pricing_page_path %></p>
+	      </div>
+      </div>
+			<div class="row-fluid">
+	     	<div class="span4 feature">
+					<%= image_tag ('feature_04.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f4.title') %></h3>
+	        <p class="description"><%= t('home.features.f4.description') %></p>
+	      </div>
+				<div class="span4 feature">
+					<%= image_tag ('feature_05.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f5.title') %></h3>
+	        <p class="description"><%= t('home.features.f5.description') %></p>
+	      </div>
+				<div class="span4 feature">
+					<%= image_tag ('feature_06.png'), :class => 'thumb' %>
+	        <h3><%= t('home.features.f6.title') %></h3>
+	        <p class="description"><%= t('home.features.f6.description') %></p>
+	      </div>
+      </div>
+		</div>
+		<% end %>
+		
+		<% if Flip.home_icone_features? %>
+			<div class="features2">
+	    	<h2 class="section_header">
+		    	<hr class="left visible-desktop">
+			  	<span><%= t('home.features.title') %></span>
+				  <hr class="right visible-desktop">
+		 		</h2>
+	     	<div class="row-fluid">
+	     		<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-globe"></i></div>
+	             <h4><%= t('home.features.f1.title') %></h4>
+	             <p><%= t('home.features.f1.description') %></p>
+	        </div>
+					<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-signal"></i></div>
+	             <h4><%= t('home.features.f2.title') %></h4>
+	             <p><%= t('home.features.f2.description') %> <%= link_to t('home.more_about_plans'), pricing_page_path %></p>
+	        </div>
+					<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-ok-sign"></i></div>
+	             <h4><%= t('home.features.f3.title') %></h4>
+	             <p><%= t('home.features.f3.description') %>  <%= link_to t('home.more_about_plans'), pricing_page_path %></p>
+	        </div>
+	     	</div>
+	      <div class="row-fluid">
+					<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-eye-open"></i></div>
+	             <h4><%= t('home.features.f4.title') %></h4>
+	             <p><%= t('home.features.f4.description') %></p>
+	        </div>
+					<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-comments-alt"></i></div>
+	             <h4><%= t('home.features.f5.title') %></h4>
+	             <p><%= t('home.features.f5.description') %></p>
+	        </div>
+					<div class="span4 feature2">
+	             <div class="icon pagination-centered"><i class="fa-icon-edit"></i></div>
+	             <h4><%= t('home.features.f6.title') %></h4>
+	             <p><%= t('home.features.f6.description') %></p>
+	        </div>
+	      </div>
+	   	</div>
+		<% end %>
+		
+		<div class="pagination-centered">
+			<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+        <span class='title uppercase'><%= t('btn.home.action') %></span>
+        <span class='subtitle'><%= t('btn.home.subaction') %></span>
+			<% end %>
+		</div>
+    <div class="features2">
+			<h2 class="section_header">
+        <hr class="left visible-desktop" style="width: 25%">
+	        <span><%= t('home.more_features.subtitle') %></span>
+        <hr class="right visible-desktop" style="width: 25%">
+	    </h2>
+     	<div class="row-fluid">
+     		<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-money"></i></div>
+             <h4><%= t('home.more_features.f1.title') %></h4>
+             <p><%= t('home.more_features.f1.description') %></p>
+        </div>
+				<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-tags"></i></div>
+             <h4><%= t('home.more_features.f2.title') %></h4>
+             <p><%= t('home.more_features.f2.description') %></p>
+        </div>
+				<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-bell"></i></div>
+             <h4><%= t('home.more_features.f3.title') %></h4>
+             <p><%= t('home.more_features.f3.description') %></p>
+        </div>
+     	</div>
+      <div class="row-fluid">
+				<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-file"></i></div>
+             <h4><%= t('home.more_features.f4.title') %></h4>
+             <p><%= t('home.more_features.f4.description') %></p>
+        </div>
+				<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-check"></i></div>
+             <h4><%= t('home.more_features.f5.title') %></h4>
+             <p><%= t('home.more_features.f5.description') %></p>
+        </div>
+				<div class="span4 feature2">
+             <div class="icon pagination-centered"><i class="fa-icon-cloud"></i></div>
+             <h4><%= t('home.more_features.f6.title') %></h4>
+             <p><%= t('home.more_features.f6.description') %></p>
+        </div>
+      </div>
+   	</div>
+	</div>
+</div>
+<% end -%>
+
+<% if Flip.home_pricing? %>
+<div class="home" id="pricing">
+	<div class="container">
+		<h2 class="section_header">
+    	<hr class="left visible-desktop">
+		  <span style="width: 27%;">
+		  	<%= t('plans.title') %>
+		  	<small>
+		  		<%= link_to t('plans.subtitle'), pricing_page_path %>
+				</small>
+		  </span>
+		  <hr class="right visible-desktop">
+ 		</h2>
+		<%= render 'plans_box' %>
+	</div>
+</div>
+<% end %>
+
+<% if Flip.home_schools? %>
+<div id="schools">
+	<div class="container">
+		<h2 class="section_header">
+    	<hr class="left visible-desktop">
+	  	<span><%= t('home.schools_already_use') %></span>
+		  <hr class="right visible-desktop">
+ 		</h2>
+	  <div class="row-fluid">
+			<div class="offset1 span10 well well_white">
+				<div class="row-fluid" id="school_list">
+					<div class="school">
+						<%= link_to image_tag('schools/bizstart.png', :alt => "Bizstart", size: "260x80"), "http://bizstart.edools.com", :title => "Bizstart", :target => "blank" %>
+					</div>
+					<div class="school">
+						<%= link_to image_tag('schools/doctor_apple.png', :alt => "Bizstart", size: "150x80"), "http://doctorapple.edools.com", :title => "DoctorApple", :target => "blank" %>
+					</div>
+					<div class="school">
+						<%= link_to image_tag('schools/essencial_ensino.png', :alt => "Essencial Ensino", size: "170x80"), "http://essencialensino.edools.com", :title => "Essencial Ensino", :target => "blank" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end -%>
+<br>
+
+<div class="pagination-centered">
+	<%= link_to new_user_registration_path, :class => "multi-line-button green multi-button" do %>
+		<span class='title uppercase'><%= t('btn.home.action') %></span>
+	  <span class='subtitle'><%= t('btn.home.subaction') %></span>
+	<% end %>
+</div>
+<br>

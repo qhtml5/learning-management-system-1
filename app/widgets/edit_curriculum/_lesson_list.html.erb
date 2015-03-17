@@ -1,0 +1,35 @@
+<ul class="td-sortable" data-update-url="<%= sort_dashboard_course_lessons_path(@course) %>" style="list-style-type: none; margin-left: 0; padding-left: 0;">
+	<% @lessons.each_with_index do |lesson| %>
+		<li data-item-id="<%= lesson.id %>">
+			
+			<div class="lesson-item">
+				
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box-header btn btn-success span12 lesson-header">
+							<span class="reorder hint hint--right" data-hint="Arraste para ordenar os módulos"><i class="fa-icon-reorder"></i></span>
+							<span class="break"></span>
+							<span class="hint hint--right" data-hint="Clique para renomear"><%= best_in_place lesson, :title, :path => rename_dashboard_course_lesson_path(@course.id, lesson.id) %></span>
+							<%= link_to "<i class=\"fa-icon-trash\"></i>".html_safe, url_for_event(:destroy_lesson, course: @course, lesson: lesson), remote: true, method: :delete, confirm: t('messages.module.destroy.confirm'), class: "pull-right btn-lesson-remove", id: "delete-module-#{lesson.id}" %>
+						</div>
+					</div>
+				</div>
+				
+
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="media-container">	
+					 		<%= render "media_list", lesson: lesson %>
+
+							<div class="box-header pagination-centered btn btn-info btn-add-content media-header">
+								<i class="fa-icon-plus-sign"></i>
+								<%= link_to t('widgets.edit_curriculum.create_lesson'), url_for_event(:new_media, course: @course, lesson: lesson), remote: true, id: "new-media-#{lesson.id}" %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+
+		</li>
+	<% end %>
+</ul>

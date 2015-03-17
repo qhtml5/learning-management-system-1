@@ -1,0 +1,5 @@
+pt-BR:
+  simple_form:
+    labels:
+      user:
+        email: "Email"

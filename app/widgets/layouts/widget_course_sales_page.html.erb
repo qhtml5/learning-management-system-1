@@ -1,0 +1,13 @@
+<%= widget_div :id => "course-#{widget_id}" do %>
+<div class="post">
+	<div class="row-fluid">
+		<div class="span8">
+			<div class="info">
+				<h3><%= @title %></h3>
+				<br />
+				<%= yield %>
+			</div>
+		</div>
+	</div> 
+</div>
+<% end %>

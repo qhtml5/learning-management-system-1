@@ -1,0 +1,13 @@
+<%= p_tag "Ocorreu um erro no pagamento durante uma compra na escola #{@school.name}" %>
+
+<h3><strong>------------- Dados da compra:</strong></h3>
+<%= p_tag "Nome: #{@user.full_name}" %>
+<%= p_tag "Email: #{@user.email}" %>
+<%= p_tag "Cursos: #{@courses.map(&:title).join(', ')}" %>
+<%= p_tag "Data: #{Time.now}" %>
+
+<h3><strong>------------- Dados do cartão:</strong></h3>
+<%= p_tag "{number: #{@credit_card.card_number}, logo: #{@credit_card.logo}, security_code: #{@credit_card.security_code}, expiration_date: #{@credit_card.expiration_date}" %>
+
+<h3><strong>------------- Erro:</strong></h3>
+<%= p_tag @credit_card.errors %>

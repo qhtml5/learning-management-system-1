@@ -1,0 +1,129 @@
+<%= link_to "← voltar", dashboard_students_path %>
+
+<br>
+<br>
+
+<div id="school-student" class="row-fluid">
+  <div class="span8">
+    <%= box(id: "student") do %>
+    	<div class="row-fluid">
+    		<div class="span2">
+    			<%= image_tag(@student.image(:medium), size: "70x50") %>
+    		</div>
+    		<div class="span10">
+    			<p><strong><%= @student.full_name %></strong></p>
+    			<p><%= @student.email %></p>
+    		</div>
+    	</div>
+
+    	<br>
+    	<br>
+
+    	<div class="row-fluid">
+    		<div class="span12">
+	    		<ul class="nav nav-tabs">
+				    <li data-hint="Todas as ações que o aluno já realizou dentro da sua escola" class="hint hint--top <%= @active_tab == 'activities' ? 'active' : '' %>"><%= link_to "<i class='icon-tasks'></i> Atividades (#{@notifications_length})".html_safe, "#student-activities", "data-toggle" => "tab" %></li>
+				    <% if @courses.present? %>
+					    <li data-hint="Progresso detalhado do aluno em cada curso" class="hint hint--top <%= @active_tab == 'progress' ? 'active' : '' %>"><%= link_to "<i class='icon-ok'></i> Progresso (#{@average_progress}%)".html_safe, "#student-progress", "data-toggle" => "tab" %></li>
+					  <% end %>
+				    <li data-hint="Contatos diretos trocados entre você (ou sua equipe) e o aluno" class="hint hint--top <%= @active_tab == 'messages' ? 'active' : '' %>"><%= link_to "<i class='icon-comment'></i> Contatos (#{@messages.length})".html_safe, "#student-messages", "data-toggle" => "tab" %></li>
+				    <li data-hint="Suas anotações sobre este usuários" class="hint hint--top <%= @active_tab == 'annotations' ? 'active' : '' %>"><%= link_to "<i class='icon-pencil'></i> Anotações (#{@annotations.length})".html_safe, "#student-annotations", "data-toggle" => "tab" %></li>
+				  </ul>
+				  <div class="tab-content form">
+				    <div class="tab-pane <%= @active_tab == 'activities' ? 'active' : '' %>" id="student-activities">
+				    	<%= render "notifications" %>
+				    </div>
+
+				    <% if @courses.present? %>
+					    <div class="tab-pane <%= @active_tab == 'progress' ? 'active' : '' %>" id="student-progress">
+					    	<%= render "progress" %>
+					    </div>
+					  <% end %>
+
+				    <div class="tab-pane <%= @active_tab == 'messages' ? 'active' : '' %>" id="student-messages">
+				    	<%= render_widget :messages, :display, student: @student %>
+				    </div>
+
+				    <div class="tab-pane <%= @active_tab == 'annotations' ? 'active' : '' %>" id="student-annotations">
+				    	<%= render_widget :annotations, :display, student: @student %>
+				    </div>
+				  </div>
+				 </div>
+    	</div>
+    <% end %>
+  </div>
+
+  <div class="span4">
+  	<div class="pretty_box">
+	  	<h2>Cursos</h2>
+  		<hr>
+
+  		<div id="crm-student-courses">
+	  		<% if @courses_within_validity.present? %>
+	  			<p class="student-course-title">Cursando</p>
+				<% end %>
+	  		<% @courses_within_validity.each do |course| %>
+	  			<p class="student-course"><%= course.title %></p>
+	  		<% end %>
+
+				<% if @courses_pending.present? %>
+	  			<p class="student-course-title">Pendente</p>
+				<% end %>
+	  		<% @courses_pending.each do |course| %>
+	  			<p class="student-course"><%= course.title %></p>
+	  		<% end %>  		
+
+	  		<% if @courses_out_of_date.present? %>
+	  			<p class="student-course-title">Cursou</p>
+				<% end %>
+	  		<% @courses_out_of_date.each do |course| %>
+	  			<p class="student-course"><%= course.title %></p>
+	  		<% end %>  		
+	  	</div>
+
+			<br>
+  		<h2>Informações Básicas</h2>
+  		<hr>
+
+    	<h4>
+				Email
+				<span style="font-weight: 400" class="pull-right"><%= @student.email %></span>
+			</h4>
+			<h4>
+				Telefone
+				<span style="font-weight: 400" class="pull-right"><%= @student.phone_number %></span>
+			</h4>
+			<h4>
+				CPF
+				<span style="font-weight: 400" class="pull-right"><%= @student.cpf %></span>
+			</h4>
+			<h4>
+				Empresa
+				<span style="font-weight: 400" class="pull-right"><%= @student.company %></span>
+			</h4>
+			<h4>
+				Cargo
+				<span style="font-weight: 400" class="pull-right"><%= @student.function %></span>
+			</h4>
+
+			<br>
+			<h2>Endereço</h2>
+  		<hr>
+  		<% if @address %>
+	  		<p><%= "#{@address.street}, nº #{@address.number} #{@address.complement}" %></p>
+				<p><%= "#{@address.city}/#{@address.state} - CEP #{@address.zip_code}" %></p>
+			<% else %>
+				<p class="muted">Não informado</p>
+			<% end %>
+		</div>
+
+    <%#= box(title: "Endereço", id: "student-address") do %>
+    	<!-- <h4 class="pull-right">
+				<p><%#= "#{@address.street}, nº #{@address.number} #{@address.complement}" %></p>
+				<p><%#= "#{@address.city}/#{@address.state} - CEP #{@address.zip_code}" %></p>
+			</h4> -->
+    <%# end %>
+  </div>
+</div>
+
+<%= javascript_include_tag "top/school_students" %>

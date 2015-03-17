@@ -1,0 +1,46 @@
+<h3 class="muted">Gerencie todos os seus vídeos, documentos e apresentações.</h3>
+<hr>
+
+<%= render "notice" %>
+
+<%= box(title: "Mídias") do %>
+	<% if @medias.present? %>
+		<table class="table table-hover">
+			<thead>
+		  	<tr>
+		    	<th>Nome</th>
+		      <th>Tipo</th>
+					<th>Status</th>
+					<th>Ações</th>
+		    </tr>
+		  </thead>
+		  <tbody>	
+				<% @medias.each do |media| %>
+		    	<tr>
+		        <td><%= media.name %></td>
+		        <td><%= media.type %></td>
+						<% if @school.wistia_media?(media.hashed_id) %>
+							<td>
+								<span class="label label-success">Em uso</span>
+							</td>
+							<td>
+								<%= link_to 'Exibir', url_for_event(:show_media, media_hash: media.hashed_id, school: @school), remote: true, :class => 'btn btn-success' %>
+								<%= link_to 'Deletar', '#', :class => 'btn btn-danger disabled' %>
+							</td>
+						<% else %>
+							<td>
+								<span class="label label-warning">Não utilizado</span>
+							</td>
+							<td>
+								<%= link_to 'Exibir', url_for_event(:show_media, media_hash: media.hashed_id, school: @school), remote: true, :class => 'btn btn-success' %>
+								<%= link_to 'Deletar', url_for_event(:delete_media, media_hash: media.hashed_id, school: @school), remote: true, :confirm => "Tem certeza? Não será possível recuperar essa mídia.", :class => 'btn btn-danger' %>
+							</td>
+						<% end %>
+		      </tr>
+				<% end %>
+		  </tbody>
+	</table>
+	<% else %>
+		<p class="alert">Você ainda não subiu nenhuma mídia</p>
+	<% end %>
+<% end %>

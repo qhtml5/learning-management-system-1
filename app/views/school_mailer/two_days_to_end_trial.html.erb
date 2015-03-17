@@ -1,0 +1,24 @@
+<%= title_tag "Seu período de testes está prestes à terminar." %>
+
+<hr style="border-top: 1px solid #c0c0c0 !important;">
+
+<%= p2_tag "Olá, #{@school_admin.first_name}. Tudo bem?".html_safe %>
+
+<%= p2_tag "Seu período de TESTE GRÁTIS irá terminar em menos de dois dias." %>
+
+<%= p2_tag "Para manter sua escola online, clique no botão para logar e escolher um plano.".html_safe %>
+
+<br>
+<%= button_tag "Logar e escolher plano", configurations_plan_dashboard_schools_url(subdomain: @school.subdomain) %>
+
+<br>
+<br>
+<hr style="border-top: 1px solid #c0c0c0;">
+
+<%= p2_tag "<b>Precisa de alguma ajuda para escolher o melhor plano para atender suas necessidades?</b>".html_safe %>
+
+<%= p2_tag "Nós podemos te ajudar a escolher o melhor plano que atenda as suas necessidades. Ligue-nos no telefone (21) 3741-8006 ou envie um email para <b>contato@edools.com</b>.".html_safe %>
+
+<hr style="border-top: 1px solid #c0c0c0;">
+
+<%= footer_tag "© Edools.com" %> 

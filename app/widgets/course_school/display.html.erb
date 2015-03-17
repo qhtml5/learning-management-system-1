@@ -1,0 +1,9 @@
+<div class="pagination-centered">
+	<% if @school_layout.try(:site_logo).try(:present?) %>
+		<%= image_tag(@school_layout.site_logo.url(:medium), class: "img-instructor") %>
+	<% else %>
+		<h3><%= @school.name %></p>
+	<% end %>
+</div>
+<hr>
+<h4><%= sanitize @school.about_us %></h4>

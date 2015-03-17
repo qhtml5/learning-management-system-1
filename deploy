@@ -1,0 +1,332 @@
+#!/bin/bash
+
+#########
+# To Do #
+#########
+# nao deixar fazer deploy se tiver erro grave de vulnerabilidade
+# informar percentual de cobertura de testes. (ver se vale barrar deploy para percentual muito baixo.)
+
+# To get duration 
+START=$(date +%s)
+
+#################
+# Configuration #
+#################
+DEBUG="OFF"
+PROD_BRANCH="master"
+DEV_BRANCH="develop"
+BITBUCKET_REMOTE="origin"
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+##########
+# Colors #
+##########
+msg_red(){
+	echo >&2
+	echo -e "\033[31m $1\033[0m"
+	echo >&2
+}
+msg_green(){
+	echo >&2
+	echo -e "\033[32m $1\033[0m"
+	echo >&2
+}
+msg_yellow(){
+	echo >&2
+	echo -e "\033[33m $1\033[0m"
+	echo >&2
+}
+msg_blue(){
+	echo >&2
+	echo -e "\033[34m $1\033[0m"
+	echo >&2
+}
+
+############
+# Messages #
+############
+SCAPE_TESTS="[AVISO] Voce esta fazendo deploy sem executar testes! CUIDADO, isso coloca a aplicacao em RISCO!"
+
+THEREARE_CHANGES="[PROBLEMA] Existem modificacoes pendentes! Antes do deploy efetue commit."
+
+MSG_START="Iniciando deploy para: "
+
+CBRANCH_ERROR="[PROBLEMA] Voce esta tentando fazer deploy para [Producao] e nao esta na branch <master>!"
+CBRANCH_WARN="[AVISO] Antes de fazer deploy para [Producao] crie uma release [git flow release start 'versao']."
+CBRANCH_ST_ERROR="[PROBLEMA] Voce esta tentando fazer deploy para [Staging] e nao esta na branch <develop>!"
+CBRANCH_ST_WARN="[AVISO] Antes de fazer deploy para [Staging] finalize a feature [git flow feature finish 'nome']."
+
+SCHECKS_S="Iniciando testes de vulnerabilidade ..."
+SCHECKS_F="Testes de vulnerabilidade finalizados."
+SCHECKS_WARN="[AVISO] Voce precisa instalar a gem brakeman [gem install brakeman] para executar testes de vulnerabilidade."
+
+RSPEC_S="Iniciando testes com RSPEC ..."
+RSPEC_F="Todos os testes com RSPEC passaram!"
+RSPEC_ERROR="[PROBLEMA]: Existem testes unitarios quebrando!"
+RSPEC_WARN1="[AVISO]: Corrija os testes antes de fazer deploy para [Producao]."
+RSPEC_WARN2="[AVISO]: Para [Staging] vai passar, mas CORRIJA os testes antes de fazer deploy para [Producao]."
+
+CUCUMBER_S="Iniciando testes com Cucumber ..."
+CUCUMBER_F="Todos os testes com Cucumber passaram!"
+CUCUMBER_ERROR="[PROBLEMA]: Existem testes de aceitacao quebrando!"
+CUCUMBER_WARN="[AVISO]: Corrija os testes antes de fazer deploy para [Producao]."
+
+BITBUCKET_S="Iniciando push para [Bitbucket] ..."
+BITBUCKET_F="Push para [Bitbucket] finalizado."
+
+ASSETS_S="Iniciando compilacao dos assets ..."
+ASSETS_F="Compilacao dos assets finalizada."
+ASSETS_CHANGES="Encontrada alteracao nos assets, iniciando commit ..."
+ASSETS_COMMIT="Assets compilados com sucesso."
+
+# So para heroku
+# BACKUP_S="Iniciando backup do banco de dados ..."
+# BACKUP_F="Buckup do bando de dados finalizado finalizado."
+# BACKUP_URL="[AVISO] Baixe o dump do DB na url abaixo:"
+
+DEPLOYPROD_S="Iniciando deploy para [Producao] ..."
+DEPLOYPROD_F="Deploy para [Producao] finalizado."
+DEPLOYSTAGING_S="Iniciando deploy para [Staging] ..."
+DEPLOYSTAGING_F="Deploy para [Staging] finalizado."
+
+# So para heroku
+# MIGRATE_S="Iniciando migracao do banco de dados ..."
+# MIGRATE_F="Migracao do banco de dados finalizada."
+
+#############
+# Functions #
+#############
+usage()
+{
+    echo >&2
+	echo "Usage: ./$(basename $0) <environment> [options]" >&2
+    echo >&2
+	echo "        environment      Name of app environment [staging or production]" >&2
+	echo >&2
+	echo "Options:"
+# So para heroku
+#    echo "        no-migrations    Deploy without running migrations" >&2
+	echo "        no-tests         Deploy without testes [DANGER]" >&2
+	echo "        show-outputs     Deploy with outputs" >&2
+    echo >&2
+    exit 1
+}
+
+show_time_duration()
+{
+	END=$(date +%s)
+	DIFF=$(( $END - $START ))
+	echo -e "\033[34m Tempo gasto para deploy: $DIFF segundos. \033[0m"
+}
+
+check_env()
+{
+	if [ "$REMOTE" != "production" ] && [ "$REMOTE" != "staging" ]; then
+		usage
+	fi	
+}
+
+check_changes()
+{
+	if [ -n "$(git status --porcelain)" ]; then 
+		msg_red "$THEREARE_CHANGES"
+		exit 1
+	fi
+}
+
+# Deploy to production only if in branch master
+# Deploy to staging only if in branch develop
+check_branch()
+{
+	if [ "$REMOTE" = "production" ]; then
+		if [ $BRANCH != "master" ]; then
+			msg_red "$CBRANCH_ERROR"
+			msg_yellow "$CBRANCH_WARN"
+			exit 1
+		fi
+	fi
+
+	if [ "$REMOTE" = "staging" ]; then
+		if [ $BRANCH != "develop" ]; then
+			msg_red "$CBRANCH_ST_ERROR"
+			msg_yellow "$CBRANCH_ST_WARN"
+			exit 1
+		fi
+	fi
+}
+
+# https://github.com/presidentbeef/brakeman
+run_security_checks()
+{
+	msg_blue "$SCHECKS_S"
+    if which brakeman > /dev/null; then
+        run_command brakeman
+		msg_green "$SCHECKS_F"
+	else
+		msg_yellow "$SCHECKS_WARN"
+	fi
+}
+
+# RSPEC tests
+# return 0 if pass
+# return 1 it not pass
+run_rspec()
+{
+	if running_tests; then
+		msg_blue "$RSPEC_S"
+		run_command "rspec spec"
+		if [ "$?" = 1 ]; then
+			msg_red "$RSPEC_ERROR"
+			if [ "$REMOTE" = "production" ]; then
+				msg_yellow "$RSPEC_WARN1"
+				exit 1
+			fi
+			if [ "$REMOTE" = "staging" ]; then
+				msg_yellow "$RSPEC_WARN2"
+			fi
+		else
+			msg_green "$RSPEC_F"
+		fi
+	else
+		msg_yellow "$SCAPE_TESTS"
+	fi
+}
+
+# Cucumber tests
+# return 0 if pass
+# return 1 if not pass
+run_cucumber()
+{
+	if running_tests; then
+		if [ "$REMOTE" = "production" ]; then
+			msg_blue "$CUCUMBER_S"
+			run_command "rake cucumber"
+			if [ "$?" = 1 ]; then
+				msg_red "$CUCUMBER_ERROR"
+				msg_yellow "$CUCUMBER_WARN"
+				exit 1
+			else
+				msg_green "$CUCUMBER_F"
+			fi	
+		fi
+	else
+		msg_yellow "$SCAPE_TESTS"
+	fi
+}
+
+# Precompile Assets
+precompile_assets()
+{
+	msg_blue "$ASSETS_S"
+	run_command "rake assets:precompile:all"
+	if [ -n "$(git status --porcelain)" ]; then 
+		msg_yellow "$ASSETS_CHANGES"
+		git add public/assets
+		git commit -am "$ASSETS_COMMIT"
+	fi
+	msg_green "$ASSETS_F"
+}
+
+# .git/config
+push_to_bitbucket()
+{
+	msg_blue "$BITBUCKET_S"
+	run_command "git push $BITBUCKET_REMOTE"
+	msg_green "$BITBUCKET_F"
+}
+
+# So para heroku
+# only for production App
+# backup_database()
+# {
+#     if [ "$REMOTE" = "production" ]; then
+# 		msg_blue "$BACKUP_S"
+#     	run_command "heroku pgbackups:capture --expire --remote $REMOTE"
+# 		msg_yellow "$BACKUP_URL"
+# 		heroku pgbackups:url --remote $REMOTE
+# 		msg_green "$BACKUP_F"
+#     fi
+# }
+
+deploy_changes()
+{
+    if [ "$REMOTE" = "production" ]; then
+		msg_blue "$DEPLOYPROD_S"
+        run_command "git aws.push "
+		msg_green "$DEPLOYPROD_F"
+    else
+		if [ "$REMOTE" = "staging" ]; then
+			msg_blue "$DEPLOYSTAGING_S"
+			run_command "git aws.push"
+			msg_green "$DEPLOYSTAGING_F"
+		fi
+    fi
+}
+
+# So para heroku
+# migrate_database()
+# {
+#     if running_migrations; then
+# 		msg_blue "$MIGRATE_S"
+#         run_command "heroku maintenance:on --remote $REMOTE"
+#         run_command "heroku run rake db:migrate --remote $REMOTE"
+#         run_command "heroku maintenance:off --remote $REMOTE"
+# 		msg_green "$MIGRATE_F"
+#     fi
+# }
+
+# So para heroku
+# running_migrations()
+# {
+#     [ "$COMMAND1" != "no-migrations" ]
+# }
+
+show_outputs()
+{
+    [ "$COMMAND1" = "show-outputs" ]
+}
+
+running_tests()
+{
+    [ "$COMMAND1" != "no-tests" ]
+}
+
+# To not show outputs
+run_command()
+{
+	if show_outputs; then
+		$1 
+	else
+		$1 > /dev/null
+	fi
+}
+
+msg_start()
+{
+	msg_blue "$MSG_START $REMOTE"
+}
+
+################
+# Main program #
+################
+# set -e
+REMOTE="$1"
+COMMAND1="$2"
+[ "$DEBUG" = "ON" ] && set -x
+[ -z "$REMOTE" ] && usage
+[ "$REMOTE" = "--help" ] && usage
+[ "$REMOTE" = "help" ] && usage
+
+check_env
+check_changes
+msg_start
+check_branch
+run_security_checks
+run_rspec
+# run_cucumber
+precompile_assets
+push_to_bitbucket
+# backup_database # So para heroku
+deploy_changes
+# migrate_database # So para heroku
+show_time_duration

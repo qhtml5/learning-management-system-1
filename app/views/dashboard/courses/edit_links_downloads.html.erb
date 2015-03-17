@@ -1,0 +1,31 @@
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Links e downloads</h4>
+		</div>
+		<div class="content">
+			<fieldset>
+				<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_links_downloads) do |f| %>	
+	        <%= f.input :downloads, label: "Adicione links para downloads de conteúdos e material extra", as: :text, :size => "1000x4", input_html: { :class => "tinymce span9" }, :placeholder => "Adicione aqui links para seu aluno baixar documentos complementares." %></p>
+	        <br>
+					<div class="row-fluid">
+						<%= f.label :accept_download, "Download de documentos" %>
+						<label class="radiobutton inline span2" style="margin-left: 0;">
+							<%= f.radio_button :accept_download, true, :class => "btn" %> Sim
+						</label>
+						<label class="radiobutton inline span2">
+							<%= f.radio_button :accept_download, false, :class => "btn" %> Não
+						</label>
+					</div>
+          <p>Caso habilitada, o aluno poderá fazer o download dos documentos presentes nas aulas.</p>
+
+		    	<div class="form-actions">
+			    	<%= f.submit "Salvar", :class => "btn btn-success" %>
+			  	</div>
+				<% end -%>
+			</fieldset>
+		</div>	
+	</div>
+</div>
+<%= tinymce_assets %>
+<%= tinymce %>

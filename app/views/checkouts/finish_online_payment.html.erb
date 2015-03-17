@@ -1,0 +1,53 @@
+<div class="checkout_page">
+	<div class="container">
+		<%= render 'checkouts/cart_header' %>
+
+		<div class="progress">
+			<div class="bar bar-success" style="width: 34%; background: rgb(130,186,57);"><i class="icon-user"></i> 1. Conecte-se</div>
+			<div class="bar bar-success" style="width: 33%; background: rgb(130,186,57);"><i class="icon-list"></i> 2. Complete seu cadastro</div>
+			<div class="bar bar-success" style="width: 33%; background: rgb(130,186,57);"><i class="icon-ok"></i> 3. Realize o pagamento</div>
+		</div>
+		
+		<div class="row-fluid cart_container">
+			<div class="span8">
+
+				<p class="alert"><strong>Realize o pagamento através da janela que se abriu. Caso a janela não tenha aberto <%= link_to "clique aqui", @url, target: "_blank" %>.</p></strong></p>
+
+				<%= box(title: "Obrigado!") do %>
+					<p><strong>Sua transação foi processada pelo Moip Pagamentos S/A.</strong></p>
+					<%= hidden_field_tag :url, @url, id: "url" %>
+
+					<hr>
+
+					<p>Você pode acompanhar seus pedidos ou realizar o pagamento novamente na área de <%= link_to "pedidos", purchases_user_path %>.</p>
+					<hr>
+					<p>Caso tenha alguma dúvida referente a transação, entre em contato em 
+					<%= link_to "Moip.com.br", "http://www.moip.com.br" %></p>
+				<% end %>
+				
+				<h3>Você comprou:</h3>
+				<hr class="black">
+	      <% @purchase.cart_items.each do |cart_item| %>
+	        <%= render "cart_item_purchased", :cart_item => cart_item %>
+	      <% end -%>
+			</div>
+
+			<div class="span4">
+				<%= render "checkouts/order" %>
+				<%= render_widget :school_phone_email, :checkout, :school => current_school  %>
+				<%= render_widget :secure_info %>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<%= javascript_tag do %>
+	window.url_window = <%= raw @url %>;
+<% end -%>
+
+<script type='text/javascript'>
+	$(function() { 
+		window.open($("#url").val());
+	});
+</script>

@@ -1,0 +1,225 @@
+<% content_for :title do %>
+	<%= t('home.title') %>
+<% end %>
+
+<% content_for :description do %>
+	<%= t('home.description') %>
+<% end %>
+
+<div id="hero" class="bar_edools">
+	<div class="container">
+		<div class="row-fluid animated fadeInDown">
+			<div class="span6">
+				<h1><%= t('home.value_proposition') %></h1>
+				<div class="row-fluid">
+					<div class="span6 pagination-centered call_action">
+						<%= link_to "Testar por 15 dias GRÁTIS! →", new_user_registration_path, :class => 'btn_home_action' %>
+					</div>
+					<div class="span6 pagination-centered call_action">
+						<%= link_to "Ver todas as funcionalidades →", features_page_path, :class => 'btn_home_action' %>
+					</div>
+				</div>
+			</div>
+
+			<div class="span6 tela_home">
+				<%= image_tag "tela_home.png", class: "pull-right" %>	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<div id="intro">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span10 offset1">
+		  	<h1>A solução definitiva para você comercializar seus cursos na internet.</h1>
+		  	<h2 class="muted">Tudo integrado em uma única plataforma.</h2>
+		  </div>
+		</div>
+  </div>
+</div>
+
+<br>
+
+<div id="home-triple" class="home_blocks other_values">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span1">
+	  		<i class="fa-icon-adjust"></i>
+			</div>
+	  	<div class="span3">
+	  		<h2>
+		    	Personalizável
+	  		</h2>
+		    <h4 class="description">Você pode personalizar toda a aparência do site para manter sua identidade visual e melhorar a experiência dos seus alunos.</h4>
+		  </div>
+		  <div class="span1">
+				<i class="fa-icon-lock"></i>
+			</div>
+			<div class="span3">
+				<h2>
+					Seguro
+				</h2>
+				<h4 class="description">Usamos certificado de segurança e as tecnologias mais modernas para garantir que todos os seus dados fiquem protegidos.</h4>
+		  </div>
+		  <div class="span1">
+				<i class="fa-icon-ok"></i>
+			</div>
+			<div class="span3">
+				<h2>
+					Simples
+				</h2>
+		    <h4 class="description">Prezamos muito pela simplicidade e usabilidade para garantir que você foque no que realmente importa: seu conteúdo.</h4>
+			 </div>
+		 </div>
+	</div>
+</div>
+
+<br>
+
+<div id="schools" class="home_blocks">
+	<div class="container know_more">
+		<h1 class="pagination-centered">
+    	<%#= t('home.schools_already_use') %>
+    	Alguns Clientes:
+ 		</h1>
+ 		<!-- <div id="slider">
+ 			<ul>
+ 				<li> -->
+				  <div class="row-fluid">
+						<div class="span12" id="school_list">
+							<div class="row-fluid">
+								<div class="school" style="margin-left: 28px;">
+									<%= image_tag('schools/bizstart.png', :alt => "Bizstart", size: "240x70") %>
+								</div>
+								<div class="school">
+									<%= image_tag('schools/abs.png', :alt => "Digital School", size: "280x65") %>
+								</div>
+								<div class="school" style="margin-top: 30px;">
+									<%= image_tag('schools/Logo_RD.png', :alt => "RD Station", size: "232x65") %>
+								</div>
+								<div class="school" style="margin-top: 20px;">
+									<%= image_tag('schools/irm10.png', :alt => "Instituto Ricardo Melo", size: "270x58") %>
+								</div>
+							</div>
+							<div class="row-fluid" id="school-list-bottom">
+								<div class="school" style="margin-top: 35px; margin-left: 21px;">
+									<%= image_tag('schools/inova_paulasouza.png', :alt => "Núcleo de Inovação Tecnológica do Centro Paula Souza", size: "328x30") %>
+								</div>
+								<div class="school">
+									<%= image_tag('schools/doctor_apple.png', :alt => "DoctorApple", size: "150x80") %>
+								</div>
+								<div class="school">
+									<%= image_tag('schools/armando.png', :alt => "Armando Comitre - Coach & Palestrante", size: "277x56") %>
+								</div>
+								<div class="school">
+									<%= image_tag('schools/essencial_ensino.png', :alt => "Essencial Ensino", size: "170x80") %>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- </li>
+				<li><%#= image_tag "schools.png", width: "100%" %></li>
+			</ul>
+		</div> -->
+		<br>
+	</div>
+</div>
+<br>
+<div id="testimonials" class="home_blocks other_values">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span4 offset1">
+				<div class="span12">
+	  			<h3>
+			  		" Gostei muito do formato simples e intuitivo da ferramenta, que possibilita qualquer empresa a criar sua própria sala de aula online em poucos minutos, abrindo um novo canal de receita para quem já faz isso no mundo offline. "
+			  	</h3>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="testimonial-img">
+			  			<%= image_tag "testimonials/guilherme_junqueira.png", :class=>"img-circle" %>
+		  			</div>
+					</div>
+					<div class="span9">
+						<div class="testimonial-bio">
+				  		<h4>Guilherme Junqueira</h4>
+				  		<p>Diretor Executivo da ABStartups</p>
+				  	</div>
+		  		</div>
+	  		</div>
+	  	</div>
+
+			
+
+			<div class="span4 offset1">
+				<div class="row-fluid">
+					<div class="span12">
+		  			<h3>
+				  		" Recomendo o Edools com muito entusiasmo. O profissionalismo e alto nível de qualidade do atendimento são pontos bastante significativos, além de terem uma ótima plataforma. Estamos muito otimistas com o futuro dessa parceria! "
+				  	</h3>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="testimonial-img">
+			  			<%= image_tag "testimonials/ricardo-melo-site.png", :class=>"img-circle" %>
+		  			</div>
+					</div>
+					<div class="span9">
+						<div class="testimonial-bio">
+				  		<h4>Ricardo Melo</h4>
+				  		<p>Fundador do Instituto Ricardo Melo</p>
+				  	</div>
+		  		</div>
+	  		</div>
+	  	</div>	  		  	
+		</div>
+		
+	</div>
+</div>
+
+<br>
+
+<div id="last-call-to-action" class="home_blocks">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<h1 class='pagination-centered'>Teste o Edools por 15 dias grátis, sem risco.</h1>
+				</div>
+			</div>
+			<br>
+			<div class="row-fluid">
+				<div class="span4 offset2">
+					<%= link_to "Testar por 15 dias GRÁTIS! →", new_user_registration_path, :class => 'btn_home_action' %>
+				</div>
+				<div class="span4">
+					<%= link_to "Ver todas as funcionalidades →", features_page_path, :class => 'btn_home_action' %>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    var unslider = $('#slider').unslider({
+    	speed: 0,
+    	dots: true
+    });
+    data = unslider.data('unslider');
+
+    $('.unslider-arrow').click(function(e) {
+      var fn = this.className.split(' ')[1];
+      
+      //  Either do unslider.data('unslider').next() or .prev() depending on the className
+      unslider.data('unslider')[fn]();
+
+      e.preventDefault();
+    });
+	});
+</script>

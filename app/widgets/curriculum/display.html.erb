@@ -1,0 +1,49 @@
+<% counter = 1 %>
+
+<table class="curriculum-table table">
+	<tbody>
+		<% @lessons.each_with_index do |lesson, i| %>
+			<tr class="lesson">
+				<td style="width: 100px;">
+					<span class="label label-success">
+						<% if @course.slug == "workshop-online-sua-ideia-ainda-nao-vale-nada" %>
+							Capítulo
+						<% else %>
+						 <%= t('module') %>
+						<% end %>
+						<%= i+1 %>
+					</span>
+				</td>
+				<td colspan="2"><h3><%= lesson.title %></h3></td>
+			</tr>
+			<% lesson.medias.available.order(:sequence).each_with_index do |media, i| %>
+				<tr class="media" onclick="window.location='<%= course_media_path(@course, media) %>'">
+					<td class"module" width="5%">
+						<span class="label label-default">
+							<% if @course.slug == "workshop-online-sua-ideia-ainda-nao-vale-nada" %>
+								Módulo
+							<% else %>
+							 <%= t('lesson') %>
+							<% end %>
+ 							<%= counter %>
+ 							<% counter += 1 %>
+						</span>
+					</td>
+					<% if media.kind %>
+						<td class="icon" width="5%"><%= media_icon media.kind, style: "opacity: 0.1" %></td>
+					<% else %>
+						<td class="icon" width="5%"><i class="glyphicons-icon facetime_video" style="opacity: 0.1;"></i></td>
+					<% end %>
+					<td class="title" width="90%"><h4>
+						<%= media.title %>
+						<% if current_user.ended_media? media %>
+							<span class="hint hint--left pull-right" data-hint="Assistido"> <i class="icon-ok" style="margin-right: 10px; color: #888888;"></i> </span>
+						<% elsif current_user.started_media? media %>
+							<span class="hint hint--left pull-right" data-hint="Começou a assistir"> <i class="icon-pause" style="margin-right: 10px; color: #888888;"></i> </span>
+						<% end %>
+					</h4></td>
+				</tr>
+			<% end -%>
+		<% end -%>
+	</tbody>
+</table>

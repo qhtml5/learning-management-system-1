@@ -1,0 +1,89 @@
+<% if !current_school %>
+	<div id="edools_info">
+		<div class="container">
+			<div class="navbar">
+				<div class="row-fluid">
+					<div class="span4">
+						<p>(21) 3741-8006 | <%= mail_to 'contato@edools.com', 'contato@edools.com' %></p>
+					</div>
+					<div class="span8 menu">
+						<% unless params[:action] == "wizard_basic_info" %>
+							<%= render "layouts/header_nav" %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<%end%>
+
+<div id="header" class="<%= !current_school ? 'edools': 'school' %>">
+	<div class="container">	
+		<nav class="navbar" role="navigation">
+			<% if current_school.try(:layout_configuration).try(:site_logo).try(:present?) %>
+				<%= link_to image_tag(current_school.layout_configuration.site_logo.url(:medium), :alt=>current_school.name), root_path(subdomain: current_school.subdomain), :title => current_school.name, :class=>"brand scroller" %>
+			<% elsif current_school %>
+				<div class="school-name"><%= link_to current_school.name, root_path(subdomain: current_school.subdomain), :title => "Edools", :class=>"brand scroller" %></div>
+			<% else %>
+				<%= link_to image_tag("edools_logo_v4.png", :alt=>"Edools"), root_path, :title => "Edools", :class=>"brand scroller" %>
+			<% end %>
+
+			<% if !current_school && params[:action] != "wizard_basic_info" && !params[:controller].include?('admin') %>
+				<div id="header-home-nav">
+					<li>
+						<%= link_to "Funcionalidades", features_page_path %>
+					</li>
+					<% if Flip.princing_page? %>
+						<li>
+							<%= link_to "Planos e preços", pricing_page_path %>
+						</li>
+					<% end %>
+				</div>
+			<% end %>
+
+			<% if current_school %>
+				<button id="header-nav-btn" class="btn pull-right" type="button">
+				  <i class="fa-icon-reorder"></i>
+				</button>
+			<% end %>
+
+			<% if current_school && params[:action] != "wizard_basic_info" %>
+				<%= render "layouts/header_nav" %>
+			<% end %>
+		</nav>
+	</div>
+</div>
+
+
+<%= javascript_include_tag "top/popup_facebook.js" %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#submit-feedback').attr('disabled', 'disabled');
+
+		$('#feedback-email, #feedback-form input:radio').bind("change propertychange keyup input paste", function () {
+			email = $('#feedback-email').val();
+			feedback_like = $("#feedback-form input:radio:checked").val();
+			match = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)
+			if(match && feedback_like) {
+				$('#submit-feedback').removeAttr('disabled');
+			} else {
+				$('#submit-feedback').attr('disabled', 'disabled');
+			}
+		});
+		$('html').bind('keypress', function(e) {
+			if(e.keyCode == 13) {
+				$("#submit-feedback").click();
+			}
+		});
+
+		$("#header-nav-btn").click(function (e){
+			if($("#header-nav").is(":visible")) {
+				$("#header-nav").slideUp({easing: "easeInOutBack"});
+			} else {
+				$("#header-nav").slideDown({easing: "easeInOutBack"});
+			}
+		});
+	});		
+
+</script>

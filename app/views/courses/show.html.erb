@@ -1,0 +1,169 @@
+<%= content_for :title do %>
+	<%= @course.title %> | <%= @school.name %>
+<% end %>
+
+<%#= content_for :modal do %>
+
+	<div id="newLead" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right: 3px;">×</button>
+  	<%= render_widget :course_cart_recovery, :display, course: @course %>
+	</div>
+
+<%# end %>
+
+<%= content_for :opengraph do %>
+	<script type="text/javascript" src="//w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">stLight.options({publisher: "b15c5521-c9f6-4fe6-aa2b-c616db09a138", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+	<meta property="og:title" content="<%= @course.title %>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= course_url(@course) %>" />
+	<meta property="og:image" content="<%= @course.logo.url(:large) %>" />
+	<meta property="og:description" content="<%= @course.pitch %>" />
+	<meta property="og:site_name" content="<%= @school.name %>" />
+	<meta property="og:locale" content="pt_br" />
+<% end %>
+
+<div id="course_banner" class="course_top_bar">
+	<div class="container">
+    <div class="row-fluid animated fadeInUp">
+			<div class="span5 pagination-centered picture">
+				<div class="row-fluid">
+						<% if @course.video_url? %>
+							<div class="span12">
+								<iframe width="100%" height="270" src="//www.youtube.com/embed/<%= @course.video_url %>?autoplay=0&autohide=1" frameborder="0" allowfullscreen></iframe>
+							</div>
+						<% else %>
+							<div class="shadow img-polaroid span12 img-container">
+								<%= image_tag @course.logo.url(:large), :class=>"" %>
+							</div>					
+						<% end %>
+				</div>
+			</div>
+			<div class="span7 pagination-centered">
+
+				<h1><%= @course.title %></h1>
+				<h2><%= @course.pitch %></h2>	
+				<div class="btn-buy">
+					<!-- <div class="payment-info payment-info-top">
+					</div> -->
+					<%= link_to @path, :class => "multi-line-button green", :id => "course-buy-#{@course.slug}", "role" => "button", "data-toggle" => "modal" do %>
+						<span class="title">
+							<span><%= t("course.buy") %></span>
+						</span>
+						<span class="subtitle">
+							<span class="badge badge-white">
+								<h4>
+									<% if current_school.try(:pricing_style_full?) || @course.free? %>
+										<%= em_real @course.price %>
+									<% else %>
+										<%= installments_amount @course.price %>x
+										<span><%= max_installments_value(@course.price) %></span>
+									<% end %>
+								</h4>
+							</span>
+						</span>
+					<% end %>
+					<% if @course.restrict? %>
+						<h5 id="course-price-at-sight">
+							Este curso é restrito apenas para convidados.
+						</h5>
+					<% elsif @course.paid? %>
+						<% if current_school.try(:pricing_style_full?) %>
+							<h5 id="course-price-at-sight">
+								ou em <%= installments_amount @course.price %>x de <span><%= max_installments_value(@course.price) %></span>
+								<% if @course.limited? %>
+								  | curso disponível por <%= @course.available_time %> dias   
+								<% end %>
+							</h5>
+						<% else %>
+							<h5 id="course-price-at-sight">
+								ou <%= em_real @course.price_with_discount(@coupon) %> à vista
+								<% if @course.limited? %>
+									| curso disponível por <%= @course.available_time %> dias    
+								<% end %>
+							</h5>
+						<% end %>
+					<% end %>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>
+	
+<div id="course_content">
+	<div class="container">
+    	<div class="row-fluid">
+    		<div class="span1">
+    			<span class='st_facebook_vcount' displayText='Facebook'></span>
+					<span class='st_twitter_vcount' displayText='Tweet' st_title='<%= @course.pitch %>' st_via='<%= @school.twitter || "edools_" %>'></span>
+					<span class='st_googleplus_vcount' displayText='g+'></span>
+					<span class='st_pinterest_vcount' displayText='Pinterest'></span>
+    		</div>
+      	<div class="span7" id="course_description">
+    			<div class="pretty_box">
+	      		<h3>
+	      			por <span class="roman"><%= link_to @school.name.upcase, root_path(subdomain: @school.subdomain) %></span>
+	      			<% if @course.certificate_available? %>
+		      			<p class="badge pull-right muted" style="margin-left: 8px;">
+		      				<i class="icon-edit" style="font-size: 12px; color: white; "> com certificado</i>
+		      			</p>
+		      		<% end %>
+
+	      			<p class="badge pull-right muted" style="margin-left: 8px;">
+	      				<i class="icon-time" style="font-size: 12px; color: white; "> 
+	      					disponível 24h
+	      					<% if @course.limited? %>
+	      						durante <%= @course.time_available %> dias
+	      					<% end %>
+	      				</i>
+	      			</p>
+	      		</h3>
+	      		<hr>
+						<span class="description">
+							<% unless @course.description.nil? %>
+								<%= sanitize @course.description.gsub(/font-size:(.*);/, "font-size:16px;") %>
+							<% end %>
+						</span>
+					</div>
+					<%= render_widget :curriculum, :sales_page, course: @course %>
+				</div>
+	      <div class="span4 sidebar">
+	      	<%= render_widget :course_advantages, :display, course: @course %>
+	      	<% unless @course.free? %>
+		      	<%= render_widget :school_payment_forms, :display %>
+		      <% end %>
+					<%= render_widget :school_phone_email, :course, :school => @school %>
+					<%= render_widget :content_and_goals, :display, :course => @course %>
+					<%= render_widget :who_should_attend, :display, :course => @course %>
+					<%= render_widget :course_testimonials, :display, :course => @course %>
+	      	<%= render_widget :course_instructor, :display, :course => @course %>
+	      	<%= render_widget :course_school, :display, :course => @course %>
+
+	      	<%= render_widget :course_alumni, :display, :course => @course %>
+	      	<%= render_widget :course_evaluation, :show, :course => @course %>
+					<%#= render_widget :about, :display, :course => @course %>
+					<%#= render_widget :how_to_enroll %>
+					<%= render_widget :course_faq, :display, course: @course %>
+	     	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#submit-lead').attr('disabled', 'disabled');
+
+		$('#lead_email').bind("change propertychange keyup input paste", function () {
+			email = $(this).val();
+			filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(filter.test(email)) {
+				$('#submit-lead').removeAttr('disabled');
+			} else {
+				$('#submit-lead').attr('disabled', 'disabled');
+			}
+		});
+	});
+</script>

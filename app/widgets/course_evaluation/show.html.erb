@@ -1,0 +1,17 @@
+<div class="star" data-score="<%= @course.average_rate %>"></div>
+
+<script>
+	$('.star').raty({
+		score: function() {
+	    return $(this).attr('data-score');
+	  },
+		starHalf : '<%= asset_path('star-half.png') %>',
+		starOff  : '<%= asset_path('star-off.png') %>',
+		starOn   : '<%= asset_path('star-on.png') %>',
+		cancelOff: '<%= asset_path('cancel-off.png') %>',
+	    cancelOn : '<%= asset_path('cancel-on.png') %>',
+		cancel     : false,
+		size	: 30,
+		readOnly : true
+	});
+</script>

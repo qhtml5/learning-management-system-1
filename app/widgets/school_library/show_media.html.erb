@@ -1,0 +1,37 @@
+<%= render "notice" %>
+
+<% if @content %>
+	<div class="row-fluid">
+		<div class="span12 well well_gray">
+			<div class="row-fluid">
+				<div class="span2">
+					<%= link_to '< voltar', url_for_event(:cancel, school: @school), remote: true %>
+				</div>
+				<div class="span7 pagination-centered">
+					<h2><%= @content.name %></h2>
+				</div>
+				<div class="span3">
+					<% if @school.wistia_media?(@content.hashed_id) %>
+						<span class="label label-success">Em uso</span>
+						<%= link_to 'Deletar', '#', :class => 'btn btn-danger disabled' %>
+					<% else %>
+						<span class="label label-warning">Não utilizado</span>
+						<%= link_to 'Deletar', url_for_event(:delete_media, media_hash: @content.hashed_id, school: @school), remote: true, :confirm => "Tem certeza? Não será possível recuperar essa mídia.", :class => 'btn btn-danger' %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<% if @content.type == "PdfDocument" %>
+			 <p class="muted pull-right">* O carregamento pode demorar alguns instantes.</p>
+			<% end -%>
+			<% if @embed %>
+				<div class="pagination-centered"><%= raw @embed %></div>
+			<% else %>
+				<p class="alert">Ocorreu um erro ao renderizar conteúdo</p>
+			<% end %>
+		</div>
+	</div>
+<% end %>

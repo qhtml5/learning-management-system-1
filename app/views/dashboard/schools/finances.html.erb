@@ -1,0 +1,138 @@
+<div class="row-fluid">
+	<div class="span12">
+		<%= box(:title => "Faturamento bruto últimos 6 meses", :icon => "fa-icon-money")  do %>
+			<div class="row-fluid" id="finances-summary">
+				<div class="offset2 span4 pagination-centered">
+					<div class="well">
+						<h2><%= em_real_with_zero @billing_last_month %></h2> 
+						Faturamento do mês anterior
+					</div>
+				</div>
+				<div class="span4 pagination-centered">
+					<div class="well">
+						<h2><%= em_real_with_zero @billing_this_month %></h2> 
+						Faturamento do mês atual
+					</div>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div id="container_highchart_summary"></div>
+			</div>
+
+		<% end %>
+
+		<%= box(:title => "Faturamento bruto por período específico", :icon => "icon-calendar")  do %>
+			<h3>Saiba o faturamento detalhado dentro de um período de dias/semanas/meses ou anos.</h3>
+			<hr>
+			<div class="row-fluid">
+				<div class="span2 offset2">
+		      <%= text_field_tag :start_date, nil, :class => "_date", :placeholder=>"Data de início" %>
+		    </div>
+
+		    <div class="span2 offset1">
+		      <%= text_field_tag :end_date, nil, :class => "_date", :placeholder=>"Data de fim" %>
+		    </div>
+
+		    <div class="span2 offset1">
+		      <%= link_to_function "Gerar gráfico →", "purchases_billing();", :class => "btn btn-success", :id => "buscar" %>
+		    </div>
+		  </div>
+
+		  <br>
+
+		  <div id="container_highchart"></div>
+		<% end %>
+
+		<%= box(:title => "Faturamento detalhado por curso", :icon => "icon-facetime-video")  do %>
+			<table class="table table-striped">
+				<thead>
+        	<tr>
+          	<th>Curso</th>
+          	<th>Unidades vendidas</th>
+            <th>Total bruto</th>
+            <th>Taxa Moip</th>
+            <th>Total líquido</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<% @courses.each do |course| %>
+        		<% confirmed_purchases = course.purchases.payment_confirmed %>
+
+          	<tr>
+              <td><%= link_to course.title, course %></td>
+              <td><%= confirmed_purchases.length %></td>
+              <td><%= confirmed_purchases.sum(&:amount_paid).em_real %></td>
+              <td><%= confirmed_purchases.sum { |p| p.moip_tax * 100 }.em_real %></td>
+              <td><%= confirmed_purchases.sum { |p| p.amount_paid - (p.moip_tax * 100) }.em_real %></td>
+            </tr>
+        	<% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= box(:title => "Extrato de transações", :icon => "fa-icon-money")  do %>
+    	<div class="row-fluid">
+    		<div class="span3">
+		    	<h4>Confirmadas: <%= @purchases_confirmed %></h4>
+		    	<h4>Pendentes: <%= @purchases_pending %></h4>
+		    	<h4>Canceladas: <%= @purchases_canceled %></h4>
+		    </div>
+		    <div class="span3">
+		    	<% if @purchases_confirmed > 0 %>
+				    <h4>Cartão de crédito: <%= @purchases_paid_with_credit_card %> (<%= ((@purchases_paid_with_credit_card.to_f / @purchases_confirmed) * 100).to_i %>%)</h4>
+				    <h4>Débito online: <%= @purchases_paid_with_online_debit %> (<%= ((@purchases_paid_with_online_debit.to_f / @purchases_confirmed) * 100).to_i %>%)</h4>
+				    <h4>Boleto bancário: <%= @purchases_paid_with_billet %> (<%= ((@purchases_paid_with_billet.to_f / @purchases_confirmed) * 100).to_i %>%)</h4>
+				  <% end %>
+			  </div>
+			  <div class="span6">
+		    	<div class="pull-right">
+			    	<p><%= link_to "Exportar para Excel", finances_dashboard_schools_path(format: "xls") %>
+		    	</div>
+	    	</div>
+	    </div>
+    	<div class="row-fluid">
+		  </div>
+		  <hr>
+			<table class="table table-striped">
+				<thead>
+        	<tr>
+          	<th>Cursos</th>
+            <th>Aluno</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Forma de Pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+        	<% @purchases.each do |purchase| %>
+          	<tr>
+              <td><%= purchase.courses_titles %></td>
+              <td><%= link_to purchase.user.full_name, dashboard_student_path(purchase.user), class: "hint hint--top", "data-hint" => "clique para ver o perfil completo do aluno" %></td>
+              <td><%= l purchase.created_at, format: :long %></td>
+              <td>
+              	<% if purchase.confirmed? %>
+	              	<%= em_real_with_zero purchase.amount_paid %>
+              	<% else %>
+              		<%= em_real_with_zero purchase.total %>
+              	<% end %>
+              </td>
+              <td><%= purchase.payment_status %></td>
+              <td><%= purchase.payment_type %></td>
+            </tr>
+        	<% end %>
+        </tbody>
+      </table>
+      <div class="apple_pagination" style="font-size: 14px;">
+        <%= paginate @purchases %>
+      </div>
+   	<% end %>
+	</div>	
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		school_purchases();
+	});
+</script>

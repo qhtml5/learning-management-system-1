@@ -1,0 +1,15 @@
+<% if @school.phone.present? %>
+	<p><i class="fa-icon-phone "></i> <span class=""> <%= @phone %></span></p>
+<% end %>
+<% if @school.email.present? %>
+	<p><i class="fa-icon-envelope "></i> <span class=""><%= mail_to @email %></span></p>
+<% end %>
+<% if @school.site.present? %>
+	<p><i class="fa-icon-globe "></i> <span class=""><%= link_to @school.site, 'http://'+@school.site %></span></p>
+<% end %>
+<% if @school.facebook.present? %>
+	<p><i class="fa-icon-facebook-sign"></i> <span class=""><%= link_to @school.facebook, "http://www.facebook.com/#{@school.facebook}" %></span></p>
+<% end %>
+<% if @school.twitter.present? %>
+	<p><i class="fa-icon-twitter-sign "></i> <span class=""><%= link_to @school.twitter, "http://www.twitter.com/#{@school.twitter}" %></span></p>
+<% end %>

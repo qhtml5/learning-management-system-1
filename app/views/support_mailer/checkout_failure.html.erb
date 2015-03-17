@@ -1,0 +1,10 @@
+<%= p_tag "Ocorreu um erro de comunicação com o MoIP durante uma compra na escola #{@school.name}" %>
+
+<h3><strong>------------- Dados da compra:</strong></h3>
+<%= p_tag "Nome: #{@user.full_name}" %>
+<%= p_tag "Email: #{@user.email}" %>
+<%= p_tag "Cursos: #{@courses.map(&:title).join(', ')}" %>
+<%= p_tag "Data: #{Time.now}" %>
+
+<h3><strong>------------- Resposta do MoIP:</strong></h3>
+<%= p_tag @response %>

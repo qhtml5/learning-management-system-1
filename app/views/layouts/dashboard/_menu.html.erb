@@ -1,0 +1,59 @@
+<div id="dashboard_menu">
+	<div class="well sidebar-nav">
+   	<ul class="nav nav-list">
+    	<li class="nav-header"><h4>Dashboard</h4></li>
+    	<li>
+				<%= link_to_unless_current 'Painel principal', dashboard_root_path do %>
+				<li class="active">
+					<%= link_to 'Painel principal', dashboard_root_path %>
+				</li>
+				<% end %>
+ 			</li>
+    	<li>
+				<%= link_to_unless_current 'Listas Mailchimp', dashboard_mailchimp_lists_path do %>
+				<li class="active">
+					<%= link_to 'Listas Mailchimp', dashboard_mailchimp_lists_path %>
+				</li>
+				<% end %>
+ 			</li> 			
+
+			<li class="nav-header"><h4>Cursos</h4></li>
+    	<li>
+				<%= link_to_unless_current 'Ver todos', dashboard_courses_path, :id => "all-courses" do %>
+					<li class="active">
+						<%= link_to 'Ver Todos', dashboard_courses_path, :id => "all-courses" %>
+					</li>
+				<% end %>
+			</li>
+			
+			<li class="nav-header"><h4>Mídias</h4></li>
+    	<li>
+				<%= link_to_unless_current 'Ver todas', dashboard_medias_path, :id => "ver-todos-midia" do %>
+					<li class="active">
+						<%= link_to 'Ver todas', dashboard_medias_path, :id => "ver-todos-midia" %>
+					</li>
+				<% end %>
+			</li>
+			
+			<li class="nav-header"><h4>Cupons</h4></li>
+    	<li>
+				<%= link_to_unless_current 'Ver todos', dashboard_coupons_path do %>
+					<li class="active">
+						<%= link_to 'Ver todos', dashboard_coupons_path %>
+					</li>
+				<% end %>
+			</li>
+
+			<li class="nav-header"><h4>Feedbacks</h4></li>
+    	<li>
+				<%= link_to_unless_current 'Ver todos', dashboard_feedbacks_path do %>
+					<li class="active">
+						<%= link_to 'Ver todos', dashboard_feedbacks_path %>
+					</li>
+				<% end %>
+			</li>
+
+		</ul>
+	</div><!--/.well -->
+</div>
+

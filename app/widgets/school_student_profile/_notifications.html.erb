@@ -1,0 +1,27 @@
+<div id="student-notifications">
+	<div class="row-fluid">
+		<div class="span12">
+			<% @notifications.each do |notification| %>
+				<p><div class="date"><%= l notification.created_at, format: :long %></div></p>
+				<div class="well">
+					<div class="row-fluid">
+						<li>
+							<div class="span1 icon">
+								<%= notification_icon notification %>
+							</div>
+							<div class="span11">
+								<div><%= notification_text_passive notification %></div>
+							</div>
+						</li>
+					</div>
+				</div>
+			<% end %>
+
+			<% if @notifications_length > 10 %>
+				<div class="apple_pagination" style="font-size: 14px;">
+					<%= paginate @notifications, active_tab: "notification", remote: params[:action] == "render_event_response" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

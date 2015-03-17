@@ -1,0 +1,141 @@
+<button id="course-menu-btn" class="btn expanded-btn" type="button">
+  <i class="fa-icon-reorder"></i> <span>Menu</span>
+</button>
+
+<ul id="course-menu" class="nav nav-list">
+	<li>
+		<%= link_to_unless_current "Início", dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Início", dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>	
+
+	<li class="nav-header"><h5>Conteúdo</h5></li>
+	<li>
+		<%= link_to_unless_current "Conteúdo", dashboard_course_lessons_path(@course) do %>
+		<li class="active">
+			<%= link_to "Conteúdo", dashboard_course_lessons_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Links e downloads", edit_links_downloads_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Links e downloads", edit_links_downloads_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+
+  <li class="nav-header"><h5>Informações</h5></li>
+	<li>
+		<%= link_to_unless_current "Básicas", edit_basic_info_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Básicas", edit_basic_info_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Detalhadas", edit_detailed_info_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Detalhadas", edit_detailed_info_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Imagem", edit_image_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Imagem", edit_image_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Vídeo Promocional", edit_promo_video_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Vídeo Promocional", edit_promo_video_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Instrutor", edit_instructor_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Instrutor", edit_instructor_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>		
+
+  <li class="nav-header"><h5>Configurações</h5></li>
+	<li>
+		<%= link_to_unless_current "Privacidade", edit_privacy_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Privacidade", edit_privacy_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Preço e Cupons", edit_price_and_coupon_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Preço e Cupons", edit_price_and_coupon_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Tempo disponível", edit_available_time_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Tempo disponível", edit_available_time_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+
+	<li>
+		<%= link_to_unless_current "Certificado", edit_certificate_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Certificado", edit_certificate_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+
+	<li>
+		<%#= link_to_unless_current "Professores", edit_teachers_dashboard_course_path(@course) do %>
+		<!-- <li class="active"> -->
+			<%#= link_to "Professores", edit_teachers_dashboard_course_path(@course) %>
+		<!-- </li> -->
+		<%# end -%>
+	</li>
+
+	<li class="nav-header"><h5>Mais</h5></li>
+	<li>
+		<%= link_to_unless_current "Convidar alunos", invite_students_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Convidar alunos", invite_students_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+	<li>
+		<%= link_to_unless_current "Biblioteca de mídias", library_dashboard_course_path(@course) do %>
+		<li class="active">
+			<%= link_to "Biblioteca de mídias", library_dashboard_course_path(@course) %>
+		</li>
+		<% end -%>
+	</li>
+			
+	<!-- <li>
+		<%#= link_to_unless_current "Ajuda", '#' do %>
+		<li class="active">
+			<%#= link_to "Ajuda", '#' %>
+		</li>
+		<%# end -%>
+	</li>				 -->
+</ul>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#course-menu-btn").click(function (e){
+			if($("#course-menu").is(":visible")) {
+				$("#course-menu").slideUp({easing: "easeInOutBack"});
+			} else {
+				$("#course-menu").slideDown({easing: "easeInOutBack"});
+			}
+		});
+	});
+</script>		

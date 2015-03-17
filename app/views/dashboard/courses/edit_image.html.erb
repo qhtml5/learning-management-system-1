@@ -1,0 +1,32 @@
+<div class="box_widget_course">
+	<div class="box">
+		<div class="head">
+			<h4>Imagem do curso</h4>
+		</div>
+		<div class="content">
+			<fieldset class="pagination-centered">
+				<% if @course.logo %>
+					<h3>Atual:</h3>
+					<%= image_tag @course.logo.url(:large), :class => "img-polaroid" %>
+				<% end -%>
+
+				<br>
+				<br>
+
+				<div class="row-fluid">
+					<i class="icon-exclamation-sign"></i> <strong>Importante:</strong> Tamanho ideal: <strong>500x280</strong> (Propoção 16 por 9).</p>
+
+					<hr>
+					<div class="span4 offset4">
+						<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_image) do |f| %>
+					    <%= f.input :logo, label: "Imagem" %>
+					    <br>
+					    <%= f.submit "Salvar", :class => "btn btn-success" %>
+						<% end -%>
+					</div>
+				</row-fluid>
+
+			</fieldset>
+		</div>
+	</div>
+</div>

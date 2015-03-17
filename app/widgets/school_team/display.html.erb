@@ -1,0 +1,40 @@
+<%= render "notice" %>
+
+<br>
+<%#= simple_form_for :invitation, url: url_for_event(:invite, school: @school), remote: true do |f| %>
+	<!-- <div class="span3"><%#= f.input :email, label: false, placeholder: "Insira um email para convidar" %></div> -->
+	<!-- <div class="span3"><%#= f.input :role, as: :select, collection: User::SCHOOL_ROLES, label: false, placeholder: "Insira um email para convidar" %></div> -->
+	<!-- <div class="span1"><%#= f.submit "Convidar", class: "btn" %></div> -->
+<%# end %>
+
+<table class="table table-hover">
+	<thead>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Data de entrada</th>
+		<th>Função</th>
+	</thead>
+  <tbody>
+		<% @users.each do |user| %>
+  		<tr>
+  			<td><%= user.full_name %></td>
+  			<td><%= user.email %></td>
+  			<td><%= l user.created_at, format: :long %></td>
+  			<td>
+  				<span class="badge"><%= User::SCHOOL_ROLES.key(user.role) %></span>
+  			</td>
+  		</tr>
+    <% end %>
+    <%# @invitations.each do |invitation| %>
+  		<!-- <tr>
+  			<td><%#= invitation.email %></td>
+        <td><p class="muted">Convite pendente</p></td>
+  			<td><p class="muted">Convite pendente</p></td>
+  			<td>
+  				<span class="badge"><%#= User::SCHOOL_ROLES.key(invitation.role) %></span>
+  			</td>
+  		</tr> -->
+    <%# end %>
+  </tbody>
+</table>
+			

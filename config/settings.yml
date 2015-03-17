@@ -1,0 +1,30 @@
+development:
+  host: edools.dev
+  facebook_key: 452208521500314
+  facebook_secret: 27da9707acce6775737ccaef8b3edc67
+  kissmetrics_key: 5dfddd65b224d997cf62fad1461d0ab0acc08230
+  mailchimp_list_id: 0a6431924a  
+  moip_login: "zangrandi@live.com"
+
+test:
+  host: "example.com"
+  facebook_key: 452208521500314
+  facebook_secret: 27da9707acce6775737ccaef8b3edc67
+  mailchimp_list_id: 0a6431924a  
+  moip_login: "zangrandi@live.com"
+
+staging:
+  host: "edools.info"
+  facebook_key: 430319883708438
+  facebook_secret: 1adc572ddce8a7d36060af3493759f13
+  kissmetrics_key: 5dfddd65b224d997cf62fad1461d0ab0acc08230
+  mailchimp_list_id: 0a6431924a
+  moip_login: "bizstart"
+
+production:
+  host: "edools.com"
+  facebook_key: 133455533512907
+  facebook_secret: 18c9adba320607a23e7c350a3aa2e657
+  kissmetrics_key: c88474f087443f9313685470efcb0decef7ab8a7
+  mailchimp_list_id: 2c3227fb79
+  moip_login: "bizstart"

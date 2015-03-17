@@ -1,0 +1,24 @@
+<% order = @purchase || current_cart %>
+
+<% if order.present? %>
+	<div id="purchase">	
+		<%= box(:title => "Seu Pedido")  do %>	
+			<% order.cart_items.each_with_index do |cart_item, i| %>
+				<% course = cart_item.course %>
+				<p><strong><%= link_to course.title, course_path(course) %></strong></p>
+				<p><%= em_real cart_item.price_with_discount %></p>
+			<% end -%>
+			<% if order.is_a?(Purchase) && order.fee > 0 %>
+				<p><strong>Taxa parcelamento</strong></p>
+				<p><%= em_real order.fee %></p>
+				<div class="footer-content">
+					<h3><strong>Total: <%= em_real order.total_with_fee %></strong></h3>
+				</div>
+			<% else %>
+				<div class="footer-content">
+					<h3><strong>Total: <%= em_real order.total %></strong></h3>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+<% end %>

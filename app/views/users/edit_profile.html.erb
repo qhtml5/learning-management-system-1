@@ -1,0 +1,45 @@
+<br> 
+<div class="container">
+	<div class="row-fluid">
+		<%= render 'users/profile_menu' %>
+
+	  <div class="span9">
+			<div class="box_widget_course">
+				<div class="box">
+					<div class="head">
+						<h4><%= "<i class=\"icon-user\"></i> ".html_safe + "Meu Perfil" %></h4>
+					</div>
+					<div class="content">
+						<div class="form">
+							<%= simple_form_for(@user, :url => user_registration_path, :html => { :method => :put, :id => "_form-validations" }) do |f| %>
+					    	<h3><i class="icon-camera"></i> Avatar</h3>
+						  	<hr>
+								<% if @user.image.present? %>
+					        <%= image_tag @user.image.url(:small), :class => "thumbnail" %>
+					      <% else %>
+					        <div style="margin-left: 10px; background: white; width: 80px; height: 50px; padding-top: 30px; text-align: center; vertical-align: center;" class="thumbnail"><i class="icon-user" style="opacity: 0.6;"></i></div>
+					      <% end -%>
+								<%= f.input :image, label: false %>
+								<br>
+							  <%= render "devise/registrations/form", :f => f, purchasing: false %>
+							  <br>
+						  	<h3><i class="icon-book"></i> Biografia</h3>
+						  	<hr>
+					    	<%= f.input :biography, label: false, as: :text, input_html: { size: "100x3", class: "span12" } %>
+					    	<br>
+								<h3><i class="icon-lock"></i> Modificar senha</h3>
+								<hr>
+						    <%= f.input :password, as: :password, label: "Senha", :autocomplete => "off" %>
+						    <%= f.input :password_confirmation, as: :password, label: "Confirme a senha" %>
+							  <%= f.input :current_password, as: :password, label: "Senha atual" %>
+							  <div class="form-actions">
+								  <%= f.submit "Salvar", :class => "btn btn-success", :id => "prosseguir" %>
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+	  </div>
+	</div>
+</div>

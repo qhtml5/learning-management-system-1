@@ -1,0 +1,508 @@
+pt_BR:
+  views: 
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Nenhum(a) %{entry_name} encontrado(a)"
+          one: "Exibindo <b>1</b> %{entry_name}"
+          other: "Exibindo <b>todas %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Exibindo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> no total"
+
+  module: 'Módulo'
+  lesson: 'Aula'
+  
+  users:
+    purchases:
+      no_purchases: "Não há dados de compras disponíveis"
+
+  course:
+    buy: "Matricule-se"
+    watch: "Assistir"
+    bought: "Matriculado"
+
+  coupon:
+    invalid: "Cupom inválido"
+
+  messages: 
+    leads: 
+      empty: "Nenhum lead para este curso"
+    courses:
+      empty: "Não há cursos disponíveis"
+    invitation:
+      create:
+        success: "Convite enviado com sucesso"
+        failure: "Falha ao enviar convite"
+    school:
+      update:
+        success: "Informações da escola atualizadas com sucesso"
+        failure: "Falha ao atualizar informações da Escola"
+      no_courses: 'Sua escola ainda não possui cursos.'
+      no_students: 'Não foram encontrados alunos'
+    message:
+      destroy: 
+        success: "Mensagem removida com sucesso"
+    layout:
+      update:
+        success: "Layout atualizado com sucesso"
+        failure: "Falha ao atualizar layout."
+      create:
+        success: "Layout criado com sucesso"
+        failure: "Falha ao criar layout"    
+    feedback:
+      success: "Feedback enviado com sucesso!"
+      failure: "Falha ao enviar Feedback."
+    cart:
+      no_courses: "Não há cursos no carrinho"
+    coupon:
+      create:
+        success: "Cupom criado com sucesso"
+        failure: "Falha ao criar cupom"
+      update:
+        success: "Cupom atualizado com sucesso"
+        failure: "Falha ao atualizar cupom"
+      destroy:
+        success: "Cupom removido com sucesso"
+    course:
+      publish:
+        success: "Curso publicado com sucesso. Agora ele aparece em sua página."
+        failure: "Erro ao publicar curso."
+      unpublish:
+        success:  "Curso despublicado com sucesso. Agora ele está invisível ao público."
+        failure: "Erro ao despublicar curso."
+      add_coupon:
+        success: "Cupom adicionado com sucesso."
+        failure: "Falha ao adicionar cupom"
+      remove_coupon:
+        success: "Cupom removido com sucesso."
+      remove_coupon:
+        success: "Cupom removido com sucesso"
+        failure: "Falha ao remover cupom"
+      submit_message:
+        success: "Pergunta enviada com sucesso"
+        failure: "Ocorreu um erro ao enviar sua pergunta."
+      submit_answer:
+        success: "Resposta enviada com sucesso"
+        failure: "Ocorreu um erro ao enviar sua resposta."
+      create:
+        success: "Curso criado com sucesso"
+      add_related_course:
+        success: "Curso relacionado adicionado ao curso com sucesso"
+        failure: "Falha ao adicionar curso relacionado"
+      add_media:
+        success: "Mídia adicionada ao curso com sucesso"
+        failure: "Falha ao adicionar a mídia ao curso"
+      blank: "Curso não cadastrado."
+      invalid: "Você não pode visualizar esse curso."
+      update:
+        success: "Curso atualizado com sucesso!"
+      add_to_cart:
+        already_in_cart: "Este curso já está no seu carrinho."
+        invalid: "Este curso não pode ser comprado."
+        restrict: "Este curso é restrito, você não pode incluí-lo no carrinho."
+        invalid_coupon: "Cupom inválido"
+      remove_from_cart:
+        failure: "Ocorreu um erro ao remover o curso do carrinho"
+      no_students: 'Este curso ainda não possui alunos.'
+    authentication:
+      login: "Login efetuado com sucesso!"
+      signup: "Você foi cadastrado."
+      signup_failure: "Erro ao criar conta. Por favor, tente de novo." 
+      login_failure: "Ocorreu algum erro ao realizar login."
+    registration:
+      complete: "Cadastro completo!"
+      failure:
+        checkout_moip: "Erro ao processar compra. Por favor, inicie o processo novamente. (Erro 101)"
+        token_invalid: "Erro de comunicação com o gateway de pagamento. Por favor, inicie o processo de compra novamente. (Erro #102)"
+        timeout: "Erro ao processar compra. Por favor, inicie o processo novamente. (Erro 103)"
+        add_to_mail_list: "Erro ao processar compra. Por favor, inicie o processo novamente. (Erro 104)"
+        inactive_coupon: "Cupom inválido. Por favor, inicie o processo de compra novamente."
+        api_call: "Erro de comunicação com o gateway de pagamento. Por favor, inicie o processo de compra novamente. (Erro #105)"
+    checkout_moip:
+      failure: "Erro ao processar compra. Por favor, inicie o processo novamente."
+    user:
+      already_exists: "Email já cadastrado"
+      invalid: "Usuário inválido"
+      profile:
+        update:
+          success: "Dados editados com sucesso"
+    module:
+      create:
+        success: 'Módulo criado com sucesso'
+      destroy:
+        confirm: 'Deseja apagar esse módulo?'
+        success: "Módulo removido com sucesso"    
+    lesson:
+      create:
+        success: "Aula criada com sucesso."
+        failure: "Ocorreu um erro ao criar a aula."
+      destroy:
+        success: "Aula removida com sucesso"
+        confirm: 'Deseja apagar essa aula?'
+    media:
+      update:
+        success: "Mídia atualizada com sucesso!"
+        failure: "Falha ao atualizar mídia."
+      create:
+        success: "Módulo criado com sucesso"
+        failure: "Falha ao criar Módulo"
+      destroy:
+        success: "Módulo removido com sucesso"  
+    notifications:
+      empty: 'Você ainda não possui notificações.'
+    evaluations:
+      empty: 'Esse curso ainda não recebeu avaliações.'
+    wistia:
+      connect_failure: 'Servidor de dados não encontrado. Verifique sua conexão com a internet.'
+    tag:
+      add_to_user:
+        success: "Tag(s) adicionada(s) com sucesso"
+        failure: "Ocorreu um erro ao adicionar tags"
+      remove_from_user:
+        success: "Tag removida com sucesso"
+      destroy:
+        success: "Tag apagada com sucesso"
+  
+    
+
+  unauthorized:
+    default: "Acesso não autorizado"
+
+  activerecord: &models
+    models:
+      address: endereço  #g
+      authentication: autenticação  #g
+      cart: carrinho  #g
+      cart_item: item do carrinho  #g
+      coupon: cupom  #g
+      course: curso  #g
+      course_purchase: compra  #g
+      purchase: compra  #g
+      user: usuário  #g
+      lesson: lição
+
+    attributes:
+      address:
+        city: cidade  #g
+        complement: complemento  #g
+        district: bairro  #g
+        number: número  #g
+        state: estado  #g
+        street: rua  #g
+        user: :activerecord.models.user  #g
+        zip_code: cep  #g
+
+      authentication:
+        provider: provedor  #g
+        token: token  #g
+        uid: uid  #g
+        user: :activerecord.models.user  #g
+
+      cart:
+        cart_items: itens do carrinho  #g
+        coupon: :activerecord.models.coupon  #g
+        courses: cursos  #g
+        discount: desconto  #g
+
+      cart_item:
+        cart: :activerecord.models.cart  #g
+        course: :activerecord.models.course  #g
+
+      coupon:
+        carts: carrinhos  #g
+        discount: desconto  #g
+        expiration_date: data de expiração  #g
+        name: nome  #g
+        purchases: compras #g
+        quantity: quantidade  #g
+        quantity_left: quantidade restante  #g
+
+      course:
+        cart_items: Itens do carrinho  #g
+        carts: Carrinhos  #g
+        content: Conteúdo  #g
+        description: Descrição  #g
+        last_call_to_action: Última chamada para ação  #g
+        logo_url: Logo url  #g
+        overview: Visão geral  #g
+        pitch: Sub-título  #g
+        price: Preço  #g
+        production_mailchimp_grouping: id do grupo mailchimp em produção  #g
+        purchases: compras  #g
+        slug: slug  #g
+        small_logo_url: logo url pequeno  #g
+        staging_mailchimp_grouping: id do grupo mailchimp em staging  #g
+        testimonials: Depoimentos  #g
+        title: Título  #g
+        video_subtitle: Subtítulo do vídeo  #g
+        video_title: Título do vídeo  #g
+        video_url: Url do vídeo  #g
+        lessons: Ementa
+        medias: Módulos
+        logo_content_type: Arquivo
+        who_should_attend: "Público alvo"
+        privacy: Privacidade
+        school: Escola
+        content_and_goals: "O que o aluno aprenderá"
+
+      course_purchase:
+        course: :activerecord.models.course  #g
+        purchase: :activerecord.models.purchase  #g
+
+      purchase:
+        amount_paid: quantidade paga  #g
+        classification_code: código da classificação  #g
+        classification_description: descrição da classificação  #g
+        code: código  #g
+        coupon: :activerecord.models.coupon  #g
+        courses: cursos  #g
+        discount: desconto  #g
+        identificator: identificador  #g
+        institution: instituição  #g
+        message: mensagem  #g
+        moip_code: código moip  #g
+        moip_tax: taxa moip  #g
+        payment_status: status de pagamento  #g
+        payment_type: tipo do pagamento  #g
+        return_code: código de retorno  #g
+        status: status  #g
+        user: :activerecord.models.user  #g
+
+      user:
+        address: :activerecord.models.address  #g
+        authentications: autenticações  #g
+        courses: cursos  #g
+        cpf: cpf  #g
+        current_sign_in_at: current_sign_in_at  #g
+        current_sign_in_ip: current_sign_in_ip  #g
+        email: email  #g
+        encrypted_password: encrypted_password  #g
+        first_name: nome  #g
+        image_url: url da imagem  #g
+        last_name: sobrenome  #g
+        last_sign_in_at: last_sign_in_at  #g
+        last_sign_in_ip: last_sign_in_ip  #g
+        phone_number: Telefone  #g
+        purchases: compras  #g
+        remember_created_at: remember_created_at  #g
+        reset_password_sent_at: reset_password_sent_at  #g
+        reset_password_token: reset_password_token  #g
+        roles_mask: roles_mask  #g
+        skype: skype  #g  
+
+      media:
+        text: Texto
+        url: URL
+        title: Título
+        kind: Tipo
+        wistia_hashed: Arquivo
+        wistia_hashed_id: Arquivo
+
+      lesson:
+        course: Curso
+        title: Título
+
+      invitation:
+        role: "Função"
+
+
+  will_paginate:
+    next_label: 'Mais antigas'
+    previous_label: 'Mais novas'
+  
+  home:
+    title: 'Tudo o que você precisa para publicar, vender e gerenciar seus cursos online | Edools'
+    description: 'O Edools é uma plataforma completa para comercialização, oferta e gestão de ensino à distância. É oferecida no modelo de software como serviço (SaaS), onde em menos de 1 minuto e poucos passos qualquer empresa pode ter seu próprio ambiente de ensino online totalmente personalizado e seguro.'
+    value_proposition: 'Tudo o que você precisa para publicar, vender e gerenciar seus cursos online.'
+    slogan: 'Coloque sua escola no ar em 1 minuto!'
+    pitch: 'Construímos a solução definitiva para você comercializar seus cursos na internet.'
+    more_about_plans: 'Saiba mais sobre nossos planos e preços.'
+    courses: 'Cursos'
+    schools_already_use: 'Escolas que já usam o Edools:'
+    features:
+      title: 'Veja o que o Edools tem pra você'
+      f1:
+        title: 'Sua escola, sua cara'
+        description: 'Personalize a aparência da sua página para manter sua identidade visual e melhorar a experiência dos seus alunos'
+      f2:
+        title: 'Venda à vontade'
+        description: 'Não cobramos mais se você vender mais, como é comum por aí. Aqui, o que importa é a atividade dos seus alunos dentro da plataforma.'
+      f3:
+        title: 'Comece sem gastar nada'
+        description: 'Se preferir, compartilhe o risco com a gente e pague só quando vender um curso. Ou faça a assinatura mensal e fique com 100% da receita.'
+      f4:
+        title: 'Curso publicado num piscar de olhos'
+        description: 'Crie a ementa, organize as aulas e adicione os conteúdos. Tudo muito fácil e em uma única tela.'
+      f5:
+        title: 'Papo reto com os alunos'
+        description: 'Espaço de dúvidas aberto dentro do ambiente de aprendizado. Uma resposta ajuda a todos e você dá a atenção que o aluno precisa.'
+      f6:
+        title: 'Certificação automática'
+        description: 'Dê os certificados que seus alunos tanto gostam de forma automática, ao concluírem o curso.'
+    more_features: 
+      title: 'Tem mais:'
+      subtitle: 'Recursos que fazem do Edools a solução perfeita pra você'
+      f1:
+        title: 'Pagamento integrado'
+        description: 'Sem preocupações. O aluno paga, você recebe. Tudo fácil, rápido e automatizado através do MoiP, uma das maiores empresas de pagamento online do mundo.'
+      f2:
+        title: 'Cupons na mão, facilmente'
+        description: 'Gere quantos cupons de desconto quiser para aumentar suas vendas e descobrir quais canais são mais efetivos.'
+      f3:
+        title: 'Notificações'
+        description: 'Avisamos sobre tudo que acontece na sua escola para você não perder um único detalhe.'
+      f4:
+        title: 'Cada curso, uma página'
+        description: 'Cada curso tem uma página própria, otimizada para atrair e converter usuários.'
+      f5:
+        title: 'Avaliação dos Cursos'
+        description: 'Veja onde você está acertando e errando na criação dos seus cursos, com a avaliação dos seus alunos ao longo do aprendizado.'
+      f6:
+        title: 'Seu conteúdo em boas mãos'
+        description: 'Nós mesmos hospedamos e cuidamos do seu conteúdo com todo o amor e carinho.'
+      f7:
+        title: 'Recuperação de Carrinho'
+        description: 'A melhor ferramenta para fisgar aquele cliente que não comprou seu curso por pouco.'
+    values:
+      v1:
+        title: 'Segurança'
+        description: 'Usamos as tecnologias mais modernas e sempre atualizadas ...'
+      v2:
+        title: 'Robustez'
+        description: 'Entendemos a responsabilidade de cuidar dos seus clientes e por isso investimos muito em tecnologia ...'
+      v3:
+        title: 'Alta disponibilidade'
+        description: 'Nossos servidores estão hospedados na Amazon.com, o que nos garante ...'
+      v4:
+        title: 'Suporte'
+        description: 'Você sempre terá ajuda para ...'
+          
+  
+  btn:
+    home:
+      action: 'Criar minha escola online'
+      subaction: 'Comece sem pagar nada!'
+      go_school: 'Minha escola'
+    features:
+      action: 'Comece sem pagar nada!'
+      subaction: 'Teste por 15 dias GRÁTIS!'
+    cancel: 'Cancelar'
+    lesson:
+      create: 'Criar aula'
+    module:
+      create: 'Criar módulo'
+      
+  widgets:
+    edit_curriculum:
+      title: 'Crie a ementa do seu curso com aulas e conteúdos'
+      create_module: 'Criar Módulo'
+      create_lesson: 'Criar Aula'
+      create_lesson_placeholder: 'Digite o título da aula'
+      create_module_placeholder: 'Digite o título do módulo'
+    about_teacher:
+      title: 'Sobre o Instrutor'
+    who_should_attend:
+      title: 'Quem deve fazer o curso?'
+    content_and_goals:
+      title: 'O que você aprenderá no curso'
+    testimonials:
+      title: 'Depoimentos'
+    course_faq:
+      title: 'Perguntas Frequentes'
+    curriculum:
+      title: 'Conteúdo do curso'
+    downloads:
+      title: 'Links e downloads'
+    how_it_works:
+      title: 'Como funciona?'
+    how_to_enroll:
+      title: 'Veja como é fácil matricular-se'
+    your_progress:
+      title: 'Seu progresso'
+    questions:
+      title: 'Perguntas'
+    course_evaluation:
+      title: 'Sua avaliação'
+    admin_show_schools:
+      title: 'Escolas cadastradas'
+    secure_info:
+      title: 'Informações de segurança'
+      lock:
+        title: 'Este site é seguro'
+        description: 'Possuímos segurança SSL, a mesma utilizada em bancos online, garantindo a criptografia de suas informações.'
+
+  plans:
+    title: 'Planos e preços'
+    subtitle: 'Conheça todos os nossos planos e descubra o ideal para sua empresa'
+    btn: 'Escolher plano'
+    trial_msg: 'Teste grátis por 15 dias!'
+    faq_title: 'Ainda com dúvidas?'
+    know_more: 'Conheça um pouco mais e descubra o plano ideal para sua escola'
+    one:
+      name: 'Vamos juntos'
+      description: 'Neste plano, compartilhamos o risco com você. Não tem mensalidade fixa e você só paga quando vender um curso.'
+      price: '<span>25%</span>De comissão'
+    two:
+      name: 'Vai que é tua'
+      description: 'Aqui, você paga uma mensalidade fixa e fica com 100% da sua receita, podendo utilizar até 50 Gb de tráfego de dados.'
+      price: '<span>R$ 499</span>Por mês'
+    three:
+      name: 'Cada caso é um caso'
+      description: 'Negociamos um pacote que atenda especificamente as suas necessidades!'
+      price: '<span>Negociável</span>'
+    
+  faq:
+    q1: 
+      n: '1'
+      q: 'O que é um aluno ativo?'
+      a: 'Um <strong>aluno ativo</strong> é aquele que está matriculado em um ou mais cursos da sua escola. Suponha que você realizou uma campanha para um curso e conseguiu 100 novos registros, porém apenas 30 concluíram o pagamento. Nesse caso você teria 70 alunos inativos e 30 alunos ativos.'
+    q2: 
+      n: '2'
+      q: 'O que acontecerá se o limite de alunos ativos for ultrapassado?'
+      a: '<strong>Não bloquearemos sua conta e nem impediremos suas vendas.</strong> Se ultrapassar o limite de alunos ativos você será tarifado em R$7,00 (sete reais), por aluno acima do limite, no próximo período de pagamento.'
+    q3: 
+      n: '3'
+      q: 'Como funciona o período de 15 dias de TESTE GRÁTIS?'
+      a: 'Todos os planos começam com um período de <strong>15 dias de TESTE GRÁTIS</strong>. Após esse período entraremos em contato para você escolher o plano mais adequado para seu negócio.'
+    q4: 
+      n: '4'
+      q: 'Posso mudar de planos a qualquer momento?'
+      a: 'Sim, você pode passar de um plano para outro a qualquer momento.'
+    q5: 
+      n: '5'
+      q: 'Quais formas de pagamento são aceitas?'
+      a: '<strong>Não existe taxa de setup</strong> e nem será necessário fornecer dados para cobrança durante o período de TESTE GRÁTIS. Quando estiver pronto para migrar para um dos planos nós aceitaremos pagamento com cartão de crédito, boleto bancário e débito online.'
+    q6: 
+      n: '6'
+      q: 'Precisa de um plano personalizado?'
+      a: 'Sua empresa possui necessidades especiais? <strong>Entre em contato conosco</strong> pelo telefone (21) 3741-8006 ou pelo email contato@edools.com.'
+    q7: 
+      n: '7'
+      q: 'Posso cobrar o quanto quiser por curso?'
+      a: 'Sim. <strong>Não somos marketplace</strong> e não interferimos em quanto você cobrará em cada curso.'
+    q8: 
+      n: '8'
+      q: 'Quais formatos de mídia são aceitos?'
+      a: '<strong>Vídeo:</strong> MOV, MPG, AVI, FLV, F4V, MP4, M4V, ASF, WMV, VOB, MOD, 3GP, MKV, DIVX, XVID <br> <strong>Áudio:</strong> MP3, WAV, AIF, AU, M4A <br> <strong>Documentos:</strong> PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX <br> <strong>Imagens:</strong> JPG, PNG, GIF, TIFF, BMP, DCM'
+    q9:
+      n: '9'
+      q: 'Não encontrou resposta para sua dúvida?'
+  
+    
+  
+  wizard:
+    school:
+      title: 'Falta apenas essa etapa para criação da sua escola'
+      s1:
+        n: '1'
+        title: 'Escolha o nome e o subdomínio'
+      s2:
+        n: '2'
+        title: 'Escolha seu plano'

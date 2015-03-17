@@ -1,0 +1,25 @@
+<%= render "notice" %>
+
+<div id="lessons">
+	<%= render "lesson_list" %>
+	<div class="row-fluid">
+		<div class="box-header pagination-centered btn btn-success span12 lesson-header btn-add-content">
+			<i class="fa-icon-plus-sign"></i>
+			<%= link_to t('widgets.edit_curriculum.create_module'), url_for_event(:new_lesson, course: @course), remote: true, id: "new-module" %>
+		</div>
+	</div>
+</div>	
+		
+<%= javascript_include_tag "top/jquery.sortable" %>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $("#content-embed").allofthelights();
+
+    $("#switch").on("click", function() {
+    	$(this).removeClass("hint--always");
+    });
+	});
+</script>
+

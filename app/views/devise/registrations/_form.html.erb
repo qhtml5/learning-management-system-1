@@ -1,0 +1,76 @@
+<h2><i class="icon-edit"></i> Dados Pessoais</h2>
+<hr class="black">
+
+<div class="row-fluid">
+	<div class="span6">
+		<%= f.input :first_name, required: true, label: "Nome" %></p>
+		<%= f.input :last_name, label: "Sobrenome", required: purchasing %></p>
+		<%= f.input :email, label: "Email", required: true %></p>
+		<%= f.input :cpf, label: "CPF", input_html: { :class => "_cpf" }, required: purchasing %></p>
+	</div>
+
+	<div class="span6">
+		<%= f.input :phone_number, label: "Telefone", input_html: { :class => "_phone_number" }, required: purchasing %></p>
+		<%= f.input :skype, label: "Skype" %></p>
+		<%= f.input :company, label: "Empresa" %></p>
+		<%= f.input :function, label: "Cargo" %></p>
+	</div>
+</div>
+	
+
+
+<h2><i class="icon-map-marker"></i> Endereço</h2>
+<hr class="black">
+<% if params[:action] == "edit_profile" %>
+	<div id="address-form">
+		<%= f.simple_fields_for :address do |address_fields| %>
+			<div class="row-fluid">
+				<div class="span6">
+					<%= address_fields.input :street, label: "Logradouro", required: purchasing %>
+					<%= address_fields.input :number, label: "Nº", required: purchasing %>
+					<%= address_fields.input :complement, label: "Complemento" %>
+					<%= address_fields.input :district, label: "Bairro", required: purchasing %>
+				</div>
+
+				<div class="span6">
+					<%= address_fields.input :city, label: "Cidade", required: purchasing %>
+					<%= address_fields.input :state, collection: states, label: "Estado", required: purchasing %>
+					<%= address_fields.input :zip_code, label: "CEP", input_html: { :class => "_zip_code" }, required: purchasing %>
+				</div>
+			</div>
+		<% end -%>
+	</div>
+	<div id="address-form-button">
+		<%= link_to_function "Editar endereço", "fillAddress();", class: "btn btn-success" %>
+	</div>
+<% else -%>
+	<%= f.simple_fields_for :address do |address_fields| %>
+		<div class="row-fluid">
+			<div class="span6">
+				<%= address_fields.input :street, label: "Logradouro", required: purchasing %>
+				<%= address_fields.input :number, label: "Nº", required: purchasing %>
+				<%= address_fields.input :complement, label: "Complemento" %>
+				<%= address_fields.input :district, label: "Bairro", required: purchasing %>
+			</div>
+
+			<div class="span6">
+				<%= address_fields.input :city, label: "Cidade", required: purchasing %>
+				<%= address_fields.input :state, collection: states, label: "Estado", required: purchasing %>
+				<%= address_fields.input :zip_code, label: "CEP", input_html: { :class => "_zip_code" }, required: purchasing %>
+			</div>
+		</div>
+	<% end -%>
+<% end -%>
+
+<div class="clearfix"></div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#address-form").hide();
+
+		fillAddress = function() {
+			$("#address-form").show();
+			$("#address-form-button").hide();
+		};
+	});
+</script>

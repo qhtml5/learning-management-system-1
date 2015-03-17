@@ -1,0 +1,12 @@
+<p>
+	<p class="badge badge-success"><%= @user.ended_medias(@course) %></p>
+	<%= pluralize_sentence(@user.ended_medias(@course), "aula completa") %>
+	<p class="badge badge-warning"><%= @user.started_medias(@course) %></p>
+	<%= pluralize_sentence(@user.started_medias(@course), "aula iniciada") %>
+	<p class="badge"><%= @course.medias.available.length %></p>
+	<%= pluralize_sentence(@course.medias.available.length, "aula") %> no total</p>
+</p>
+<div class="progress progress-striped">
+  <div class="bar bar-success" style="width: <%= @user.completed_progress(@course) %>;"></div>
+  <div class="bar bar-warning" style="width: <%= @user.started_progress(@course) %>;"></div>
+</div>

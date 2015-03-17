@@ -1,0 +1,40 @@
+<%= render "modal_how_to_configure" %>
+
+<%= simple_form_for(@school, :url => dashboard_school_path(@school)) do |s| %>
+	<%= s.simple_fields_for :notification_configuration do |f| %>  
+		<div class="row-fluid">
+			<div class="span6">
+				<%= box(:title => 'Notificações', :icon => 'fa-icon-globe')  do %>		
+					<h3>Enviar email quando:</h3>
+					<hr>
+					<div class="row-fluid">
+						<div class="span11">
+							<p>Aluno adicionar curso ao carrinho</p>
+							<p>Aluno se registrar na escola</p>
+							<p>Aluno comprar curso</p>
+							<p>Aluno ter compra confirmada curso</p>
+							<p>Aluno avaliar curso</p>
+							<p>Aluno solicitar certificado do curso</p>
+							<p>Aluno enviar pergunta no curso</p>
+							<p>Aluno enviar novo contato direto</p>
+						</div>
+						<div class="span1">
+							<%= f.input :course_add_to_cart, label: false %>
+							<%= f.input :user_new_registration, label: false %>
+							<%= f.input :purchase_pending, label: false %>
+							<%= f.input :purchase_confirmed, label: false %>
+							<%= f.input :course_new_evaluation, label: false %>
+							<%= f.input :course_new_certificate_request, label: false %>
+							<%= f.input :course_new_question, label: false %>
+							<%= f.input :user_new_contact, label: false %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="form-actions">
+			<%= f.submit "Salvar", class: "btn btn-success", id: "save-domain" %>
+		</div>
+	<% end %>
+<% end %>

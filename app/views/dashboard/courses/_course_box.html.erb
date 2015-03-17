@@ -1,0 +1,18 @@
+<div class="span4">
+	<div class="course-item" id="course-<%= course.slug %>">
+		<div class="pagination-centered">
+			<div class="img-container">
+				<div class="info-edit">
+					<%= link_to dashboard_course_path(course), class: "btn btn-inverse" do %>
+						<i class="icon-edit"></i> Gerenciar curso
+					<% end %>
+				</div>
+				<%= link_to image_tag(course.logo.url(:medium)), dashboard_course_path(course.id), :class => "course-logo" %>
+			</div>
+		</div>
+		<div class="info-show">
+			<h4><%= course.title_short %></h4>
+			<h5 class="muted"><%= course.published? ? "Publicado" : "Rascunho" %></h5>
+		</div>
+	</div>
+</div>

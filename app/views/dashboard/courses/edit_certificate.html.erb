@@ -1,0 +1,27 @@
+<%= box(title: "Certificado") do %>
+	<%= simple_form_for @course, :url => dashboard_course_path(@course, edit_action: :edit_certificate) do |f| %>
+		<div class="row-fluid">
+			<label class="radiobutton inline span2">
+				<%= f.radio_button :certificate_available, true, :class => "btn" %> Sim
+			</label>
+			<label class="radiobutton inline span2">
+				<%= f.radio_button :certificate_available, false, :class => "btn" %> Não
+			</label>
+		</div>
+		<br>
+
+		<div class="row-fluid">
+			<div class="span1">
+				<i class="fa-icon-question-sign"></i>
+			</div>
+			<div class="span8">
+				<p class="muted">
+					Caso o seu curso ofereça certificado um botão para solicitá-lo será exibido na área aonde o aluno consome o conteúdo do curso.
+				</p>
+			</div>
+		</div>
+		<div class="form-actions"> 
+			<%= f.submit "Salvar", :class => "btn btn-success" %>
+		</div>
+	<% end -%>
+<% end %>

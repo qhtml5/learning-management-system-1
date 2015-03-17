@@ -1,0 +1,45 @@
+<% if @courses.any? %>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box_widget_course">
+				<% @courses.each do |course| %>
+					<div class="box">
+						<div class="head">
+							<h4><%= course.title %></h4>
+						</div>
+						<div class="content">
+	    				<% if course.coupons.any? %>
+								<table class="table table-hover school-coupon-table">
+									<thead>
+		              	<tr>
+		                  <th>Nome do cupom</th>
+										  <th>Número de vendas</th>
+										  <th></th>
+		                </tr>
+		            	</thead>
+      				
+		              <tbody>                
+										<% course.coupons.not_automatic.each do |coupon| %>
+											<tr>
+			                  <td><%= coupon.name %></td>
+											  <td><%= coupon.purchases.payment_confirmed.length %></td>
+											  <td>
+											  	<%= link_to "<i class='icon-facetime-video'></i>".html_safe, course_path(course, coupon: coupon.name), class: "btn btn-info btn-small hint hint--left pull-right", "data-hint" => "Página do curso com o cupom aplicado", "target" => "_blank" %>
+											  	<%= link_to "<i class='fontello-icon-chart-line'></i>".html_safe, affiliate_course_path(course, coupon.name), class: "btn btn-success btn-small hint hint--left pull-right", "data-hint" => "Relatório de vendas", "target" => "_blank" %>
+											  </td>
+			                </tr>
+										<% end %>
+		              </tbody>
+		            </table>
+	            <% else %>
+	            	<p class="alert">Não existem cupons para esse curso</p>
+	            <% end %>
+						</div>
+					</div>
+	      <% end %>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<p class="alert"><%= t('messages.school.no_courses')%></p>
+<% end %>

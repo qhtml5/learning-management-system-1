@@ -1,0 +1,20 @@
+<p>
+	<p class="label label-success"><%= @user.ended_medias(@course) %></p>
+	<%= pluralize_sentence(@user.ended_medias(@course), "aula completa") %>
+	<p class="label label-warning"><%= @user.started_medias(@course) %></p>
+	<%= pluralize_sentence(@user.started_medias(@course), "aula iniciada") %>
+	<p class="label label-default"><%= @course.medias.available.length %></p>
+	<%= pluralize_sentence(@course.medias.available.length, "aula") %> no total</p>
+</p>
+<div class="progress">
+  <div class="bar bar-success" style="width: <%= @user.completed_progress(@course) %>;"></div>
+  <div class="bar bar-warning" style="width: <%= @user.started_progress(@course) %>;"></div>
+</div>
+
+<% if current_user.student? && @course.certificate_available? %>
+	<div class="row-fluid">
+		<div class="span4 offset4">
+			<%= link_to "Solicitar certificado" ,request_certificate_course_path(@course), method: :post, :class => "btn", id: "request-certificate" %>
+		</div>
+	</div>
+<% end %>
